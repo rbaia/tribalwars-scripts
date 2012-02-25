@@ -1,0 +1,28 @@
+== Relaxeaza Tribal Wars Advanced 1.3.1 ==
+
+[http://code.google.com/p/tribalwars-scripts/downloads/detail?name=relaxeazatwa.js » Download]
+
+Todas as funções podem ser ativadas e desativadas abrindo a tela de configuração executando o script na página de configuração do Tribal Wars.
+
+[http://farm8.staticflickr.com/7159/6834807473_4a19ea722d_z.jpg Imagem da tela de configuração]
+
+|| *Funções* || *Descrição* || *Execução* || *Imagem* ||
+|| Mini-popup de pontuação || _Mostra um mini-popup mostrando um gráfico de pontuação ao passar o mouse sobre os nomes das tribos/jogadores._ || Classificações, Membros de tribo || [http://farm8.staticflickr.com/7017/6783881775_ec7562dd29_z.jpg » Imagem] ||
+|| Assistente de farm || _Envia ataques em todas os relatórios presentes na página do assistent de farm._ || Assistente de Farm || ||
+|| Contrução e demolição em massa || _Faz construções e demolições em massa_ || Visualizações » edifícios || ||
+|| Pesquisa em massa || _Faz pesquisas em massa apartir da página de visualização de pesquisas (apenas ferreiro simples, por enquanto)._ || Visualizações » pesquisas || ||
+|| Cálculo de recursos || _Cálcula a quantidade exata de recursos de uma aldeia apartir de um relatório de espionagem._ || Relatório de espionagem || ||
+|| Tempo do último ataque || _Mostra quanto tempo se passou desde o último ataque em todas as aldeias visíveis no mapa._ || Mapa || [http://farm8.staticflickr.com/7022/6783906179_49acac1191_z.jpg Imagem] ||
+|| Farmador automático || _Permite enviar ataques a coordenadas pre-programadas automáticamente._ || Praça de reunião || ||
+|| Filtro de relatórios || _Filtra a lista de relatórios por titulo._ || Lista de relatórios || [http://farm8.staticflickr.com/7024/6784121569_0331f08a43_z.jpg Imagem] ||
+|| Filtro de aldeias || _Filtra aldeias apartir do nome._ || Visualizações || ||
+|| Pesquisa de aldeias || _Seleciona as coordenadas das aldeias de jogadores/abandonadas do mapa de acordo com as configurações._ || Mapa || [http://farm8.staticflickr.com/7002/6783896419_244610701b_z.jpg Imagem] ||
+|| Pesquisa de aldeias manual || _Permite selecionar a coordenada de qualquer aldeia visível no mapa clicando nelas._ || Mapa || [http://farm8.staticflickr.com/7014/6783901739_99bb3abc51_z.jpg Imagem] ||
+|| Pesquisa de aldeias por perfil || _Seleciona as coordenadas de todas as aldeias de um jogador de acordo com as configurações._ || Perfil de jogador || [http://farm8.staticflickr.com/7152/6784074433_7cd72cb057_z.jpg Imagem] ||
+|| Gerador de mapas || _Gera mapas no Tribal Wars Stats apartir do jogadores/tribos selecionados na página de classificação._ || Classificações » qualquer modo || [http://farm8.staticflickr.com/7018/6784043477_34451274da_z.jpg Imagem] ||
+|| Estatísticas no perfil || _Mostra gráficos e estatísticas no perfil de jogadores ou tribos._ || Perfil de jogador/tribo || [http://farm8.staticflickr.com/7160/6783889497_76805f1d90_z.jpg Imagem] ||
+|| Selecionador de aldeias || _Seleciona aldeias apartir do rácio de unidades de ataque e defesa._ || Visualizações » tropas || ||
+|| Contador de unidades || _Faz a contagem de tropas em todas as aldeias visíveis na página visualização de tropas._ || Visualizações » tropas || ||
+|| Renomeador de aldeias || _Renomeia todas as aldeias visíveis na página de visualização combinada._ || Visualizações » combinado || [http://farm8.staticflickr.com/7151/6806557713_4926f18e8a_z.jpg Imagem] ||
+|| Renomeador de comandos || _Renomeia qualquer tipo de comando apartir das páginas de visualizações comando/chegando_ || Visualizações » comandos/chegando || [http://farm8.staticflickr.com/7162/6806533073_896ceb9e76_z.jpg Imagem] ||
+|| Renomeador de relatórios || _Renomeia todos os relatórios visíveis na página de relatórios._ || Lista de relatórios || [http://farm8.staticflickr.com/7034/6806511071_5edd056206_z.jpg Imagem] ||
