@@ -29,30 +29,30 @@ Todas as funções podem ser ativadas e desativadas abrindo a tela de configura�
 === Histórico de atualizações ===
 
  * *v1.1* _03/02/12_
-  * novo: Função para renomear relatórios.
-  * novo: Função para renomear comandos na visualização.
-  * alterado: Largura do display de configuração aumentada para melhor visualização.
-  * bug: Erros de digitação na ajuda no display de configuração.
-  * novo: Adicionada checkboxes para poder renomear apenas aldeias selecionadas.
-  * novo: Filtro de aldeias na visualização.
-  * novo: Contador de tropas em visualizações > tropas.
-  * novo: Função para calcular recursos exatos em uma aldeia apartir de um relatório de espionagem.
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Função para renomear relatórios.
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Função para renomear comandos na visualização.
+  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Largura do display de configuração aumentada para melhor visualização.
+  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Erros de digitação na ajuda no display de configuração.
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Adicionada checkboxes para poder renomear apenas aldeias selecionadas.
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Filtro de aldeias na visualização.
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Contador de tropas em visualizações > tropas.
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Função para calcular recursos exatos em uma aldeia apartir de um relatório de espionagem.
  * *v1.2* _07/02/12_
-  * novo: Assistente de Farm automático.
-  * alterado: Algumas melhoras na performance do script.
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Assistente de Farm automático.
+  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Algumas melhoras na performance do script.
  * *v1.3* _22/02/12_
-  * novo: Construção e demolição em massa.
-  * novo: Função para cancelar todas as construções/demolições.
-  * novo: Farmador automatico.
-  * bug: Bug ao mostrar a pontuação mínima/máxima da função de obter coordenadas.
-  * novo: Atalho para ataque direto na função de calcular recursos.
-  * novo: Imagem indicando que o script está trabalhando ao renomear aldeias/relatórios/comandos.
-  * novo: Função para selecionar aldeias por rácio de tropas de ataque e defesa.
-  * novo: Pesquisa em Massa.
-  * novo: Opção para cancelar todas as pesquisas.
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Construção e demolição em massa.
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Função para cancelar todas as construções/demolições.
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Farmador automatico.
+  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Bug ao mostrar a pontuação mínima/máxima da função de obter coordenadas.
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Atalho para ataque direto na função de calcular recursos.
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Imagem indicando que o script está trabalhando ao renomear aldeias/relatórios/comandos.
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Função para selecionar aldeias por rácio de tropas de ataque e defesa.
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Pesquisa em Massa.
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Opção para cancelar todas as pesquisas.
  * *v1.3.1* _24/02/12_
-  * alterado: Os ataques começam mais rapido quando o Assistente de Farm é iniciado.
-  * novo: Log de ataques no Assistente de Farm.
-  * bug: Erro em algumas funções quando usado apartir do Modo de Férias.
+  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Os ataques começam mais rapido quando o Assistente de Farm é iniciado.
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Log de ataques no Assistente de Farm.
+  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Erro em algumas funções quando usado apartir do Modo de Férias.
 
 === Qualquer duvida poste nos comentários que será respondida. ===
