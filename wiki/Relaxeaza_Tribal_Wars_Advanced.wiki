@@ -3,11 +3,10 @@
 [http://code.google.com/p/tribalwars-scripts/downloads/detail?name=relaxeazatwa.js » Download]
 
 Todas as funções podem ser ativadas e desativadas abrindo a tela de configuração executando o script na página de configuração do Tribal Wars.
-
 [http://farm8.staticflickr.com/7159/6834807473_4a19ea722d_z.jpg Imagem da tela de configuração]
 
 || *Funções* || *Descrição* || *Execução* || *Imagem* ||
-|| Mini-popup de pontuação || _Mostra um mini-popup mostrando um gráfico de pontuação ao passar o mouse sobre os nomes das tribos/jogadores._ || Classificações, Membros de tribo || [http://farm8.staticflickr.com/7017/6783881775_ec7562dd29_z.jpg Imagem] ||
+|| Mini-popup de pontuação || _Mostra um mini-popup mostrando um gráfico de pontuação ao passar o mouse sobre os nomes das tribos/jogadores._ || Classificações, Membros de tribo || [http://farm8.staticflickr.com/7017/6783881775_ec7562dd29_z.jpg » Imagem] ||
 || Assistente de farm || _Envia ataques em todas os relatórios presentes na página do assistent de farm._ || Assistente de Farm || ||
 || Contrução e demolição em massa || _Faz construções e demolições em massa_ || Visualizações » edifícios || ||
 || Pesquisa em massa || _Faz pesquisas em massa apartir da página de visualização de pesquisas (apenas ferreiro simples, por enquanto)._ || Visualizações » pesquisas || ||
@@ -26,3 +25,34 @@ Todas as funções podem ser ativadas e desativadas abrindo a tela de configura�
 || Renomeador de aldeias || _Renomeia todas as aldeias visíveis na página de visualização combinada._ || Visualizações » combinado || [http://farm8.staticflickr.com/7151/6806557713_4926f18e8a_z.jpg Imagem] ||
 || Renomeador de comandos || _Renomeia qualquer tipo de comando apartir das páginas de visualizações comando/chegando_ || Visualizações » comandos/chegando || [http://farm8.staticflickr.com/7162/6806533073_896ceb9e76_z.jpg Imagem] ||
 || Renomeador de relatórios || _Renomeia todos os relatórios visíveis na página de relatórios._ || Lista de relatórios || [http://farm8.staticflickr.com/7034/6806511071_5edd056206_z.jpg Imagem] ||
+
+=== Histórico de atualizações ===
+
+ * *v1.1* _03/02/12_
+  * novo: Função para renomear relatórios.
+  * novo: Função para renomear comandos na visualização.
+  * alterado: Largura do display de configuração aumentada para melhor visualização.
+  * bug: Erros de digitação na ajuda no display de configuração.
+  * novo: Adicionada checkboxes para poder renomear apenas aldeias selecionadas.
+  * novo: Filtro de aldeias na visualização.
+  * novo: Contador de tropas em visualizações > tropas.
+  * novo: Função para calcular recursos exatos em uma aldeia apartir de um relatório de espionagem.
+ * *v1.2* _07/02/12_
+  * novo: Assistente de Farm automático.
+  * alterado: Algumas melhoras na performance do script.
+ * *v1.3* _22/02/12_
+  * novo: Construção e demolição em massa.
+  * novo: Função para cancelar todas as construções/demolições.
+  * novo: Farmador automatico.
+  * bug: Bug ao mostrar a pontuação mínima/máxima da função de obter coordenadas.
+  * novo: Atalho para ataque direto na função de calcular recursos.
+  * novo: Imagem indicando que o script está trabalhando ao renomear aldeias/relatórios/comandos.
+  * novo: Função para selecionar aldeias por rácio de tropas de ataque e defesa.
+  * novo: Pesquisa em Massa.
+  * novo: Opção para cancelar todas as pesquisas.
+ * *v1.3.1* _24/02/12_
+  * alterado: Os ataques começam mais rapido quando o Assistente de Farm é iniciado.
+  * novo: Log de ataques no Assistente de Farm.
+  * bug: Erro em algumas funções quando usado apartir do Modo de Férias.
+
+=== Qualquer duvida poste nos comentários que será respondida. ===
