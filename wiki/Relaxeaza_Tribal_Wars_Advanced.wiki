@@ -7,7 +7,7 @@ Todas as funções podem ser ativadas e desativadas abrindo a tela de configura�
 [http://farm8.staticflickr.com/7159/6834807473_4a19ea722d_z.jpg Imagem da tela de configuração]
 
 || *Funções* || *Descrição* || *Execução* || *Imagem* ||
-|| Mini-popup de pontuação || _Mostra um mini-popup mostrando um gráfico de pontuação ao passar o mouse sobre os nomes das tribos/jogadores._ || Classificações, Membros de tribo || [http://farm8.staticflickr.com/7017/6783881775_ec7562dd29_z.jpg » Imagem] ||
+|| Mini-popup de pontuação || _Mostra um mini-popup mostrando um gráfico de pontuação ao passar o mouse sobre os nomes das tribos/jogadores._ || Classificações, Membros de tribo || [http://farm8.staticflickr.com/7017/6783881775_ec7562dd29_z.jpg Imagem] ||
 || Assistente de farm || _Envia ataques em todas os relatórios presentes na página do assistent de farm._ || Assistente de Farm || ||
 || Contrução e demolição em massa || _Faz construções e demolições em massa_ || Visualizações » edifícios || ||
 || Pesquisa em massa || _Faz pesquisas em massa apartir da página de visualização de pesquisas (apenas ferreiro simples, por enquanto)._ || Visualizações » pesquisas || ||
