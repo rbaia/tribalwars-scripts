@@ -1,6 +1,6 @@
 == Relaxeaza Tribal Wars Advanced 1.3.1 ==
 
-[http://code.google.com/p/tribalwars-scripts/downloads/detail?name=relaxeazatwa.js » Download]
+[http://code.google.com/p/tribalwars-scripts/downloads/detail?name=TWARelaxeaza.txt&can=2&q=#makechanges » Download]
 
 Todas as funções podem ser ativadas e desativadas abrindo a tela de configuração executando o script na página de configuração do Tribal Wars.
 [http://farm8.staticflickr.com/7159/6834807473_4a19ea722d_z.jpg Imagem da tela de configuração]
