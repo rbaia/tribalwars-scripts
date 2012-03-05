@@ -26,6 +26,9 @@ Todas as funções podem ser ativadas e desativadas abrindo a tela de configura�
 || Renomeador de comandos || _Renomeia qualquer tipo de comando apartir das páginas de visualizações comando/chegando_ || Visualizações » comandos/chegando || [http://farm8.staticflickr.com/7162/6806533073_896ceb9e76_z.jpg Imagem] ||
 || Renomeador de relatórios || _Renomeia todos os relatórios visíveis na página de relatórios._ || Lista de relatórios || [http://farm8.staticflickr.com/7034/6806511071_5edd056206_z.jpg Imagem] ||
 
+=== Como usar ===
+Simplismente vá a página referente a função e execute o script.
+
 === Histórico de atualizações ===
 
  * *v1.1* _03/02/12_
