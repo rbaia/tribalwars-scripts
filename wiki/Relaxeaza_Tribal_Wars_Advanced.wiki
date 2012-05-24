@@ -25,6 +25,9 @@ Todas as funções podem ser ativadas e desativadas abrindo a tela de configura�
 || Renomeador de aldeias || _Renomeia todas as aldeias visíveis na página de visualização combinada._ || Visualizações » combinado || [http://farm8.staticflickr.com/7151/6806557713_4926f18e8a_z.jpg Imagem] ||
 || Renomeador de comandos || _Renomeia qualquer tipo de comando apartir das páginas de visualizações comando/chegando_ || Visualizações » comandos/chegando || [http://farm8.staticflickr.com/7162/6806533073_896ceb9e76_z.jpg Imagem] ||
 || Renomeador de relatórios || _Renomeia todos os relatórios visíveis na página de relatórios._ || Lista de relatórios || [http://farm8.staticflickr.com/7034/6806511071_5edd056206_z.jpg Imagem] ||
+|| Alterador de grupos || _Faz a mesma função que a visualização de grupos em trocar aldeias de grupos em massa, porém, em qualquer visualização._ || Visualizações || ||
+|| Lembrete || _Simples recurso de lembrete no jogo. (Muito bom para co-plays quando se quer deixar um recado)._ || Qualquer página || ||
+|| Planeador de ataques || _Envia ataques em horários programados, apenas adicione a aldeia de origem, aldeia de destino, horário e tropas que os ataques serão enviados automaticamente (Para que os ataques sejam enviados, o script deve estar em execução)._ || Qualquer página || ||
 
 === Como usar ===
 Simplismente vá a página referente a função e execute o script.
