@@ -1,4 +1,4 @@
-== Relaxeaza Tribal Wars Advanced 1.3.1 ==
+== Relaxeaza Tribal Wars Advanced 1.3.2 _(24/05/12)_ ==
 
 [http://code.google.com/p/tribalwars-scripts/downloads/detail?name=TWARelaxeaza.txt&can=2&q=#makechanges » Download]
 
@@ -57,5 +57,13 @@ Simplismente vá a página referente a função e execute o script.
   * http://tribalwars-scripts.googlecode.com/svn/img/change.png Os ataques começam mais rapido quando o Assistente de Farm é iniciado.
   * http://tribalwars-scripts.googlecode.com/svn/img/add.png Log de ataques no Assistente de Farm.
   * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Erro em algumas funções quando usado apartir do Modo de Férias.
+ * *v1.3.2* _24/05/12_
+  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Layout do tooltip de ajuda no display configurações.
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Função de lembrete.
+  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Cores dos identificadores de coletor de coordenadas foram alteradas para melhor visualização.
+  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Agora as configurações de pontuação mínima e máxima das funções de obter coordenadas no mapa e no perfil de jogadores são configuradas na própria página.
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Agora é possivel alterar os grupos das aldeias em qualquer modo de visualização
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Planeador de ataques - envio de ataques em horários programados.
+  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Agora o assistent de farm também usa a opção C quando disponível.
 
 === Qualquer duvida poste nos comentários que será respondida. ===
