@@ -68,5 +68,8 @@ Simplismente vá a página referente a função e execute o script.
   * http://tribalwars-scripts.googlecode.com/svn/img/add.png Agora é possivel alterar os grupos das aldeias em qualquer modo de visualização
   * http://tribalwars-scripts.googlecode.com/svn/img/add.png Planeador de ataques - envio de ataques em horários programados.
   * http://tribalwars-scripts.googlecode.com/svn/img/change.png Agora o assistent de farm também usa a opção C quando disponível.
+ * *v1.3.3* _04/08/12_
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Função para selecionar aldeias especificas na visualização, como aldeias com tropas de ataque, defesa, etc.
+  * Area para troca de mensagens com o desenvolvedor. (perguntas, sugestões...)
 
 === Qualquer duvida poste nos comentários que será respondida. ===
