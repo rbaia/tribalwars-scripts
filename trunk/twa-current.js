@@ -1,5 +1,5 @@
 /*!
- * Relaxeaza Tribal Wars Advanced v1.3.3
+ * Relaxeaza Tribal Wars Advanced v1.4.2
  * Release 24/05/12.
  * relaxeaza.tw@gmail.com
  *
@@ -42,11 +42,11 @@
  * novo: Planeador de ataques - envio de ataques em horários programados.
  * alterado: Agora o assistent de farm também usa a opção C quando disponível.
  *
- * v1.3.3
+ * v1.4
  * novo: Função para selecionar aldeias especificas na visualização, como aldeias com tropas de ataque, defesa, etc.
  * novo: Area para troca de mensagens com o desenvolvedor. (perguntas, sugestões...)
  *
- * v1.3.4
+ * v1.4.1
  * alterado: Forma para troca de mensagens com o desenvolvedor foi melhorada.
  */
  
