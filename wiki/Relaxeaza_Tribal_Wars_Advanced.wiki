@@ -1,4 +1,4 @@
-== Relaxeaza Tribal Wars Advanced 1.3.2 _(24/05/12)_ ==
+== Relaxeaza Tribal Wars Advanced 1.4 _(19/08/12)_ ==
 
 [http://code.google.com/p/tribalwars-scripts/downloads/detail?name=TWARelaxeaza.txt&can=2&q=#makechanges » Download]
 
@@ -71,5 +71,19 @@ Simplismente vá a página referente a função e execute o script.
  * *v1.3.3* _04/08/12_
   * http://tribalwars-scripts.googlecode.com/svn/img/add.png Função para selecionar aldeias especificas na visualização, como aldeias com tropas de ataque, defesa, etc.
   * http://tribalwars-scripts.googlecode.com/svn/img/add.png Area para troca de mensagens com o desenvolvedor. (perguntas, sugestões...)
-
+ * *v1.3.4* _15/08/12_
+  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Forma para troca de mensagens com o desenvolvedor foi melhorada. O modo de conversa é identico a troca de mensagens do jogo.
+ * *v1.4* _19/08/12_
+  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Planeador de Ataques -> No campo Horário o valor é sempre o último horário inserido.
+  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Planeador de Ataques -> Ao adicionar as coordenadas da aldeia atacante automaticamente será adicionada todas as tropas da aldeia nos campos das unidades.
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Planeador de Ataques -> Agora é possivel adicionar apoio aos ataques programados.
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Planeador de Ataques -> Foi adicionado um log de comandos para melhor visualização dos ataques/apoios e ataques com problemas.
+  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Mensagens -> A troca de mensagens deixou de ser "Contato" para "Mensagens".
+  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Mensagens -> Proteção contra envio de multiplas mensagens (spam).
+  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Coletor de Coordenadas Manual -> Ao clicar em uma aldeia que já foi selecionada, ela será removidada da lista de coordenadas.
+  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Engine -> Os icones das ferramentas que são usadas em qualquer página do jogo foram movidas para uma barra independente.
+  * http://tribalwars-scripts.googlecode.com/svn/img/change.png AutoFarm -> Deixará de ser executado apenas na Praça e o modo de uso será parecido com o Planeador de Ataques.
+  * http://tribalwars-scripts.googlecode.com/svn/img/change.png AutoFarm -> Agora o autofarm pode ser executado de qualquer página do jogo.
+  * http://tribalwars-scripts.googlecode.com/svn/img/change.png AutoFarm -> O design foi reformulado.
+  
 === Qualquer duvida poste nos comentários que será respondida. ===
