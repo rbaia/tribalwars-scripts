@@ -82,8 +82,8 @@ Simplismente vá a página referente a função e execute o script.
   * http://tribalwars-scripts.googlecode.com/svn/img/change.png Mensagens -> Proteção contra envio de multiplas mensagens (spam).
   * http://tribalwars-scripts.googlecode.com/svn/img/change.png Coletor de Coordenadas Manual -> Ao clicar em uma aldeia que já foi selecionada, ela será removidada da lista de coordenadas.
   * http://tribalwars-scripts.googlecode.com/svn/img/change.png Engine -> Os icones das ferramentas que são usadas em qualquer página do jogo foram movidas para uma barra independente.
-  * http://tribalwars-scripts.googlecode.com/svn/img/change.png AutoFarm -> Deixará de ser executado apenas na Praça e o modo de uso será parecido com o Planeador de Ataques.
-  * http://tribalwars-scripts.googlecode.com/svn/img/change.png AutoFarm -> Agora o autofarm pode ser executado de qualquer página do jogo.
-  * http://tribalwars-scripts.googlecode.com/svn/img/change.png AutoFarm -> O design foi reformulado.
+  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Farmador Automático -> Deixará de ser executado apenas na Praça e o modo de uso será parecido com o Planeador de Ataques.
+  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Farmador Automático -> Agora o autofarm pode ser executado de qualquer página do jogo.
+  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Farmador Automático -> O design foi reformulado.
   
 === Qualquer duvida poste nos comentários que será respondida. ===
