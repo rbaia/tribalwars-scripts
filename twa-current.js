@@ -1,6 +1,6 @@
 /*!
  * Relaxeaza Tribal Wars Advanced v1.4
- * Release 24/05/12.
+ * Release 20/08/12.
  * relaxeaza.tw@gmail.com
  *
  * v1.1
