@@ -2090,7 +2090,7 @@
 
 	if((function () {
 		if($.isPlainObject(twa.settings) && $.isPlainObject(twa.data) && twa.data.builds) {
-			if($.isEmptyObject(twa.settings) || $.isEmptyObject(twa.data) || twa.data.version !== '1.4') {
+			if($.isEmptyObject(twa.settings) || $.isEmptyObject(twa.data) || twa.data.version !== '1.4.1') {
 				return true;
 			}
 		} else {
@@ -2174,7 +2174,7 @@
 		});
 
 		localStorage[memory.data] = JSON.stringify(twa.data = {
-			version: '1.4',
+			version: '1.4.1',
 			attackplanner: {
 				commands: [],
 				lastTime: $('#serverTime').text() + ' ' + $('#serverDate').text()
