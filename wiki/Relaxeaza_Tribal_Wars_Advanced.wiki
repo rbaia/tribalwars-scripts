@@ -85,5 +85,7 @@ Simplismente vá a página referente a função e execute o script.
   * http://tribalwars-scripts.googlecode.com/svn/img/change.png Farmador Automático -> Deixará de ser executado apenas na Praça e o modo de uso será parecido com o Planeador de Ataques.
   * http://tribalwars-scripts.googlecode.com/svn/img/change.png Farmador Automático -> Agora o autofarm pode ser executado de qualquer página do jogo.
   * http://tribalwars-scripts.googlecode.com/svn/img/change.png Farmador Automático -> O design foi reformulado.
+ * *v1.4* _20/08/12_
+  * http://tribalwars-scripts.googlecode.com/svn/img/new.png AutoFarm -> Foi adicionado um log de ataques.
   
 === Qualquer duvida poste nos comentários que será respondida. ===

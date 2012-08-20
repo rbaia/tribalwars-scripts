@@ -61,6 +61,8 @@
  * alterado: AutoFarm -> Deixará de ser executado apenas na Praça e o modo de uso será parecido com o Planeador de Ataques.
  * alterado: AutoFarm -> Agora o autofarm pode ser executado de qualquer página do jogo.
  * alterado: AutoFarm -> O design foi reformulado.
+ * v1.4.1
+ * novo: AutoFarm -> Foi adicionado um log de ataques.
  */
 
 (function () {
@@ -1171,7 +1173,7 @@
 			init: function() {
 				console.log('twa.autofarm()');
 
-				var content = twa.baseTool('twa-autofarm', 'Farmador', 'http://cdn.tribalwars.com.br/graphic/command/attack.png', '<style>#twa-autofarm-units input{width:30px;text-align:center}#twa-autofarm-content img{margin-left:5px;margin-right:2px}</style><h2>Farmador Automático</h2><span class="twa-autofarm-options"><table width="100%" class="vis"><tr><td id="twa-autofarm-units"></td></tr><tr><td><strong>Coordenadas:</strong><br/><textarea style="width:584px;height:90px" name="_placefarmcoords">' + twa.settings._placefarmcoords.join(' ') + '</textarea></td></tr><tr><td><label><input type="checkbox" name="_placefarmprotect"/> Não enviar ataques caso a aldeia tenha dono.</label></td></tr><tr><td><label><input type="checkbox" name="_placefarmreplace"/> Caso não tenha tropas sulficientes usar o que tiver.</label></td></tr><tr><th><input type="button" value="Iniciar ataques" id="twa-autofarm-switch"/></th></tr></table>');
+				var content = twa.baseTool('twa-autofarm', 'Farmador', 'http://cdn.tribalwars.com.br/graphic/command/attack.png', '<style>#twa-autofarm-units input{width:30px;text-align:center}#twa-autofarm-content img{margin-left:5px;margin-right:2px}</style><h2>Farmador Automático</h2><span class="twa-autofarm-options"><table width="100%" class="vis"><tr><td id="twa-autofarm-units"></td></tr><tr><td><strong>Coordenadas:</strong><br/><textarea style="width:584px;height:90px" name="_placefarmcoords">' + twa.settings._placefarmcoords.join(' ') + '</textarea></td></tr><tr><td><label><input type="checkbox" name="_placefarmprotect"/> Não enviar ataques caso a aldeia tenha dono.</label></td></tr><tr><td><label><input type="checkbox" name="_placefarmreplace"/> Caso não tenha tropas sulficientes usar o que tiver.</label></td></tr><tr><th><input type="button" value="Iniciar ataques" id="twa-autofarm-switch"/></th></tr></table><h3>Log de ataques:</h3><div style="overflow:auto;height:150px"><table id="twa-autofarm-log" style="width:100%" class="vis"></table></div>');
 				var units = $('#twa-autofarm-units');
 				var timeout = false;
 
@@ -1245,6 +1247,10 @@
 					twa.autofarm.coord = twa.settings._placefarmcoords[twa.settings._placefarmindex].split('|');
 				}
 			},
+			log: function(log, error) {
+				$('#twa-autofarm-log').prepend('<tr><td><strong>' + ($('#serverTime').text() + ' ' + $('#serverDate').text()) + ':</strong> <img src="' + (error ? '/graphic/delete_small.png' : '/graphic/command/attack.png') + '"/> ' + log + '</td></tr>');
+				return twa.autofarm;
+			},
 			attack: function(units) {
 				if(!twa.autofarm.stop) {
 					if(!twa.autofarm.wait) {
@@ -1265,14 +1271,15 @@
 								var troops = twa.autofarm.currentunits(html);
 
 								if(time && !troops) {
+									twa.autofarm.log( 'Não há tropas na aldeia no momento. Tropas retornaram em ' + formatTime(time) + ' (tempo estimado)', true );
+									
 									setTimeout(function () {
-										twa.autofarm.wait = false;
-										twa.autofarm.attack();
+										twa.autofarm.attack().wait = false;
 									}, time);
 
 									twa.autofarm.wait = true;
 								} else if(!time && !troops) {
-									twa.autofarm.wait = true;
+									twa.autofarm.log( 'Não existem tropas na aldeia.', true ).wait = true;
 								} else {
 									twa.autofarm.attack(troops);
 								}
@@ -1287,7 +1294,7 @@
 							var form = $(html).find('form');
 
 							$.post(form[0].action, form.serialize(), function() {
-								twa.autofarm.next();
+								twa.autofarm.log( 'Ataque enviado na aldeia ' + twa.autofarm.coord.join('|') + '.').next();
 							});
 						});
 					}
@@ -1299,6 +1306,8 @@
 						}
 					}, 500);
 				}
+				
+				return twa.autofarm;
 			},
 			nextreturn: function(html) {
 				var line = $('table.vis:last tr:not(:first)', html);
@@ -1351,12 +1360,12 @@
 				if(!check) {
 					twa.autofarm.attack();
 				}
+				
+				return twa.autofarm;
 			},
 			stop: true,
 			wait: false,
-			data: {
-				attack: true
-			},
+			data: { attack: true },
 			coord: []
 		},
 		building: {
@@ -2078,6 +2087,25 @@
 		this.css('top', Math.max(0, (($(window).height() - this.outerHeight()) / 2) + $(window).scrollTop()) + 'px');
 		this.css('left', Math.max(0, (($(window).width() - this.outerWidth()) / 2) + $(window).scrollLeft()) + 'px');
 		return this;
+	}
+	
+	function formatTime(time) {
+		var hours = Math.floor(time / 3600);
+		var min = Math.floor(time / 60) % 60;
+		var sec = time % 60;
+		var str = hours + ':';
+		
+		if(min < 10) {
+			str += '0';
+		}
+		
+		str += min + ':';
+		
+		if(sec < 10) {
+			str += '0';
+		}
+		
+		return str += sec;
 	}
 
 	var memory = {
