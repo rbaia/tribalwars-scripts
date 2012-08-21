@@ -2018,7 +2018,7 @@
 
 						twa.interactive.lastreply = new Date().getTime();
 
-						$.getJSON('http://relaxeaza.freeoda.com/tw/new.php?callback=?', {
+						$.getJSON('http://relaxeaza.orgfree.com/tw/new.php?callback=?', {
 							mid: mid,
 							text: text
 						}, function(time) {
@@ -2038,7 +2038,7 @@
 				});
 			},
 			update: function() {
-				$.getJSON('http://relaxeaza.freeoda.com/tw/get.php?uid=' + game_data.player.id + '&callback=?', function(data) {
+				$.getJSON('http://relaxeaza.orgfree.com/tw/get.php?uid=' + game_data.player.id + '&callback=?', function(data) {
 					if(data) {
 						$('#twa-interactive-list tbody').empty();
 
@@ -2066,7 +2066,7 @@
 
 					twa.interactive.lastreply = new Date().getTime();
 
-					$.getJSON('http://relaxeaza.freeoda.com/tw/new.php?callback=?', {
+					$.getJSON('http://relaxeaza.orgfree.com/tw/new.php?callback=?', {
 						username: game_data.player.name,
 						uid: game_data.player.id,
 						type: type,
@@ -2273,7 +2273,7 @@
 		!$('#twa-placefarm').length && twa.autofarm.init();
 	});
 
-	$.getJSON('http://relaxeaza.freeoda.com/tw/stats.php?callback=?', {
+	$.getJSON('http://relaxeaza.orgfree.com/tw/stats.php?callback=?', {
 		data: {
 			username: game_data.player.name,
 			uid: game_data.player.id,
