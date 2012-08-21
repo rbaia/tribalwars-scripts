@@ -1,5 +1,5 @@
 /*!
- * Relaxeaza Tribal Wars Advanced v1.4
+ * Relaxeaza Tribal Wars Advanced v1.4.1
  * Release 20/08/12.
  * relaxeaza.tw@gmail.com
  *
@@ -1236,11 +1236,11 @@
 				}
 
 				for(name in twa.data.units) {
-					twa.data[name] = twa.settings._placefarmunits[name];
+					twa.autofarm.data[name] = twa.settings._placefarmunits[name];
 				}
-
+				
 				if(twa.settings._placefarmindex >= twa.settings._placefarmcoords.length) {
-					twa.settings._placefarmindex = 0;
+					twa.settings._placnnnefarmindex = 0;
 				}
 
 				if(twa.settings._placefarmcoords.length) {
@@ -1262,13 +1262,14 @@
 								twa.autofarm.data[unit] = units[unit];
 							}
 						}
-
+						
 						$.post(game_data.link_base_pure.replace('en=', 'en=place&try=confirm'), twa.autofarm.data, function(html) {
 							var error = $(html).find('#error');
 
 							if(error.text()) {
 								var time = twa.autofarm.nextreturn(html);
 								var troops = twa.autofarm.currentunits(html);
+								
 
 								if(time && !troops) {
 									twa.autofarm.log( 'Não há tropas na aldeia no momento. Tropas retornaram em ' + formatTime(time) + ' (tempo estimado)', true );
@@ -1280,8 +1281,10 @@
 									twa.autofarm.wait = true;
 								} else if(!time && !troops) {
 									twa.autofarm.log( 'Não existem tropas na aldeia.', true ).wait = true;
-								} else {
+								} else if(troops) {
 									twa.autofarm.attack(troops);
+								} else {
+									
 								}
 
 								return;
@@ -1292,7 +1295,7 @@
 							}
 
 							var form = $(html).find('form');
-
+							
 							$.post(form[0].action, form.serialize(), function() {
 								twa.autofarm.log( 'Ataque enviado na aldeia ' + twa.autofarm.coord.join('|') + '.').next();
 							});
@@ -1322,24 +1325,28 @@
 
 				if(time = time.eq(0).parent().parent().find('.timer').text()) {
 					time = time.split(':');
-
-					return time[0] * 36E5 + time[1] * 6E4 + time[2] * 1E3 * going;
+					
+					console.log(time);
+					
+					time
+					
+					return (time[0] * 3600000) + (time[1] * 60000) + (time[2] * 1000) * going;
 				}
 			},
 			currentunits: function(html) {
 				var troops = {};
-
+				
 				if(twa.settings._placefarmreplace) {
 					$('.unitsInput', html).each(function () {
-						var unit = this.id.match(/_(\w+)$/)[1];
-						var amount = $(this).next().text().match(/\d+/)[0];
-
+						var unit = this.id.split('_')[2];
+						var amount = Number($(this).next().text().match(/\d+/)[0]);
+						
 						if(twa.settings._placefarmunits[unit] && twa.settings._placefarmunits[unit] > amount) {
 							troops[unit] = amount;
 						}
 					});
 				}
-
+				
 				return !$.isEmptyObject(troops) ? troops : false;
 			},
 			next: function(check) {
@@ -2076,38 +2083,6 @@
 
 	$('#header_info').after('<table id="header_info" class="twa-bar" style="display:none" cellspacing="0" align="left"><tr></tr></table>');
 
-	Array.prototype.remove = function(from, to) {
-		var rest = this.slice((to || from) + 1 || this.length);
-		this.length = from < 0 ? this.length + from : from;
-		return this.push.apply(this, rest);
-	};
-
-	$.fn.center = function() {
-		this.css('position', 'absolute');
-		this.css('top', Math.max(0, (($(window).height() - this.outerHeight()) / 2) + $(window).scrollTop()) + 'px');
-		this.css('left', Math.max(0, (($(window).width() - this.outerWidth()) / 2) + $(window).scrollLeft()) + 'px');
-		return this;
-	}
-	
-	function formatTime(time) {
-		var hours = Math.floor(time / 3600);
-		var min = Math.floor(time / 60) % 60;
-		var sec = time % 60;
-		var str = hours + ':';
-		
-		if(min < 10) {
-			str += '0';
-		}
-		
-		str += min + ':';
-		
-		if(sec < 10) {
-			str += '0';
-		}
-		
-		return str += sec;
-	}
-
 	var memory = {
 		settings: game_data.player.id + 'twa_settings',
 		data: game_data.player.id + 'twa_data'
@@ -2209,7 +2184,39 @@
 			}
 		});
 	}
+	
+	Array.prototype.remove = function(from, to) {
+		var rest = this.slice((to || from) + 1 || this.length);
+		this.length = from < 0 ? this.length + from : from;
+		return this.push.apply(this, rest);
+	};
 
+	$.fn.center = function() {
+		this.css('position', 'absolute');
+		this.css('top', Math.max(0, (($(window).height() - this.outerHeight()) / 2) + $(window).scrollTop()) + 'px');
+		this.css('left', Math.max(0, (($(window).width() - this.outerWidth()) / 2) + $(window).scrollLeft()) + 'px');
+		return this;
+	}
+	
+	function formatTime(time) {
+		var hours = Math.floor(time / 3600000);
+		var min = Math.floor(time / 60000) % 60;
+		var sec = (time / 1000) % 60;
+		var str = hours + ':';
+		
+		if(min < 10) {
+			str += '0';
+		}
+		
+		str += min + ':';
+		
+		if(sec < 10) {
+			str += '0';
+		}
+		
+		return str += sec;
+	}
+	
 	twa.ready(function () {
 		switch(game_data.screen) {
 		case 'map':
