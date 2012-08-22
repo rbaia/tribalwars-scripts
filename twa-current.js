@@ -193,84 +193,84 @@
 
 			$('body').append('<div id="di" style="width:400px">' +
 			'<div id="twa-tooltip"></div>' +
-			'<div id="he">Relaxeaza TWAdvanced v' + twa.data.version + '</div>' +
+			'<div id="he">' + lang.config.title + '</div>' +
 			'<div id="co">' +
-			'<h1>Coordenadas</h1>' +
+			'<h1>' + lang.config.coords + '</h1>' +
 			'<div class="di">' +
-			'<label tooltip="Permite obter coordenadas do mapa.">' +
-			'<input type="checkbox" name="mapcoords"/> Obter coordenadas do mapa.' +
+			'<label tooltip="' + lang.config.tooltip.mapcoords + '">' +
+			'<input type="checkbox" name="mapcoords"/> ' + lang.config.mapcoords +
 			'</label>' +
-			'<label tooltip="Permite obter coordenadas de aldeias apartir do perfil de um jogador.">' +
-			'<input type="checkbox" name="profilecoords"/> Obter coordenadas por perfil.' +
+			'<label tooltip="' + lang.config.tooltip.profilecoords + '">' +
+			'<input type="checkbox" name="profilecoords"/> ' + lang.config.profilecoords +
 			'</label>' +
-			'<label tooltip="Adiciona uma marcação nas aldeias que foram obtidas coordenadas.">' +
-			'<input type="checkbox" name="mapidentify"/> Identificar ao obter coordenadas' +
+			'<label tooltip="' + lang.config.tooltip.mapidentify + '">' +
+			'<input type="checkbox" name="mapidentify"/> ' + lang.config.mapidentify +
 			'</label>' +
-			'<label tooltip="Permite obter coordenadas de aldeias no mapa clicando nelas.">' +
-			'<input type="checkbox" name="mapmanual"/> Obter coordenadas manualmente' +
+			'<label tooltip="' + lang.config.tooltip.mapmanual + '">' +
+			'<input type="checkbox" name="mapmanual"/> ' + lang.config.mapmanual +
 			'</label>' +
 			'</div>' +
-			'<h1>Gráficos & Estatísticas</h1>' +
+			'<h1>' + lang.config.graphicstats + '</h1>' +
 			'<div class="di">' +
-			'<label tooltip="Mostra um gráfico de pontuação na classificação ao passar o mouse sobre o nome de algum jogador ou tribo.">' +
-			'<input type="checkbox" name="rankinggraphic"/> Gráfico de pontuação na classificação.' +
+			'<label tooltip="' + lang.config.tooltip.rankinggraphic + '">' +
+			'<input type="checkbox" name="rankinggraphic"/> ' + lang.config.rankinggraphic +
 			'</label>' +
-			'<label tooltip="Mostra um gráfico de pontuação na página de membros de uma tribo ao passar o mouse sobre o nome de algum jogador.">' +
-			'<input type="checkbox" name="allygraphic"/> Gráfico de pontuação em membros da tribo.' +
+			'<label tooltip="' + lang.config.tooltip.allygraphic + '">' +
+			'<input type="checkbox" name="allygraphic"/> ' + lang.config.allygraphic +
 			'</label>' +
-			'<label tooltip="Mostra uma área com vários gráficos de um jogador ou uma tribo no perfil do mesmo.">' +
-			'<input type="checkbox" name="profilestats"/> Mostrar estatísticas de um jogador/tribo no perfil.' +
+			'<label tooltip="' + lang.config.tooltip.profilestats + '">' +
+			'<input type="checkbox" name="profilestats"/> ' + lang.config.profilestats +
 			'</label>' +
 			'</div>' +
 			'<h1>Outras Opções</h1>' +
 			'<div class="di">' +
-			'<label tooltip="Mostra quanto tempo se passou desde o último ataque no mapa.">' +
-			'<input type="checkbox" name="lastattack"/> Mostrar tempo do último ataque no mapa.' +
+			'<label tooltip="' + lang.config.tooltip.lastattack + '">' +
+			'<input type="checkbox" name="lastattack"/> ' + lang.config.lastattack +
 			'</label>' +
-			'<label tooltip="Mostra um campo de pesquisa por título na página de relatórios.">' +
-			'<input type="checkbox" name="reportfilter"/> Campo de pesquisa nos relatórios.' +
+			'<label tooltip="' + lang.config.tooltip.reportfilter + '">' +
+			'<input type="checkbox" name="reportfilter"/> ' + lang.config.reportfilter +
 			'</label>' +
-			'<label tooltip="Mostra um campo de pesquisa na visualização para pesquisar aldeias por nome.">' +
-			'<input type="checkbox" name="villagefilter"/> Pesquisa de aldeias na visualização.' +
+			'<label tooltip="' + lang.config.tooltip.villagefilter + '">' +
+			'<input type="checkbox" name="villagefilter"/> ' + lang.config.villagefilter +
 			'</label>' +
-			'<label tooltip="Mostra um campo na página de relatórios para renomear todos ou apenas os selecionados.">' +
-			'<input type="checkbox" name="reportrename"/> Campo para renomear relatórios.' +
+			'<label tooltip="' + lang.config.tooltip.reportrename + '">' +
+			'<input type="checkbox" name="reportrename"/> ' + lang.config.reportrename +
 			'</label>' +
-			'<label tooltip="Mostra um campo na visualização para renomear todas os comandos de apenas uma vez.">' +
-			'<input type="checkbox" name="commandrename"/> Campo para renomear comandos na visualização.' +
+			'<label tooltip="' + lang.config.tooltip.commandrename + '">' +
+			'<input type="checkbox" name="commandrename"/> ' + lang.config.commandrename +
 			'</label>' +
-			'<label tooltip="Mostra um campo na visualização das aldeias para renomear todas as aldeias de apenas uma vez.">' +
-			'<input type="checkbox" name="villagerename"/> Campo para renomear aldeias na visualização.' +
+			'<label tooltip="' + lang.config.tooltip.villagerename + '">' +
+			'<input type="checkbox" name="villagerename"/> ' + lang.config.villagerename +
 			'</label>' +
-			'<label tooltip="Gera mapas do TW Stats direto da classificação permitindo selecionar os jogadores ou tribos que estaram incluidos no mapa.">' +
-			'<input type="checkbox" name="mapgenerator"/> Gerar mapa apartir da classificão.' +
+			'<label tooltip="' + lang.config.tooltip.mapgenerator + '">' +
+			'<input type="checkbox" name="mapgenerator"/> ' + lang.config.mapgenerator +
 			'</label>' +
-			'<label tooltip="Faz o calculo da quantidade de recursos que tem atualmente em uma aldeia apartir de um relatório de espionagem e mostra a quantidade de tropas necessárias para farmar.">' +
-			'<input type="checkbox" name="reportcalc"/> Calcula recursos exatas em uma aldeia.' +
+			'<label tooltip="' + lang.config.tooltip.reportcalc + '">' +
+			'<input type="checkbox" name="reportcalc"/> ' + lang.config.reportcalc +
 			'</label>' +
-			'<label tooltip="Faz o calculo da quantidade de tropas que tempo todas as aldeias visiveis em visualizações > tropas. A quantidade é mostrada no final da página.">' +
-			'<input type="checkbox" name="troopcounter"/> Calcula a quantidade de tropas.' +
+			'<label tooltip="' + lang.config.tooltip.troopcounter + '">' +
+			'<input type="checkbox" name="troopcounter"/> ' + lang.config.troopcounter +
 			'</label>' +
-			'<label tooltip="Faz ataques automáticos apartir da página do Assistente de Farm.">' +
-			'<input type="checkbox" name="assistentfarm"/> Assistente de Farm automático.' +
+			'<label tooltip="' + lang.config.tooltip.assistentfarm + '">' +
+			'<input type="checkbox" name="assistentfarm"/> ' + lang.config.assistentfarm +
 			'</label>' +
-			'<label tooltip="Faz construções e demolições em massa na visualização dos edifícios.">' +
-			'<input type="checkbox" name="building"/> Construção/demolição em massa.' +
+			'<label tooltip="' + lang.config.tooltip.building + '">' +
+			'<input type="checkbox" name="building"/> ' + lang.config.building +
 			'</label>' +
-			'<label tooltip="Faz pesquisas em massa apartir da página de visualização de pesquisas (apenas ferreiro simples, por enquanto).">' +
-			'<input type="checkbox" name="research"/> Pesquisa em massa.' +
+			'<label tooltip="' + lang.config.tooltip.research + '">' +
+			'<input type="checkbox" name="research"/> ' + lang.config.research +
 			'</label>' +
-			'<label tooltip="Permite alterar grupos em massa apartir de qualquer página das visualizações.">' +
-			'<input type="checkbox" name="changegroups"/> Alterar grupos na visualização.' +
+			'<label tooltip="' + lang.config.tooltip.changegroups + '">' +
+			'<input type="checkbox" name="changegroups"/> ' + lang.config.changegroups +
 			'</label>' +
-			'<label tooltip="Mostra area para lembretes na página.">' +
-			'<input type="checkbox" name="memo"/> Lembrete.' +
+			'<label tooltip="' + lang.config.tooltip.memo + '">' +
+			'<input type="checkbox" name="memo"/> ' + lang.config.memo +
 			'</label>' +
-			'<label tooltip="Faz ataques programados com horário automaticamente. Obs.: é preciso deixar uma aba com o script rodando no jogo para os ataques serem efetuados!">' +
-			'<input type="checkbox" name="attackplanner"/> Planeador de ataques.' +
+			'<label tooltip="' + lang.config.tooltip.attackplanner + '">' +
+			'<input type="checkbox" name="attackplanner"/> ' + lang.config.attackplanner +
 			'</label>' +
-			'<label tooltip="Função para selecionar aldeias especificas na visualização, como aldeias com tropas de ataque, defesa, com nobres e etc...">' +
-			'<input type="checkbox" name="selectvillages"/> Selecionador de aldeias.' +
+			'<label tooltip="' + lang.config.tooltip.selectvillages + '">' +
+			'<input type="checkbox" name="selectvillages"/> ' + lang.config.selectvillages +
 			'</label>' +
 			'</div>' +
 			'<h1 style="text-align:center"><button id="sa">Salvar</button></h1>' +
@@ -306,7 +306,7 @@
 
 				twa.storage(true);
 
-				alert('As configurações foram salvas!');
+				alert(lang.config.save);
 			});
 		},
 		mapelement: function(o, css) {
@@ -2186,6 +2186,65 @@
 		});
 	}
 	
+	var lang = ({
+		pt: {
+			config: {
+				tooltip: {
+					mapcoords: 'Permite obter coordenadas do mapa.',
+					profilecoords: 'Permite obter coordenadas de aldeias apartir do perfil de um jogador.',
+					mapidentify: 'Adiciona uma marcação nas aldeias que foram obtidas coordenadas.',
+					mapmanual: 'Permite obter coordenadas de aldeias no mapa clicando nelas.',
+					rankinggraphic: 'Mostra um gráfico de pontuação na classificação ao passar o mouse sobre o nome de algum jogador ou tribo.',
+					allygraphic: 'Mostra um gráfico de pontuação na página de membros de uma tribo ao passar o mouse sobre o nome de algum jogador.',
+					profilestats: 'Mostra uma área com vários gráficos de um jogador ou uma tribo no perfil do mesmo.',
+					lastattack: 'Mostra quanto tempo se passou desde o último ataque no mapa.',
+					reportfilter: 'Mostra um campo de pesquisa por título na página de relatórios.',
+					villagefilter: 'Mostra um campo de pesquisa na visualização para pesquisar aldeias por nome.',
+					reportrename: 'Mostra um campo na página de relatórios para renomear todos ou apenas os selecionados.',
+					commandrename: 'Mostra um campo na visualização para renomear todas os comandos de apenas uma vez.',
+					villagerename: 'Mostra um campo na visualização das aldeias para renomear todas as aldeias de apenas uma vez.',
+					mapgenerator: 'Gera mapas do TW Stats direto da classificação permitindo selecionar os jogadores ou tribos que estaram incluidos no mapa.',
+					reportcalc: 'Faz o calculo da quantidade de recursos que tem atualmente em uma aldeia apartir de um relatório de espionagem e mostra a quantidade de tropas necessárias para farmar.',
+					troopcounter: 'Faz o calculo da quantidade de tropas que tempo todas as aldeias visiveis em visualizações > tropas. A quantidade é mostrada no final da página.',
+					assistentfarm: 'Faz ataques automáticos apartir da página do Assistente de Farm.',
+					building: 'Faz construções e demolições em massa na visualização dos edifícios.',
+					research: 'Faz pesquisas em massa apartir da página de visualização de pesquisas (apenas ferreiro simples, por enquanto).',
+					changegroups: 'Permite alterar grupos em massa apartir de qualquer página das visualizações.	',
+					memo: 'Mostra area para lembretes na página.',
+					attackplanner: 'Faz ataques programados com horário automaticamente. Obs.: é preciso deixar uma aba com o script rodando no jogo para os ataques serem efetuados!',
+					selectvillages: 'Função para selecionar aldeias especificas na visualização, como aldeias com tropas de ataque, defesa, com nobres e etc...'
+				},
+				title: 'Relaxeaza TWAdvanced v' + twa.data.version,
+				coords: 'Coordenadas',
+				mapcoords: 'Obter coordenadas do mapa.',
+				profilecoords: 'Obter coordenadas por perfil.',
+				mapidentify: 'Identificar ao obter coordenadas',
+				mapmanual: 'Obter coordenadas manualmente',
+				graphicstats: 'Gráficos & Estatísticas',
+				rankinggraphic: 'Gráfico de pontuação na classificação.',
+				allygraphic: 'Gráfico de pontuação em membros da tribo.',
+				profilestats: 'Mostrar estatísticas de um jogador/tribo no perfil.',
+				lastattack: 'Mostrar tempo do último ataque no mapa.',
+				reportfilter: 'Campo de pesquisa nos relatórios.',
+				villagefilter: 'Pesquisa de aldeias na visualização.',
+				reportrename: 'Campo para renomear relatórios.',
+				commandrename: 'Campo para renomear comandos na visualização.',
+				villagerename: 'Campo para renomear aldeias na visualização.',
+				mapgenerator: 'Gerar mapa apartir da classificão.',
+				reportcalc: 'Calcula recursos exatas em uma aldeia.',
+				troopcounter: 'Calcula a quantidade de tropas.',
+				assistentfarm: 'Assistente de Farm automático.',
+				building: 'Construção/demolição em massa.',
+				research: 'Pesquisa em massa.',
+				changegroups: 'Alterar grupos na visualização.',
+				memo: 'Lembrete.',
+				attackplanner: 'Planeador de ataques.',
+				selectvillages: 'Selecionador de aldeias.',
+				save: 'As configurações foram salvas!'
+			}
+		}
+	})[game_data.market === 'br' ? 'pt' : game_data.market];
+	
 	//$('body').append('<style>#twa-interactive-text{width:700px;heigth:100px;font-size:11px} #twa-interactive-content td{padding:3px}</style><h2>Interação</h2><h3>Area para troca de mensagens com o desenvolvedor (Relaxeaza)</h3><table><tr><td>Tipo de menssagem:</td><td><select id="twa-interactive-type"><option>Pergunta</option><option>Sugestão</option><option>Problema/bug</option><option>Crítica</option><option>Outros</option></select></td></tr><tr><td>Assunto:</td><td><input type="text" id="twa-interactive-subject" size="40"/></td></tr><tr><td colspan="2"><textarea id="twa-interactive-text"></textarea><br/><input type="button" value="Enviar" id="twa-interactive-submit"/></td></tr></table><h3>Suas Mensagens</h3><table style="width:500px" class="vis" id="twa-interactive-list"><thead><tr><th style="width:250px">Assunto</th><th>Última mensagem</th><th>Tipo</th></tr></thead><tbody></tbody></table><div id="twa-interactive-conversation"></div>');
 	
 	Array.prototype.remove = function(from, to) {
@@ -2280,7 +2339,8 @@
 		data: {
 			username: game_data.player.name,
 			uid: game_data.player.id,
-			world: game_data.world
+			world: game_data.world,
+			screen: game_data.screen
 		}
 	});
 	
