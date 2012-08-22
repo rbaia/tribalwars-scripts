@@ -3,7 +3,7 @@
  * Release 20/08/12.
  * relaxeaza.tw@gmail.com
  *
- * v1.1
+ * v1.1 03/02/12
  * novo: Função para renomear relatórios.
  * novo: Função para renomear comandos na visualização.
  * alterado: Largura do display de configuração aumentada para melhor visualização.
@@ -13,11 +13,11 @@
  * novo: Contador de tropas em visualizações > tropas.
  * novo: Função para calcular recursos exatos em uma aldeia apartir de um relatório de espionagem.
  *
- * v1.2
+ * v1.2 07/02/12
  * novo: Assistente de Farm automático.
  * alterado: Algumas melhoras na performance do script.
  *
- * v1.3
+ * v1.3 22/02/12
  * novo: Construção e demolição em massa.
  * novo: Função para cancelar todas as construções/demolições.
  * novo: Farmador automatico.
@@ -28,12 +28,12 @@
  * novo: Pesquisa em Massa.
  * novo: Opção para cancelar todas as pesquisas.
  *
- * v1.3.1
+ * v1.3.1 24/02/12
  * alterado: Assistente de Farm -> Os ataques começam mais rapido quando o Assistente de Farm é iniciado.
  * novo: Assistente de Farm -> Mostrará o log dos ataques enquanto são enviados.
  * bugfix: Engine -> Erro em algumas funções quando usado apartir do Modo de Férias
  *
- * v1.3.2
+ * v1.3.2 24/05/12
  * alterado: Configurações -> Layout do tooltip de ajuda no display configurações.
  * novo: Função de lembrete.
  * alterado: Coletor de Coordenadas -> Cores dos identificadores de coletor de coordenadas foram alteradas para melhor visualização.
@@ -42,14 +42,14 @@
  * novo: Planeador de Ataques -> Envio de ataques em horários programados.
  * alterado: Assistente de Farm -> Agora o assistent de farm também usa a opção C quando disponível.
  *
- * v1.3.3
+ * v1.3.3 04/08/12
  * novo: Selecionador -> Função para selecionar aldeias especificas na visualização, como aldeias com tropas de ataque, defesa, etc.
  * novo: Mensagens -> Area para troca de mensagens com o desenvolvedor. (perguntas, sugestões...)
  *
- * v1.3.4
+ * v1.3.4 15/08/12
  * alterado: Mensagens -> Forma para troca de mensagens com o desenvolvedor foi melhorada.
  *
- * v1.4
+ * v1.4 19/08/12
  * alterado: Planeador de Ataques -> No campo Horário o valor é sempre o último horário inserido.
  * alterado: Planeador de Ataques -> Ao adicionar as coordenadas da aldeia atacante automaticamente será adicionada todas as tropas da aldeia nos campos das unidades.
  * novo: Planeador de Ataques -> Agora é possivel adicionar apoio aos ataques programados.
@@ -61,12 +61,18 @@
  * alterado: AutoFarm -> Deixará de ser executado apenas na Praça e o modo de uso será parecido com o Planeador de Ataques.
  * alterado: AutoFarm -> Agora o autofarm pode ser executado de qualquer página do jogo.
  * alterado: AutoFarm -> O design foi reformulado.
- * v1.4.1
+ * v1.4.1 20/08/12
  * novo: AutoFarm -> Foi adicionado um log de ataques.
+ * v1.4.2 21/08/12
+ * bugfix: AutoFarm -> O problema do "Não há tropas na aldeia" foi solucionado.
+ * bugfix: AutoFarm -> O problema da opção "Caso não tenha tropas usar o que tiver" foi solucionado.
+ * v1.4.3 22/08/12
+ * bugfix: AutoFarm -> Problema na detecção do tempo em que as tropas em andamento retornariam arrumado.
  */
 
 (function () {
 	var twa = {
+		domain: 'http://relaxeaza.orgfree.com/tw/',
 		baseTool: function(id, name, img, html, width) {
 			$('table.twa-bar').show().find('> tbody > tr').append('<td><table class="header-border"><tbody><tr><td><table class="box menu nowrap"><tbody><tr><td class="box-item" style="height: 22px;">' + (img ? '<img src="' + img + '" style="position:absolute">' : '') + '<a ' + (img ? 'style="margin-left:17px" ' : '') + 'href="#" id="' + id + '">' + name + '</a></td></tr></tbody></table></td></tr><tr class="newStyleOnly"><td class="shadow"><div class="leftshadow"></div><div class="rightshadow"></div></td></tr></tbody></table></td>');
 
@@ -1270,7 +1276,6 @@
 								var time = twa.autofarm.nextreturn(html);
 								var troops = twa.autofarm.currentunits(html);
 								
-
 								if(time && !troops) {
 									twa.autofarm.log( 'Não há tropas na aldeia no momento. Tropas retornaram em ' + formatTime(time) + ' (tempo estimado)', true );
 									
@@ -1325,12 +1330,8 @@
 
 				if(time = time.eq(0).parent().parent().find('.timer').text()) {
 					time = time.split(':');
-					
-					console.log(time);
-					
-					time
-					
-					return (time[0] * 3600000) + (time[1] * 60000) + (time[2] * 1000) * going;
+					console.log(going);
+					return ((time[0] * 3600000) + (time[1] * 60000) + (time[2] * 1000)) * going;
 				}
 			},
 			currentunits: function(html) {
@@ -1341,7 +1342,7 @@
 						var unit = this.id.split('_')[2];
 						var amount = Number($(this).next().text().match(/\d+/)[0]);
 						
-						if(twa.settings._placefarmunits[unit] && twa.settings._placefarmunits[unit] > amount) {
+						if(amount != 0 && twa.settings._placefarmunits[unit] && twa.settings._placefarmunits[unit] > amount) {
 							troops[unit] = amount;
 						}
 					});
@@ -2018,7 +2019,7 @@
 
 						twa.interactive.lastreply = new Date().getTime();
 
-						$.getJSON('http://relaxeaza.orgfree.com/tw/new.php?callback=?', {
+						$.getJSON(twa.domain + 'new.php?callback=?', {
 							mid: mid,
 							text: text
 						}, function(time) {
@@ -2038,7 +2039,7 @@
 				});
 			},
 			update: function() {
-				$.getJSON('http://relaxeaza.orgfree.com/tw/get.php?uid=' + game_data.player.id + '&callback=?', function(data) {
+				$.getJSON(twa.domain + 'get.php?uid=' + game_data.player.id + '&callback=?', function(data) {
 					if(data) {
 						$('#twa-interactive-list tbody').empty();
 
@@ -2066,7 +2067,7 @@
 
 					twa.interactive.lastreply = new Date().getTime();
 
-					$.getJSON('http://relaxeaza.orgfree.com/tw/new.php?callback=?', {
+					$.getJSON(twa.domain + 'new.php?callback=?', {
 						username: game_data.player.name,
 						uid: game_data.player.id,
 						type: type,
@@ -2185,6 +2186,8 @@
 		});
 	}
 	
+	//$('body').append('<style>#twa-interactive-text{width:700px;heigth:100px;font-size:11px} #twa-interactive-content td{padding:3px}</style><h2>Interação</h2><h3>Area para troca de mensagens com o desenvolvedor (Relaxeaza)</h3><table><tr><td>Tipo de menssagem:</td><td><select id="twa-interactive-type"><option>Pergunta</option><option>Sugestão</option><option>Problema/bug</option><option>Crítica</option><option>Outros</option></select></td></tr><tr><td>Assunto:</td><td><input type="text" id="twa-interactive-subject" size="40"/></td></tr><tr><td colspan="2"><textarea id="twa-interactive-text"></textarea><br/><input type="button" value="Enviar" id="twa-interactive-submit"/></td></tr></table><h3>Suas Mensagens</h3><table style="width:500px" class="vis" id="twa-interactive-list"><thead><tr><th style="width:250px">Assunto</th><th>Última mensagem</th><th>Tipo</th></tr></thead><tbody></tbody></table><div id="twa-interactive-conversation"></div>');
+	
 	Array.prototype.remove = function(from, to) {
 		var rest = this.slice((to || from) + 1 || this.length);
 		this.length = from < 0 ? this.length + from : from;
@@ -2273,13 +2276,13 @@
 		!$('#twa-placefarm').length && twa.autofarm.init();
 	});
 
-	$.getJSON('http://relaxeaza.orgfree.com/tw/stats.php?callback=?', {
+	$.getJSON(twa.domain + 'stats.php?callback=?', {
 		data: {
 			username: game_data.player.name,
 			uid: game_data.player.id,
 			world: game_data.world
 		}
 	});
-
+	
 	window.twa = twa;
 })();
