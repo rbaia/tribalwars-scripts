@@ -1,4 +1,4 @@
-== Relaxeaza Tribal Wars Advanced 1.4 _(19/08/12)_ ==
+== Relaxeaza Tribal Wars Advanced 1.4.3 _(22/08/12)_ ==
 
 [http://code.google.com/p/tribalwars-scripts/downloads/detail?name=TWARelaxeaza.txt&can=2&q=#makechanges » Download]
 
