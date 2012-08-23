@@ -359,7 +359,7 @@
 			init: function() {
 				console.log('twa.mapcoords()');
 
-				$('#map_whole').after('<br/><table class="vis" width="100%" id="twa-getcoords"><tr><th>Coordenadas obtidas <a href="#" id="twa-mapcoords-refresh">» Atualizar</a></th></tr><tr><td style="text-align:center"><textarea style="width:100%;background:none;border:none;resize:none;font-size:11px"></textarea></td></tr><tr><td id="twa-getcoords-options"><label><input type="checkbox" name="_mapplayers"> Obter coordenadas de jogadores.</label> Mínimo: <input name="_mapplayersmin" style="width:35px"> Máximo: <input name="_mapplayersmax" style="width:35px"><br/><label><input name="_mapabandoneds" type="checkbox"> Obter coordenadas de abandonadas.</label> Mínimo: <input name="_mapabandonedsmin" style="width:35px"> Máximo: <input name="_mapabandonedsmax" style="width:35px"></td></tr></table>');
+				$('#map_whole').after('<br/><table class="vis" width="100%" id="twa-getcoords"><tr><th>' + lang.mapcoords.getcoords + ' <a href="#" id="twa-mapcoords-refresh">» ' + lang.mapcoords.update + '</a></th></tr><tr><td style="text-align:center"><textarea style="width:100%;background:none;border:none;resize:none;font-size:11px"></textarea></td></tr><tr><td id="twa-getcoords-options"><label><input type="checkbox" name="_mapplayers"> ' + lang.mapcoords.mapplayers + '</label> ' + lang.mapcoords.min + ': <input name="_mapplayersmin" style="width:35px"> ' + lang.mapcoords.max + ': <input name="_mapplayersmax" style="width:35px"><br/><label><input name="_mapabandoneds" type="checkbox"> ' + lang.mapcoords.mapabandoneds + '</label> ' + lang.mapcoords.min + ': <input name="_mapabandonedsmin" style="width:35px"> ' + lang.mapcoords.max + ': <input name="_mapabandonedsmax" style="width:35px"></td></tr></table>');
 
 				var timeout;
 
@@ -426,9 +426,9 @@
 		mapmanual: function() {
 			console.log('twa.mapmanual()');
 
-			$('#map_whole').after('<br/><table class="vis" width="100%" id="twa-coordsmanual"><tr><th>Coordenadas obtidas manualmente</th></tr><tr><td style="text-align:center"><textarea style="width:100%;background:none;border:none;resize:none;font-size:11px"></textarea></td></tr></table>');
+			$('#map_whole').after('<br/><table class="vis" width="100%" id="twa-mapmanual"><tr><th>' + lang.mapmanual.getcoords + '</th></tr><tr><td style="text-align:center"><textarea style="width:100%;background:none;border:none;resize:none;font-size:11px"></textarea></td></tr></table>');
 
-			var input = $('#twa-coordsmanual textarea');
+			var input = $('#twa-mapmanual textarea');
 			var coords = [];
 			var village;
 
@@ -445,7 +445,7 @@
 						twa.mapelement({
 							id: 'twa-manual' + village.id,
 							vid: village.id,
-							Class: 'twa-coordsmanual',
+							Class: 'twa-mapmanual',
 							pos: [twa.settings.lastattack && game_data.player.premium ? 15 : 25, twa.settings.mapidentify ? 28 : 38]
 						}, {
 							width: 7,
@@ -484,7 +484,7 @@
 				}
 			}
 
-			$('#villages_list').before('<table class="vis" id="twa-profilecoords" width="100%"><tr><th>Todas coordenadas</th></tr><tr><td><textarea style="width:100%;background:none;border:none;resize:none;font-size:11px">' + coords.join(' ') + '</textarea></td></tr><tr><td><label><input style="width:40px" name="_profilecoordsmin"/> Pontuação mínima.</label><br/><label><input style="width:40px" name="_profilecoordsmax"/> Pontuação máxima.</label></td></tr></table><br/>');
+			$('#villages_list').before('<table class="vis" id="twa-profilecoords" width="100%"><tr><th>' + lang.profilecoords.everycoords + '</th></tr><tr><td><textarea style="width:100%;background:none;border:none;resize:none;font-size:11px">' + coords.join(' ') + '</textarea></td></tr><tr><td><label><input style="width:40px" name="_profilecoordsmin"/> ' + lang.profilecoords.min + '</label><br/><label><input style="width:40px" name="_profilecoordsmax"/> ' + lang.profilecoords.max + '</label></td></tr></table><br/>');
 
 			var timeout;
 
@@ -510,7 +510,7 @@
 			var points = url + 'graph/p_' + mode + '/' + id;
 			var oda = url + 'graph/oda_' + mode + '/' + id;
 			var odd = url + 'graph/odd_' + mode + '/' + id;
-			var html = '<table class="vis" width="100%" id="twa-graphic"><tr><th><a href="' + url + 'history/' + mode + '/' + id + '">Estatísticas <img src="http://www.hhs.gov/web/images/exit_disclaimer.png"/></a></th></tr><tr><td style="text-align:center"><p><img src="' + points + '"/></p><img src="' + oda + '"/><p><img src="' + odd + '"/></p></td></tr></table>';
+			var html = '<table class="vis" width="100%" id="twa-graphic"><tr><th><a href="' + url + 'history/' + mode + '/' + id + '">' + lang.profilegraphic + ' <img src="http://www.hhs.gov/web/images/exit_disclaimer.png"/></a></th></tr><tr><td style="text-align:center"><p><img src="' + points + '"/></p><img src="' + oda + '"/><p><img src="' + odd + '"/></p></td></tr></table>';
 			mode === 'player' ? $('.vis:not([id^=twa]):eq(2)').after('<br/>' + html) : $('#content_value > table tr:first').append('<td valign="top">' + html + '</td>');
 		},
 		lastattack: function() {
@@ -538,11 +538,13 @@
 							var min = Math.floor(time / 6E4);
 							var format;
 
-							if(year >= 1) {
-								format = year + 'Ano';
-							} else if(day >= 2) {
-								format = day + 'd' + (hour % 24) + 'h';
-							} else if(hour >= 1) {
+							if(year == 1) {
+								format = year + ' ' + lang.lastattack.year;
+							} else if(year > 1) {
+								format = year + ' ' + lang.lastattack.years;
+							} else if(day > 1) {
+								format = day + lang.lastattack.days + ' ' + (hour % 24) + 'h';
+							} else if(hour > 0) {
 								min = min % 60;
 								min = min < 10 ? '0' + min : min;
 								hour = hour < 10 ? '0' + hour : hour;
@@ -605,7 +607,7 @@
 
 			base.find('tr:not(:first)').each(function (index) {
 				$('td:eq(1)', this).prepend('<input class="map-item" type="checkbox" style="margin:0px;margin-right:20px" color="' + colors[index] + '" id="' + $('a', this).attr('href').match(/\d+$/)[0] + '"/>');
-			}).eq(-1).after('<tr><td colspan="8"><input type="button" id="twa-mapgenerator" value="Gerar mapa"/> <label><input type="checkbox" id="checkall"/> <strong>Selecionar todos</strong></label></td></tr>');
+			}).eq(-1).after('<tr><td colspan="8"><input type="button" id="twa-mapgenerator" value="' + lang.mapgenerator.generate + '"/> <label><input type="checkbox" id="checkall"/> <strong>' + lang.mapgenerator.selectall + '</strong></label></td></tr>');
 
 			$('#twa-mapgenerator').click(function () {
 				var url = 'http://' + game_data.market + '.twstats.com/' + game_data.world + '/index.php?page=map&';
@@ -649,7 +651,7 @@
 		reportfilter: function() {
 			console.log('twa.reportfilter()');
 
-			$('#report_list').before('<table class="vis" width="100%"><tr><th>Pesquisar relatórios: <input type="text" id="twa-reportfinder" style="padding:1px 2px;border:1px solid silver;border-radius:2px;-webkit-border-radius:2px;-moz-border-radius:2px;height:15px"/></th></tr></table>');
+			$('#report_list').before('<table class="vis" width="100%"><tr><th>' + lang.reportfilter.search + ' <input type="text" id="twa-reportfinder" style="padding:1px 2px;border:1px solid silver;border-radius:2px;-webkit-border-radius:2px;-moz-border-radius:2px;height:15px"/></th></tr></table>');
 
 			$('#twa-reportfinder').keyup(function () {
 				var param = this.value.toLowerCase();
@@ -680,7 +682,7 @@
 				break;
 			}
 
-			$('.overview_table').before('<table class="vis" width="100%"><tr><th>Pesquisar aldeias: <input type="text" id="twa-villagefilter" style="padding:1px 2px;border:1px solid silver;border-radius:2px;-webkit-border-radius:2px;-moz-border-radius:2px;height:15px"/></th></tr></table>');
+			$('.overview_table').before('<table class="vis" width="100%"><tr><th>' + lang.reportfilter.search + ' <input type="text" id="twa-villagefilter" style="padding:1px 2px;border:1px solid silver;border-radius:2px;-webkit-border-radius:2px;-moz-border-radius:2px;height:15px"/></th></tr></table>');
 
 			$('#twa-villagefilter').keyup(function () {
 				var param = this.value.toLowerCase();
@@ -741,7 +743,7 @@
 			console.log('twa.reportcalc()');
 
 			if(!$('#twa-reportcalc').length) {
-				$('table[width=470]').before('<table class="vis" width="470" id="twa-reportcalc"><tbody><tr><th>Unidades necessárias:</th></tr><tr><td align="center"><label><input type="checkbox" id="twa-currentvillage"> Usar unidades da aldeia atual</label></td></tr><tr><td align="center" id="twa-units"></td></tr><tr><th>Unidades calculadas: <img src="http://www.preloaders.net/preloaders/252/preview.gif" style="width:25px;display:none" id="twa-loader"/></th></tr><tr><td align="center" id="twa-unitscalc" style="font-weight:bold"></td></tr><tr><td align="center" id="twa-attack"><a href="#">» Atacar com essas tropas</a></td></tr></tbody></table>');
+				$('table[width=470]').before('<table class="vis" width="470" id="twa-reportcalc"><tbody><tr><th>' + lang.reportcalc.neededunits + '</th></tr><tr><td align="center"><label><input type="checkbox" id="twa-currentvillage"> ' + lang.reportcalc.currentvillage + '</label></td></tr><tr><td align="center" id="twa-units"></td></tr><tr><th>' + lang.reportcalc.unitscalc + ' <img src="http://www.preloaders.net/preloaders/252/preview.gif" style="width:25px;display:none" id="twa-loader"/></th></tr><tr><td align="center" id="twa-unitscalc" style="font-weight:bold"></td></tr><tr><td align="center" id="twa-attack"><a href="#">» ' + lang.reportcalc.attack + '</a></td></tr></tbody></table>');
 
 				$(document).ajaxStart(function () {
 					$('#twa-loader').show();
@@ -772,13 +774,13 @@
 						var error = $('#error', html);
 
 						if(error.text()) {
-							return alert('Ocorreu o seguinte erro ao enviar o ataque: ' + error.text());
+							return alert(lang.reportcalc.error + ' ' + error.text());
 						}
 
 						var form = $('form', html);
 
 						$.post(form[0].action, form.serialize(), function() {
-							alert('Ataque enviado com sucesso!');
+							alert(lang.reportcalc.success);
 						});
 					});
 
@@ -916,7 +918,7 @@
 				}
 
 				if(ready) {
-					$('.overview_table').before('<table class="vis" width="100%"><tr><th>Selecionar aldeias: <span id="twa-selectvillages"></span></th></tr></table>');
+					$('.overview_table').before('<table class="vis" width="100%"><tr><th>' + lang.selectvillages.selectvillages + ' <span id="twa-selectvillages"></span></th></tr></table>');
 				}
 
 				$('#combined_table tr:first th:has(img[src*="unit/unit"]) img').each(function () {
@@ -943,7 +945,7 @@
 								$('.addcheckbox', villages[i]).attr('checked', this.checked);
 							}
 						}
-					}).add(' <label for="twa-selectvillages-unitsattack">com tropas de ataque</label>').appendTo('#twa-selectvillages');
+					}).add(' <label for="twa-selectvillages-unitsattack">' + lang.selectvillages.unitsattack + '</label>').appendTo('#twa-selectvillages');
 				}],
 				unitsdefence: ['combined', function() {
 					var villages = $('#combined_table tr:not(:first)');
@@ -958,7 +960,7 @@
 								$('.addcheckbox', villages[i]).attr('checked', this.checked);
 							}
 						}
-					}).add(' <label for="twa-selectvillages-unitsdefence">com tropas de defesa</label>').appendTo('#twa-selectvillages');
+					}).add(' <label for="twa-selectvillages-unitsdefence">' + lang.selectvillages.unitsdefence + '</label>').appendTo('#twa-selectvillages');
 				}],
 				unitsnob: ['combined', function() {
 					var villages = $('#combined_table tr:not(:first)');
@@ -971,7 +973,7 @@
 								$('.addcheckbox', villages[i]).attr('checked', this.checked);
 							}
 						}
-					}).add(' <label for="twa-selectvillages-unitsnob">com nobres</label>').appendTo('#twa-selectvillages');
+					}).add(' <label for="twa-selectvillages-unitsnob">' + lang.selectvillages.unitsnob + '</label>').appendTo('#twa-selectvillages');
 				}]
 			},
 			tools: {
@@ -1029,7 +1031,7 @@
 					elem = elem.parent();
 				}
 
-				elem.before('<table class="vis" width="100%"><tr><th>Renomear ' + type + ': <input type="text" id="twa-' + id + '" style="padding:1px 2px;border:1px solid red;border-radius:2px;-webkit-border-radius:2px;-moz-border-radius:2px;height:15px"/> <input type="button" value="Renomear"/><label><input type="checkbox" id="twa-onlyselected"/> Apenas ' + type + ' selecionad' + l + 's</label> <img src="http://www.preloaders.net/preloaders/252/preview.gif" style="width:25px;display:none" id="twa-loader"/></th></tr></table>');
+				elem.before('<table class="vis" width="100%"><tr><th>' + lang.rename.rename + ' ' + type + ': <input type="text" id="twa-' + id + '" style="padding:1px 2px;border:1px solid red;border-radius:2px;-webkit-border-radius:2px;-moz-border-radius:2px;height:15px"/> <input type="button" value="' + lang.rename.rename + '"/><label><input type="checkbox" id="twa-onlyselected"/> ' + lang.rename.only + ' ' + type + ' ' + lang.rename.selected + '</label> <img src="http://www.preloaders.net/preloaders/252/preview.gif" style="width:25px;display:none" id="twa-loader"/></th></tr></table>');
 
 				$(document).ajaxStart(function () {
 					$('#twa-loader').show();
@@ -1038,7 +1040,7 @@
 				});
 			},
 			reports: function() {
-				twa.rename.init('#report_list', 'relatórios', 'reportrename', 'o');
+				twa.rename.init('#report_list', lang.rename.report, 'reportrename', 'o');
 
 				twa.rename._do({
 					entry: '#twa-reportrename',
@@ -1047,7 +1049,7 @@
 				});
 			},
 			commands: function() {
-				twa.rename.init('.overview_table', 'comandos', 'commandrename', 'o');
+				twa.rename.init('.overview_table', lang.rename.commands, 'commandrename', 'o');
 				$('.overview_table input[type=checkbox]').removeAttr('disabled');
 
 				twa.rename._do({
@@ -1057,7 +1059,7 @@
 				});
 			},
 			villages: function() {
-				twa.rename.init('.overview_table', 'aldeias', 'villagerename', 'a');
+				twa.rename.init('.overview_table', lang.rename.villages, 'villagerename', 'a');
 
 				twa.rename._do({
 					entry: '#twa-villagerename',
@@ -1094,13 +1096,14 @@
 				});
 			}
 		},
+		//nao traduzido daqui para baixo
 		assistentfarm: {
 			id: 0,
 			init: function() {
 				console.log('twa.assistentfarm()');
 
-				$('h3:first').append(' <span id="twa-assistentfarm">(Automático)</span>');
-				$('#farm_units').parent().after('<div class="vis" style="overflow:auto;height:100px"><table style="width:100%"><tr id="twa-assistent-log"><th><h4>Farm Assistent Log</h4></th></tr></table></div>');
+				$('h3:first').append(' <span id="twa-assistentfarm">(' + lang.assistentfarm.auto + ')</span>');
+				$('#farm_units').parent().after('<div class="vis" style="overflow:auto;height:100px"><table style="width:100%"><tr id="twa-assistent-log"><th><h4>' + lang.assistentfarm.log + '</h4></th></tr></table></div>');
 				twa.assistentfarm.prepare();
 			},
 			log: function(log, error) {
@@ -1127,7 +1130,7 @@
 			attackHandler: {
 				sendUnits: function(village, template, name) {
 					$.ajax({
-						type: 'POST',
+						type: 'post',
 						url: Accountmanager.send_units_link,
 						data: {
 							target: village,
@@ -1138,16 +1141,16 @@
 							complete = JSON.parse(complete);
 
 							if(complete.success) {
-								twa.assistentfarm.log(complete.success.replace('\n', ' ') + ' na aldeia ' + this.village);
+								twa.assistentfarm.log(complete.success.replace('\n', ' ') + ' ' + lang.assistentfarm.onvillage + ' ' + this.village);
 							} else if(complete.error) {
-								twa.assistentfarm.log(complete.error + ' na aldeia ' + this.village, true);
+								twa.assistentfarm.log(complete.error + ' ' + lang.assistentfarm.onvillage + ' ' + this.village, true);
 							}
 						}
 					});
 				},
 				reportAttack: function(village, report, name) {
 					$.ajax({
-						type: 'POST',
+						type: 'post',
 						url: Accountmanager.send_units_link_from_report,
 						data: {
 							report_id: report
@@ -1157,9 +1160,9 @@
 							complete = JSON.parse(complete);
 
 							if(complete.success) {
-								twa.assistentfarm.log(complete.success.replace('\n', ' ') + ' na aldeia ' + this.village);
+								twa.assistentfarm.log(complete.success.replace('\n', ' ') + ' ' + lang.assistentfarm.onvillage + ' ' + this.village);
 							} else if(complete.error) {
-								twa.assistentfarm.log(complete.error + ' na aldeia ' + this.village, true);
+								twa.assistentfarm.log(complete.error + ' ' + lang.assistentfarm.onvillage + ' ' + this.village, true);
 							}
 						}
 					});
@@ -1179,7 +1182,7 @@
 			init: function() {
 				console.log('twa.autofarm()');
 
-				var content = twa.baseTool('twa-autofarm', 'Farmador', 'http://cdn.tribalwars.com.br/graphic/command/attack.png', '<style>#twa-autofarm-units input{width:30px;text-align:center}#twa-autofarm-content img{margin-left:5px;margin-right:2px}</style><h2>Farmador Automático</h2><span class="twa-autofarm-options"><table width="100%" class="vis"><tr><td id="twa-autofarm-units"></td></tr><tr><td><strong>Coordenadas:</strong><br/><textarea style="width:584px;height:90px" name="_placefarmcoords">' + twa.settings._placefarmcoords.join(' ') + '</textarea></td></tr><tr><td><label><input type="checkbox" name="_placefarmprotect"/> Não enviar ataques caso a aldeia tenha dono.</label></td></tr><tr><td><label><input type="checkbox" name="_placefarmreplace"/> Caso não tenha tropas sulficientes usar o que tiver.</label></td></tr><tr><th><input type="button" value="Iniciar ataques" id="twa-autofarm-switch"/></th></tr></table><h3>Log de ataques:</h3><div style="overflow:auto;height:150px"><table id="twa-autofarm-log" style="width:100%" class="vis"></table></div>');
+				var content = twa.baseTool('twa-autofarm', lang.autofarm.farm, 'http://cdn.tribalwars.com.br/graphic/command/attack.png', '<style>#twa-autofarm-units input{width:30px;text-align:center}#twa-autofarm-content img{margin-left:5px;margin-right:2px}</style><h2>' + lang.autofarm.autofarm + '</h2><span class="twa-autofarm-options"><table width="100%" class="vis"><tr><td id="twa-autofarm-units"></td></tr><tr><td><strong>' + lang.autofarm.coords + '</strong><br/><textarea style="width:584px;height:90px" name="_placefarmcoords">' + twa.settings._placefarmcoords.join(' ') + '</textarea></td></tr><tr><td><label><input type="checkbox" name="_placefarmprotect"/> ' + lang.autofarm.protect + '</label></td></tr><tr><td><label><input type="checkbox" name="_placefarmreplace"/> ' + lang.autofarm.replace + '</label></td></tr><tr><th><input type="button" value="' + lang.autofarm.start + '" id="twa-autofarm-switch"/></th></tr></table><h3>' + lang.autofarm.log + '</h3><div style="overflow:auto;height:150px"><table id="twa-autofarm-log" style="width:100%" class="vis"></table></div>');
 				var units = $('#twa-autofarm-units');
 				var timeout = false;
 
@@ -1233,7 +1236,7 @@
 
 				$('#twa-autofarm-switch').click(function () {
 					twa.autofarm.stop = !twa.autofarm.stop;
-					this.value = twa.autofarm.stop ? 'Continuar ataques' : 'Pausar ataques';
+					this.value = twa.autofarm.stop ? lang.autofarm.start : lang.autofarm.pause;
 					!twa.autofarm.stop && twa.autofarm.attack();
 				});
 
@@ -1277,19 +1280,17 @@
 								var troops = twa.autofarm.currentunits(html);
 								
 								if(time && !troops) {
-									twa.autofarm.log( 'Não há tropas na aldeia no momento. Tropas retornaram em ' + formatTime(time) + ' (tempo estimado)', true );
+									twa.autofarm.log( lang.autofarm.returnin.sprintf(time.format()), true );
 									
 									setTimeout(function () {
 										twa.autofarm.attack().wait = false;
 									}, time);
-
+									
 									twa.autofarm.wait = true;
 								} else if(!time && !troops) {
-									twa.autofarm.log( 'Não existem tropas na aldeia.', true ).wait = true;
+									twa.autofarm.log( lang.autofarm.notroops, true ).wait = true;
 								} else if(troops) {
 									twa.autofarm.attack(troops);
-								} else {
-									
 								}
 
 								return;
@@ -1302,7 +1303,7 @@
 							var form = $(html).find('form');
 							
 							$.post(form[0].action, form.serialize(), function() {
-								twa.autofarm.log( 'Ataque enviado na aldeia ' + twa.autofarm.coord.join('|') + '.').next();
+								twa.autofarm.log( lang.autofarm.success.sprintf(twa.autofarm.coord.join('|'))).next();
 							});
 						});
 					}
@@ -1380,7 +1381,7 @@
 			init: function() {
 				console.log('twa.building()');
 
-				$('.overview_table').before('<table class="vis" id="twa-building" width="100%"><tr><th><label><input type="radio" checked name="twa-building" id="twa-building-build"/> Construção em Massa - Edifícios <img src="graphic/questionmark.png" width="13" title="Os edifícios serão construidos até o nível indicado abaixo!"/></label> <a href="#" id="twa-cancel-builds">» Cancelar todas as contruções</a></th></tr><tr><td class="twa-buildings"></td></tr><tr><th><label><input type="radio" name="twa-building" id="twa-building-destroy"/> Demolição em Massa - Edifícios <img src="graphic/questionmark.png" width="13" title="Os edifícios serão demolidos até o nível indicado abaixo!"/></label> <a href="#" id="twa-cancel-destroy">» Cancelar todas as demolições</a></th></tr><tr><td class="twa-buildings"></td></tr></table><table class="vis" width="100%"><tr><th>Clique no icone dos edifícios abaixo para iniciar a construção em massa do edifício clicado.</th></tr></table>');
+				$('.overview_table').before('<table class="vis" id="twa-building" width="100%"><tr><th><label><input type="radio" checked name="twa-building" id="twa-building-build"/> ' + lang.building.buildtitle + ' <img src="graphic/questionmark.png" width="13" title="' + lang.building.buildhelp + '"/></label> <a href="#" id="twa-cancel-builds">» ' + lang.building.cancelbuilds + '</a></th></tr><tr><td class="twa-buildings"></td></tr><tr><th><label><input type="radio" name="twa-building" id="twa-building-destroy"/> ' + lang.building.destroytitle + ' <img src="graphic/questionmark.png" width="13" title="' + lang.building.destroyhelp + '"/></label> <a href="#" id="twa-cancel-destroy">» ' + lang.building.canceldestroy + '</a></th></tr><tr><td class="twa-buildings"></td></tr></table><table class="vis" width="100%"><tr><th>' + lang.building.help + '</th></tr></table>');
 
 				$('#twa-building-build, #twa-building-destroy').click(function () {
 					if((BuildingOverview._display_type === 1 && this.id === 'twa-building-destroy') || (BuildingOverview._display_type === 0 && this.id === 'twa-building-build')) {
@@ -1391,7 +1392,7 @@
 				});
 
 				$('#twa-cancel-builds, #twa-cancel-destroy').click(function () {
-					if(confirm('Tem certeza que deseja cancelar todas as ' + (this.id === 'twa-cancel-destroy' ? 'demolições' : 'construções') + '?')) {
+					if(confirm(lang.buildings.confirmcancel.springf(this.id === 'twa-cancel-destroy' ? lang.buildings.demolitions : lang.buildings.buildings))) {
 						twa.building.cancel(this.id === 'twa-cancel-destroy');
 					}
 
@@ -1483,10 +1484,10 @@
 			init: function() {
 				console.log('twa.research()');
 
-				$('.overview_table').before('<table class="vis" width="100%" id="twa-research"><tr><th>Clique no icone das unidades abaixo para iniciar a pesquisa em massa da unidade clicada. <a href="#" id="twa-research-cancel">» Cancelar todas as pesquisas</a></th></tr></table>');
+				$('.overview_table').before('<table class="vis" width="100%" id="twa-research"><tr><th>' + lang.research.help + ' <a href="#" id="twa-research-cancel">» ' + lang.research.cancel + '</a></th></tr></table>');
 
 				$('#twa-research-cancel').click(function () {
-					if(confirm('Tem certeza que deseja cancelar todas as pesquisas?')) {
+					if(confirm(lang.research.confirmcancel)) {
 						twa.research.cancel();
 					}
 
@@ -1507,9 +1508,7 @@
 						$.ajax({
 							type: 'post',
 							url: TechOverview.urls.ajax_research_link.replace(/village=\d+/, 'village=' + vid),
-							data: {
-								tech_id: unit
-							},
+							data: { tech_id: unit },
 							dataType: 'json',
 							vid: vid,
 							success: function(complete) {
@@ -1558,7 +1557,7 @@
 			init: function() {
 				console.log('twa.memo()');
 
-				var content = twa.baseTool('twa-memo', 'Lembrete', 'http://cdn.tribalwars.net/graphic/overview/note.png', '<textarea style="width:400px;height:150px"></textarea><br/><input type="button" value="Salvar"/> <span id="twa-memo-time" style="font-style:italic;font-size:10px"></span> <img src="http://www.preloaders.net/preloaders/252/preview.gif" style="width:25px"/>', 410);
+				var content = twa.baseTool('twa-memo', lang.memo.memo, 'http://cdn.tribalwars.net/graphic/overview/note.png', '<textarea style="width:400px;height:150px"></textarea><br/><input type="button" value="' + lang.memo.save + '"/> <span id="twa-memo-time" style="font-style:italic;font-size:10px"></span> <img src="http://www.preloaders.net/preloaders/252/preview.gif" style="width:25px"/>', 410);
 				content.find('input').click(function () {
 					if(!content.find('img').is(':visible')) {
 						twa.memo.edit(content);
@@ -1615,7 +1614,7 @@
 						elem.val(elem.val() + '\n\n[twanote]' + content.find('textarea').val() + '[/twanote-' + time + ']');
 					}
 
-					$('#twa-memo-time').html('Última alteração: ' + time);
+					$('#twa-memo-time').html(lang.memo.lastchange.sprintf(time));
 
 					var form = elem.parentsUntil('.memo_script').last();
 
@@ -1629,7 +1628,7 @@
 			init: function() {
 				console.log('twa.changegroups()');
 
-				$('.overview_table').before('<table class="vis" width="100%" id="twa-changegroups"><tr><th>Alterar grupos das aldeias selecionadas: <select id="twa-group" name="selected_group"></select> <input type="submit" value="Adicionar" name="add_to_group"/> <input type="submit" value="Remover" name="remove_from_group"/> <input type="submit" value="Mover" name="change_group"/> <img src="http://www.preloaders.net/preloaders/252/preview.gif" style="width:25px;display:none" id="twa-loader"/></th></tr></table>');
+				$('.overview_table').before('<table class="vis" width="100%" id="twa-changegroups"><tr><th>' + lang.changegroups.changegroups + ' <select id="twa-group" name="selected_group"></select> <input type="submit" value="' + lang.changegroups.add + '" name="add_to_group"/> <input type="submit" value="' + lang.changegroups.remove + '" name="remove_from_group"/> <input type="submit" value="' + lang.changegroups.move + '" name="change_group"/> <img src="http://www.preloaders.net/preloaders/252/preview.gif" style="width:25px;display:none" id="twa-loader"/></th></tr></table>');
 
 				$('#twa-changegroups input').click(function () {
 					twa.changegroups.change(this);
@@ -1674,7 +1673,7 @@
 			init: function() {
 				console.log('twa.attackplanner()');
 
-				var content = twa.baseTool('twa-attackplanner', 'Planeador', 'http://cdn.tribalwars.com.br/graphic/command/attack.png', '<style>#twa-attackplanner-content td{padding:3px}</style><h2>Planeador de ataque</h2><h3>Adicionar comando</h3><table class="vis" width="100%"><tr><th colspan="4">Aldeia atacante</th><th colspan="4">Aldeia alvo</th><th colspan="4">Horário de envio</th><th colspan="4">Apoio</th></tr><tr><td colspan="4"><input value="xxx|yyy" style="width:90px;border:1px solid red" name="from"/></td><td colspan="4"><input style="width:90px;border:1px solid red" value="xxx|yyy" name="to"/></td><td colspan="4"><input name="time" value="' + twa.data.attackplanner.lastTime + '" style="width:200px;border:1px solid #aaa"/></td><td><input name="support" type="checkbox"/></td></tr></table><table width="100%" class="vis"><tr><th colspan="12">Tropas</th></tr><tr id="twa-units"></tr><tr><td colspan="12"><button name="add">Adicionar comando</button></td></tr></table><h3>Comandos</h3><table class="vis" width="100%" id="twa-commands"><tr><th>Aldeia atacante</th><th>Aldeia alvo</th><th>Horário de envio</th><th>Tipo</th><th>Tropas</th><th>Remover</th></tr></table><h3>Comandos enviados</h3><div style="overflow:auto;height:150px"><table id="twa-attackplanner-log" style="width:100%" class="vis"></table></div>');
+				var content = twa.baseTool('twa-attackplanner', lang.attackplanner.planner, 'http://cdn.tribalwars.com.br/graphic/command/attack.png', '<style>#twa-attackplanner-content td{padding:3px}</style><h2>' + lang.attackplanner.attackplanner + '</h2><h3>' + lang.attackplanner.addcommand + '</h3><table class="vis" width="100%"><tr><th colspan="4">' + lang.attackplanner.attacker + '</th><th colspan="4">' + lang.attackplanner.target + '</th><th colspan="4">' + lang.attackplanner.time + '</th><th colspan="4">' + lang.attackplanner.support + '</th></tr><tr><td colspan="4"><input value="xxx|yyy" style="width:90px;border:1px solid red" name="from"/></td><td colspan="4"><input style="width:90px;border:1px solid red" value="xxx|yyy" name="to"/></td><td colspan="4"><input name="time" value="' + twa.data.attackplanner.lastTime + '" style="width:200px;border:1px solid #aaa"/></td><td><input name="support" type="checkbox"/></td></tr></table><table width="100%" class="vis"><tr><th colspan="12">' + lang.attackplanner.troops + '</th></tr><tr id="twa-units"></tr><tr><td colspan="12"><button name="add">' + lang.attackplanner.addcommand + '</button></td></tr></table><h3>' + lang.attackplanner.commands + '</h3><table class="vis" width="100%" id="twa-commands"><tr><th>' + lang.attackplanner.attacker + '</th><th>' + lang.attackplanner.target + '</th><th>' + lang.attackplanner.time + '</th><th>' + lang.attackplanner.type + '</th><th>' + lang.attackplanner.troops + '</th><th>' + lang.attackplanner.remove + '</th></tr></table><h3>' + lang.attackplanner.commandssended + '</h3><div style="overflow:auto;height:150px"><table id="twa-attackplanner-log" style="width:100%" class="vis"></table></div>');
 				var unitsContent = document.getElementById('twa-units');
 				var inputs = content.find('input').css({
 					fontStyle: 'italic',
@@ -1741,7 +1740,7 @@
 					}
 
 					if(inputs[0].value === inputs[1].value && inputs[0].value !== 'xxx|yyy' && inputs[1].value !== 'xxx|yyy') {
-						return alert('As coordenadas da aldeia atacante não pode ser a mesma da aldeia de destino!');
+						return alert(lang.attackplanner.errorequal);
 					}
 
 					if($('[name=from]')[0].style.borderColor === 'red' || $('[name=to]')[0].style.borderColor === 'red' || $('[name=time]')[0].style.borderColor === 'red') {
@@ -1770,7 +1769,7 @@
 					});
 
 					if(!inserted) {
-						return alert('Você não inseriu nenhuma unidade!');
+						return alert(lang.attackplanner.errorunits);
 					}
 
 					twa.data.attackplanner.commands.push(attackdata);
@@ -1853,7 +1852,7 @@
 							units.push('<img src="http://cdn.tribalwars.net/graphic/unit/unit_' + unit + '.png"/> ' + cmds[i].units[unit]);
 						}
 
-						var tr = $('<tr id="' + i + '"><td class="coord ' + cmds[i].village + '"><img src="http://www.preloaders.net/preloaders/252/preview.gif" style="width:25px" class="load"/></td><td class="coord ' + cmds[i].target + '"><img src="http://www.preloaders.net/preloaders/252/preview.gif" style="width:25px" class="load"/></td><td>' + hour + ':' + min + ':' + sec + ' ' + day + '/' + month + '/' + year + '</td><td>' + ( cmds[ i ].support ? 'Apoio' : 'Ataque') + '</td><td>' + units.join(' ') + '</td><td><a href="#" class="remove"><img src="/graphic/delete.png"/></a></td></tr>').appendTo(cmdsc);
+						var tr = $('<tr id="' + i + '"><td class="coord ' + cmds[i].village + '"><img src="http://www.preloaders.net/preloaders/252/preview.gif" style="width:25px" class="load"/></td><td class="coord ' + cmds[i].target + '"><img src="http://www.preloaders.net/preloaders/252/preview.gif" style="width:25px" class="load"/></td><td>' + hour + ':' + min + ':' + sec + ' ' + day + '/' + month + '/' + year + '</td><td>' + ( cmds[ i ].support ? lang.attackplanner.support : lang.attackplanner.attack) + '</td><td>' + units.join(' ') + '</td><td><a href="#" class="remove"><img src="/graphic/delete.png"/></a></td></tr>').appendTo(cmdsc);
 
 						tr.find('.remove').click(function () {
 							twa.data.attackplanner.commands.remove(Number($(this).parent().parent().attr('id')));
@@ -1871,7 +1870,7 @@
 							var elems = cmdsc.find('td[class="coord ' + coords + '"]');
 
 							if(twa.attackplanner.villages[coords].error) {
-								return elems.html('A coordenada ' + coords + ' não existe.');
+								return elems.html(lang.attackplanner.errorcoords.springf(coords));
 							}
 
 							elems.html('<a href="' + twa.linkbase('info_village') + '&id=' + twa.attackplanner.villages[coords].id + '">' + twa.attackplanner.villages[coords].name + '</a>');
@@ -1880,7 +1879,7 @@
 								var elems = cmdsc.find('td[class="coord ' + coords + '"]');
 
 								if(data.error) {
-									return elems.html('A coordenada ' + coords + ' não existe.');
+									return elems.html(lang.attackplanner.errorcoords.springf(coords));
 								}
 
 								elems.html('<a href="' + twa.linkbase('info_village') + '&id=' + data.id + '">' + data.name + '</a>');
@@ -1961,44 +1960,44 @@
 						var time = '<strong>' + ($('#serverTime').text() + ' ' + $('#serverDate').text()) + ':</strong>';
 						
 						if(error.text()) {
-							return $('#twa-attackplanner-log').after('<tr><td>' + time + ' ' + error.text() + '(Tentativa de ' +   + ')</td></tr>');
+							return $('#twa-attackplanner-log').after('<tr><td>' + time + ' ' + error.text() + '</td></tr>');
 						}
 						
 						var form = $('form', html);
 
 						$.post(form[0].action, form.serialize(), function() {
-							$('#twa-attackplanner-log').after('<tr><td>' + time + ' <img src="/graphic/command/' + (cmd.support ? 'support' : 'attack') + '.png"/> ' + (cmd.support ? 'Apoio' : 'Ataque') + ' enviado da aldeia ' + cmd.village + ' para a aldeia ' + cmd.target + ' com as seguintes tropas: ' + units + '</td></tr>');
+							$('#twa-attackplanner-log').after('<tr><td>' + time + ' <img src="/graphic/command/' + (cmd.support ? 'support' : 'attack') + '.png"/> ' + lang.attackplanner.success.springf(cmd.support ? lang.attackplanner.support : lang.attackplanner.attack, cmd.village, cmd.target, units) + '</td></tr>');
 						});
 					});
 				});
 			},
 			id: 0
 		},
-		interactive: {
+		messages: {
 			conversation: {},
 			lastreply: 0,
 			init: function() {
-				var content = twa.baseTool('twa-interactive', 'Mensagens', 'http://cdn2.tribalwars.net/graphic/new_mail.png', '<style>#twa-interactive-text{width:700px;heigth:100px;font-size:11px} #twa-interactive-content td{padding:3px}</style><h2>Interação</h2><h3>Area para troca de mensagens com o desenvolvedor (Relaxeaza)</h3><table><tr><td>Tipo de menssagem:</td><td><select id="twa-interactive-type"><option>Pergunta</option><option>Sugestão</option><option>Problema/bug</option><option>Crítica</option><option>Outros</option></select></td></tr><tr><td>Assunto:</td><td><input type="text" id="twa-interactive-subject" size="40"/></td></tr><tr><td colspan="2"><textarea id="twa-interactive-text"></textarea><br/><input type="button" value="Enviar" id="twa-interactive-submit"/></td></tr></table><h3>Suas Mensagens</h3><table style="width:500px" class="vis" id="twa-interactive-list"><thead><tr><th style="width:250px">Assunto</th><th>Última mensagem</th><th>Tipo</th></tr></thead><tbody></tbody></table><div id="twa-interactive-conversation"></div>');
+				var content = twa.baseTool('twa-messages', lang.messages.messages, 'http://cdn2.tribalwars.net/graphic/new_mail.png', '<style>#twa-messages-text{width:700px;heigth:100px;font-size:11px} #twa-messages-content td{padding:3px}</style><h2>' + lang.messages.messages + '</h2><h3>' + lang.messages.desc + '</h3><table><tr><td>' + lang.messages.messagetype + '</td><td><select id="twa-messages-type"><option>' + lang.messages.question + '</option><option>' + lang.messages.suggest + '</option><option>' + lang.messages.bug + '</option><option>' + lang.messages.critic + '</option><option>' + lang.messages.other + '</option></select></td></tr><tr><td>' + lang.messages.subject + ':</td><td><input type="text" id="twa-messages-subject" size="40"/></td></tr><tr><td colspan="2"><textarea id="twa-messages-text"></textarea><br/><input type="button" value="' + lang.messages.send + '" id="twa-messages-submit"/></td></tr></table><h3>' + lang.messages.yourmessages + '</h3><table style="width:500px" class="vis" id="twa-messages-list"><thead><tr><th style="width:250px">' + lang.messages.subject + '</th><th>' + lang.messages.lastmessage + '</th><th>' + lang.messages.type + '</th></tr></thead><tbody></tbody></table><div id="twa-messages-conversation"></div>');
 
-				twa.interactive.update();
-				twa.interactive.newmessage();
-				twa.interactive.reply();
+				twa.messages.update();
+				twa.messages.newmessage();
+				twa.messages.reply();
 
 				setInterval(function () {
 					if(content.is(':visible')) {
-						twa.interactive.update();
+						twa.messages.update();
 					}
 				}, 10000);
 			},
 			reply: function() {
-				$('#twa-interactive-list tbody a.message').live('click', function() {
+				$('#twa-messages-list tbody a.message').live('click', function() {
 					var mid = Number($(this).attr('mid'));
-					var html = $('<p><a href="javascript:void(0);" class="back">» Voltar</a></p><table class="vis" style="width:500px"><tr><th>Assunto</th><th>' + twa.interactive.conversation[mid].subject + '</th></tr><tr><td>Parceiro de conversa</td><td><img src="http://cdn2.tribalwars.net/graphic/new_mail.png"/> <a href="http://code.google.com/p/tribalwars-scripts/wiki/Relaxeaza_Tribal_Wars_Advanced">Relaxeaza</a></td></tr><tr><td colspan="2"><a href="javascript:void(0)" class="reply">» Responder</a><div style="display:none"><textarea style="width:490px;height:60px"></textarea><br/><input type="button" value="Responder"/></div></td></td></tr><tr><td colspan="2" class="conversation-list"></td></tr></table>');
+					var html = $('<p><a href="javascript:void(0);" class="back">» ' + lang.messages.back + '</a></p><table class="vis" 	style="width:500px"><tr><th>' + lang.messages.subject + '</th><th>' + twa.messages.conversation[mid].subject + '</th></tr><tr><td>' + lang.messages.partner + '</td><td><img src="http://cdn2.tribalwars.net/graphic/new_mail.png"/> <a href="http://code.google.com/p/tribalwars-scripts/wiki/Relaxeaza_Tribal_Wars_Advanced">Relaxeaza</a></td></tr><tr><td colspan="2"><a href="javascript:void(0)" class="reply">» ' + lang.messages.reply + '</a><div style="display:none"><textarea style="width:490px;height:60px"></textarea><br/><input type="button" value="' + lang.messages.reply + '"/></div></td></td></tr><tr><td colspan="2" class="conversation-list"></td></tr></table>');
 					var convList = $('.conversation-list', html);
-					var convContent = $('#twa-interactive-conversation');
-					var listTable = $('#twa-interactive-list ');
+					var convContent = $('#twa-messages-conversation');
+					var listTable = $('#twa-messages-list ');
 
-					$.each(twa.interactive.conversation[mid].messages, function(mid, message) {
+					$.each(twa.messages.conversation[mid].messages, function(mid, message) {
 						convList.prepend('<div class="post"><div class="igmline"><span class="author"><strong>' + (message.response === '1' ? 'Relaxeaza' : game_data.player.name) + '</strong></span><span class="date">' + message.time + '</span></div><div class="text">' + message.text + '</div></div>');
 					});
 
@@ -2007,8 +2006,8 @@
 					});
 
 					$('input', html).click(function () {
-						if(new Date().getTime() - twa.interactive.lastreply < 10000) {
-							return alert('Você só pode enviar uma mensagem a cada 10 segundos.');
+						if(new Date().getTime() - twa.messages.lastreply < 10000) {
+							return alert(lang.messages.errortime);
 						}
 
 						var text = $('textarea', html).val().replace(/\n/g, '<br/>');
@@ -2017,7 +2016,7 @@
 							return false;
 						}
 
-						twa.interactive.lastreply = new Date().getTime();
+						twa.messages.lastreply = new Date().getTime();
 
 						$.getJSON(twa.domain + 'new.php?callback=?', {
 							mid: mid,
@@ -2041,31 +2040,31 @@
 			update: function() {
 				$.getJSON(twa.domain + 'get.php?uid=' + game_data.player.id + '&callback=?', function(data) {
 					if(data) {
-						$('#twa-interactive-list tbody').empty();
+						$('#twa-messages-list tbody').empty();
 
 						$.each(data, function(mid, msg) {
-							twa.interactive.conversation[mid] = msg;
+							twa.messages.conversation[mid] = msg;
 
-							$('#twa-interactive-list tbody').append('<tr><td><a class="message" mid="' + mid + '" href="javascript:void(0);">' + msg.subject + '</a></td><td>' + msg.last + '</td><td>' + msg.type + '</td></tr>');
+							$('#twa-messages-list tbody').append('<tr><td><a class="message" mid="' + mid + '" href="javascript:void(0);">' + msg.subject + '</a></td><td>' + msg.last + '</td><td>' + msg.type + '</td></tr>');
 						});
 					}
 				});
 			},
 			newmessage: function() {
-				$('#twa-interactive-submit').click(function () {
-					if(new Date().getTime() - twa.interactive.lastreply < 10000) {
-						return alert('Você só pode enviar uma mensagem a cada 10 segundos.');
+				$('#twa-messages-submit').click(function () {
+					if(new Date().getTime() - twa.messages.lastreply < 10000) {
+						return alert(lang.messages.errortime);
 					}
 
-					var type = $('#twa-interactive-type').val();
-					var subject = $('#twa-interactive-subject').val();
-					var text = $('#twa-interactive-text').val().replace(/\n/g, '<br/>');
+					var type = $('#twa-messages-type').val();
+					var subject = $('#twa-messages-subject').val();
+					var text = $('#twa-messages-text').val().replace(/\n/g, '<br/>');
 
 					if(!subject.length || !text.length) {
 						return false;
 					}
 
-					twa.interactive.lastreply = new Date().getTime();
+					twa.messages.lastreply = new Date().getTime();
 
 					$.getJSON(twa.domain + 'new.php?callback=?', {
 						username: game_data.player.name,
@@ -2074,8 +2073,8 @@
 						subject: subject,
 						text: text
 					}, function(msg) {
-						$('#twa-interactive-list tbody').append('<tr><td><a class="message" mid="' + msg.mid + '" href="#">' + subject + '</a></td><td>' + msg.last + '</td><td>' + type + '</td></tr>');
-						twa.interactive.conversation[msg.mid] = msg;
+						$('#twa-messages-list tbody').append('<tr><td><a class="message" mid="' + msg.mid + '" href="#">' + subject + '</a></td><td>' + msg.last + '</td><td>' + type + '</td></tr>');
+						twa.messages.conversation[msg.mid] = msg;
 					});
 				});
 			}
@@ -2094,7 +2093,7 @@
 
 	if((function () {
 		if($.isPlainObject(twa.settings) && $.isPlainObject(twa.data) && twa.data.builds) {
-			if($.isEmptyObject(twa.settings) || $.isEmptyObject(twa.data) || twa.data.version !== '1.4.1') {
+			if($.isEmptyObject(twa.settings) || $.isEmptyObject(twa.data) || twa.data.version !== '1.4.2') {
 				return true;
 			}
 		} else {
@@ -2178,7 +2177,7 @@
 		});
 
 		localStorage[memory.data] = JSON.stringify(twa.data = {
-			version: '1.4.1',
+			version: '1.4.2',
 			attackplanner: {
 				commands: [],
 				lastTime: $('#serverTime').text() + ' ' + $('#serverDate').text()
@@ -2241,17 +2240,155 @@
 				attackplanner: 'Planeador de ataques.',
 				selectvillages: 'Selecionador de aldeias.',
 				save: 'As configurações foram salvas!'
+			},
+			mapcoords: {
+				getcoords: 'Coordenadas obtidas',
+				update: 'Atualizar',
+				mapplayers: 'Obter coordenadas de jogadores.',
+				min: 'Mínimo',
+				max: 'Máximo',
+				mapabandoneds: 'Obter coordenadas de abandonadas.'
+			},
+			mapmanual: {
+				gecoords: 'Coordenadas obtidas manualmente'
+			},
+			profilecoords: {
+				everycoords: 'Todas coordenadas',
+				min: 'Pontuação mínima.',
+				max: 'Pontuação máxima.'
+			},
+			profilegraphic: {
+				stats: 'Estatísticas'
+			},
+			lastattack: {
+				year: 'ano',
+				years: 'anos',
+				days: 'dias'
+			},
+			mapgenerator: {
+				generate: 'Gerar mapa',
+				selectall: 'Selecionar todos'
+			},
+			reportfilter: {
+				search: 'Pesquisar relatórios:'
+			},
+			villagefilter: {
+				search: 'Pesquisar aldeias:'
+			},
+			reportcalc: {
+				neededunits: 'Unidades necessárias:',
+				currentvillage: 'Usar unidades da aldeia atual',
+				unitscalc: 'Unidades calculadas:',
+				attack: 'Atacar com essas tropas',
+				error: 'Ocorreu o seguinte erro ao enviar o ataque:',
+				success: 'Ataque enviado com sucesso!'
+			},
+			selectvillages: {
+				selectvillages: 'Selecionar aldeias:',
+				unitsattack: 'com tropas de ataque',
+				unitsdefence: 'com tropas de defesa',
+				unitsnob: 'com nobres'
+			},
+			rename: {
+				rename: 'Renomear',
+				only: 'Apenas',
+				selected: 'selecionados',
+				report: 'relatórios',
+				villages: 'aldeias',
+				commands: 'comandos'
+			},
+			assistentfarm: {
+				auto: 'Automático',
+				log: 'Farm Assistent Log',
+				onvillage: 'na aldeia'
+			},
+			autofarm: {
+				farm: 'Farmador',
+				autofarm: 'Farmador Automático',
+				coords: 'Coordenadas:',
+				protect: 'Não enviar ataques caso a aldeia tenha dono.',
+				replace: 'Caso não tenha tropas sulficientes usar o que tiver.',
+				start: 'Iniciar ataques',
+				pause: 'Pausar ataques',
+				log: 'Log de ataques:',
+				returnin: 'Não há tropas na aldeia no momento. Tropas retornaram em {0} (tempo estimado)',
+				notroops: 'Não existem tropas na aldeia.',
+				success: 'Ataque enviado na aldeia {0}.'
+			},
+			building: {
+				buildtitle: 'Construção em Massa - Edifícios',
+				buildhelp: 'Os edifícios serão construidos até o nível indicado abaixo!',
+				cancelbuilds: 'Cancelar todas as contruções',
+				destroytitle: 'Demolição em Massa - Edifícios',
+				destroyhelp: 'Os edifícios serão demolidos até o nível indicado abaixo!',
+				canceldestroy: 'Cancelar todas as demolições',
+				help: 'Clique no icone dos edifícios abaixo para iniciar a construção em massa do edifício clicado.',
+				demolitions: 'demolições',
+				buildings: 'construções',
+				confirmcancel: 'Tem certeza que deseja cancelar todas as {0}?'
+			},
+			research: {
+				help: 'Clique no icone das unidades abaixo para iniciar a pesquisa em massa da unidade clicada.',
+				cancel: 'Cancelar todas as pesquisas',
+				confirmcancel: 'Tem certeza que deseja cancelar todas as pesquisas?'
+			},
+			memo: {
+				memo: 'Lembrete',
+				save: 'Salvar',
+				lastchange: 'Última alteração: {0}'
+			},
+			changegroups: {
+				changegroups: 'Alterar grupos das aldeias selecionadas:',
+				add: 'Adicionar',
+				remove: 'Remover',
+				move: 'Mover'
+			},
+			attackplanner: {
+				planner: 'Planeador',
+				attackplanner: 'Planeador de ataque',
+				addcommand: 'Adicionar comando',
+				attacker: 'Aldeia atacante',
+				target: 'Aldeia alvo',
+				time: 'Horário de envio',
+				support: 'Apoio',
+				attack: 'Ataque',
+				troops: 'Tropas',
+				commands: 'Comandos',
+				type: 'Tipo',
+				remove: 'Remover',
+				commandssended: 'Comandos enviados',
+				errorequal: 'As coordenadas da aldeia atacante não pode ser a mesma da aldeia de destino!',
+				errorunits: 'Você não inseriu nenhuma unidade!',
+				errorcoords: 'A coordenada {0} não existe.',
+				success: '{0} enviado da aldeia {1} para a aldeia {2} com as seguintes tropas: {3}'
+			},
+			messages: {
+				messages: 'Mensagens',
+				desc: 'Area para troca de mensagens com o desenvolvedor (Relaxeaza)',
+				messagetype: 'Tipo de menssagem:',
+				type: 'Tipo',
+				question: 'Pergunta',
+				suggest: 'Sugestão',
+				bug: 'Problema/bug',
+				critic: 'Crítica',
+				other: 'Outros',
+				subject: 'Assunto',
+				send: 'Enviar',
+				yourmessages: 'Suas Mensagens',
+				lastmessage: 'Última mensagem',
+				back: 'Voltar',
+				partner: 'Parceiro de conversa',
+				reply: 'Responder',
+				errortime: 'Você só pode enviar uma mensagem a cada 10 segundos.'
 			}
 		}
 	})[game_data.market === 'br' ? 'pt' : game_data.market];
-	
-	//$('body').append('<style>#twa-interactive-text{width:700px;heigth:100px;font-size:11px} #twa-interactive-content td{padding:3px}</style><h2>Interação</h2><h3>Area para troca de mensagens com o desenvolvedor (Relaxeaza)</h3><table><tr><td>Tipo de menssagem:</td><td><select id="twa-interactive-type"><option>Pergunta</option><option>Sugestão</option><option>Problema/bug</option><option>Crítica</option><option>Outros</option></select></td></tr><tr><td>Assunto:</td><td><input type="text" id="twa-interactive-subject" size="40"/></td></tr><tr><td colspan="2"><textarea id="twa-interactive-text"></textarea><br/><input type="button" value="Enviar" id="twa-interactive-submit"/></td></tr></table><h3>Suas Mensagens</h3><table style="width:500px" class="vis" id="twa-interactive-list"><thead><tr><th style="width:250px">Assunto</th><th>Última mensagem</th><th>Tipo</th></tr></thead><tbody></tbody></table><div id="twa-interactive-conversation"></div>');
 	
 	Array.prototype.remove = function(from, to) {
 		var rest = this.slice((to || from) + 1 || this.length);
 		this.length = from < 0 ? this.length + from : from;
 		return this.push.apply(this, rest);
-	};
+	}
 
 	$.fn.center = function() {
 		this.css('position', 'absolute');
@@ -2260,7 +2397,7 @@
 		return this;
 	}
 	
-	function formatTime(time) {
+	Number.prototype.format = function(time) {
 		var hours = Math.floor(time / 3600000);
 		var min = Math.floor(time / 60000) % 60;
 		var sec = (time / 1000) % 60;
@@ -2279,11 +2416,19 @@
 		return str += sec;
 	}
 	
+	String.prototype.sprintf = function() {
+		var args = arguments;
+		
+		return this.replace(/{(\d+)}/g, function(match, number) {
+			return typeof args[number] != 'undefined' ? args[number] : match;
+		});
+	};
+	
 	twa.ready(function () {
 		switch(game_data.screen) {
 		case 'map':
 			(twa.settings._mapplayers || twa.settings._mapabandoneds) && !$('#twa-getcoords').length && twa.mapcoords.init();
-			twa.settings.mapmanual && !$('#twa-coordsmanual').length && twa.mapmanual();
+			twa.settings.mapmanual && !$('#twa-mapmanual').length && twa.mapmanual();
 			twa.settings.lastattack && game_data.player.premium && twa.lastattack();
 			break;
 		case 'info_player':
@@ -2331,7 +2476,7 @@
 
 		twa.settings.attackplanner && !$('#twa-attackplaner').length && twa.attackplanner.init();
 		twa.settings.memo && !$('#twa-memo').length && twa.memo.init();
-		!$('#twa-interactive').length && twa.interactive.init();
+		!$('#twa-messages').length && twa.messages.init();
 		!$('#twa-placefarm').length && twa.autofarm.init();
 	});
 
