@@ -14,7 +14,7 @@ Todas as funções podem ser ativadas e desativadas abrindo a tela de configura�
 || Pesquisa em Massa || _Faz pesquisas em massa apartir da página de visualização de pesquisas (apenas ferreiro simples, por enquanto)._ || Visualizações » pesquisas || ||
 || Cálculo de Recursos || _Cálcula a quantidade exata de recursos de uma aldeia apartir de um relatório de espionagem._ || Relatório de espionagem || ||
 || Últimos ataques || _Mostra quanto tempo se passou desde o último ataque em todas as aldeias visíveis no mapa._ || Mapa || [http://farm8.staticflickr.com/7022/6783906179_49acac1191_z.jpg Imagem] ||
-|| Farmador Automático || _Permite enviar ataques a coordenadas pre-programadas automáticamente._ || Qualquer página || ||
+|| [http://code.google.com/p/tribalwars-scripts/wiki/Farmador_Automatico Farmador Automático] || _Permite enviar ataques a coordenadas pre-programadas automáticamente._ || Qualquer página || ||
 || Filtro de Relatórios || _Filtra a lista de relatórios por titulo._ || Lista de relatórios || [http://farm8.staticflickr.com/7024/6784121569_0331f08a43_z.jpg Imagem] ||
 || Filtro de Aldeias || _Filtra aldeias apartir do nome._ || Visualizações || ||
 || Pesquisa de Aldeias || _Seleciona as coordenadas das aldeias de jogadores/abandonadas do mapa de acordo com as configurações._ || Mapa || [http://farm8.staticflickr.com/7002/6783896419_244610701b_z.jpg Imagem] ||
@@ -29,7 +29,7 @@ Todas as funções podem ser ativadas e desativadas abrindo a tela de configura�
 || Renomeador de Relatórios || _Renomeia todos os relatórios visíveis na página de relatórios._ || Lista de relatórios || [http://farm8.staticflickr.com/7034/6806511071_5edd056206_z.jpg Imagem] ||
 || Alterador de Grupos || _Faz a mesma função que a visualização de grupos em trocar aldeias de grupos em massa, porém, em qualquer visualização._ || Visualizações || ||
 || Lembrete || _Simples recurso de lembrete no jogo. (Muito bom para co-plays quando se quer deixar um recado)._ || Qualquer página || ||
-|| Planeador de Ataques || _Envia ataques em horários programados, apenas adicione a aldeia de origem, aldeia de destino, horário e tropas que os ataques serão enviados automaticamente (Para que os ataques sejam enviados, o script deve estar em execução)._ || Qualquer página || ||
+|| [http://code.google.com/p/tribalwars-scripts/wiki/Planeador_de_Ataques Planeador de Ataques] || _Envia ataques em horários programados, apenas adicione a aldeia de origem, aldeia de destino, horário e tropas que os ataques serão enviados automaticamente (Para que os ataques sejam enviados, o script deve estar em execução)._ || Qualquer página || ||
 
 === Como usar ===
 Simplismente vá a página referente a função e execute o script.
