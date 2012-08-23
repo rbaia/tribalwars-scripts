@@ -1,13 +1,13 @@
-== TWA - Farmador Autom·tico ==
+Ôªø== TWA - Farmador Autom√°tico ==
 
-Com o Farmador Autom·tico È possÌvel farmas diversas aldeias automaticamente.
+Com o Farmador Autom√°tico √© poss√≠vel farmas diversas aldeias automaticamente.
 
-*OpÁıes:*
+*Op√ß√µes:*
 
- * *Coordenadas* - A lista de coordenadas que o script ir· atacar.
- * *ProteÁ„o* - Possibilita que sctipt ignore todas coordenadas que n„o sejam aldeias abandonadas.
- * *SubstituiÁ„o* - Quando o ataque for ser enviado e n„o tenha tropas sulficientes, ser· enviado o que tiver. Por exemplo: O script est· mandando 10 CLS por ataque e tenha apenas 5, com essa opÁ„o ativada o script ir· enviar as 5 CLS da aldeia
+ * *Coordenadas* - A lista de coordenadas que o script ir√° atacar.
+ * *Prote√ß√£o* - Possibilita que sctipt ignore todas coordenadas que n√£o sejam aldeias abandonadas.
+ * *Substitui√ß√£o* - Quando o ataque for ser enviado e n√£o tenha tropas sulficientes, ser√° enviado o que tiver. Por exemplo: O script est√° mandando 10 CLS por ataque e tenha apenas 5, com essa op√ß√£o ativada o script ir√° enviar as 5 CLS da aldeia
 
-O script conta com uma ·rea de logs dos ataques, todos os ataques que forem enviados, todos os problemas que der como falta de tropas entre outros ser„o marcados para que o usu·rio tenha uma melhor vis„o do que est· acontecendo.
+O script conta com uma √°rea de logs dos ataques, todos os ataques que forem enviados, todos os problemas que der como falta de tropas entre outros ser√£o marcados para que o usu√°rio tenha uma melhor vis√£o do que est√° acontecendo.
 
 http://tribalwars-scripts.googlecode.com/svn/img/autofarm.png
