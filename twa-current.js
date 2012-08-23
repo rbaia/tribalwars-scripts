@@ -1280,6 +1280,7 @@
 								var troops = twa.autofarm.currentunits(html);
 								
 								if(time && !troops) {
+									console.log(time);
 									twa.autofarm.log( lang.autofarm.returnin.sprintf(time.format()), true );
 									
 									setTimeout(function () {
@@ -2306,8 +2307,8 @@
 				farm: 'Farmador',
 				autofarm: 'Farmador Automático',
 				coords: 'Coordenadas:',
-				protect: 'Não enviar ataques caso a aldeia tenha dono.',
-				replace: 'Caso não tenha tropas sulficientes usar o que tiver.',
+				protect: 'Proteção - Não enviar ataques caso a aldeia tenha dono.',
+				replace: 'Substituição - Caso não tenha tropas sulficientes usar o que tiver.',
 				start: 'Iniciar ataques',
 				pause: 'Pausar ataques',
 				log: 'Log de ataques:',
@@ -2397,10 +2398,10 @@
 		return this;
 	}
 	
-	Number.prototype.format = function(time) {
-		var hours = Math.floor(time / 3600000);
-		var min = Math.floor(time / 60000) % 60;
-		var sec = (time / 1000) % 60;
+	Number.prototype.format = function() {
+		var hours = Math.floor(this / 3600000);
+		var min = Math.floor(this / 60000) % 60;
+		var sec = (this / 1000) % 60;
 		var str = hours + ':';
 		
 		if(min < 10) {
