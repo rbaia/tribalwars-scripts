@@ -2083,8 +2083,8 @@
 		},
 		suggests: {
 			init: function() {
-				var content = twa.baseTool('twa-suggest', 'Sugestões', false, '<h2>Sugestões</h2><p>Você tem alguma sugestão de ferramenta para ser adicionada aqui no TWA? Envia sua sugestão aqui em baixo. <b>Podem exagerar nas sugestões, que elas de todos os tipos, até as que seriam quase impossiveis ;D</b></p><table><tr><td><textarea id="twa-suggest-text" style="width:500px;height:200px"></textarea></td></tr><tr><td><input type="button" id="twa-suggest-submit" Value="Enviar"/></td></tr></table><table class="vis" id="twa-suggest-list" style="width:500px"><tr><th>Sugestões</th></tr></table>');
-				var list = $('#twa-suggest-list');
+				var content = twa.baseTool('twa-suggest', 'Sugestões', false, '<h2>Sugestões</h2><p>Você tem alguma sugestão de ferramenta para ser adicionada aqui no TWA? Envia sua sugestão aqui em baixo. <b>Podem exagerar nas sugestões, que elas de todos os tipos, até as que seriam quase impossiveis ;D</b></p><table><tr><td><textarea id="twa-suggest-text" style="width:500px;height:200px"></textarea></td></tr><tr><td><input type="button" id="twa-suggest-submit" Value="Enviar"/></td></tr></table><table class="vis" id="twa-suggest-list" style="width:500px"><thead><tr><th>Sugestões</th></tr></thead><tbody></tbody></table>');
+				var list = $('#twa-suggest-list tbody');
 				
 				$('#twa-suggest-submit').click(function() {
 					var text = $('#twa-suggest-text').val().replace(/\n/g, '<br/>');
