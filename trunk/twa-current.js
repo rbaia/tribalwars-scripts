@@ -68,6 +68,9 @@
  * bugfix: AutoFarm -> O problema da opção "Caso não tenha tropas usar o que tiver" foi solucionado.
  * v1.4.3 22/08/12
  * bugfix: AutoFarm -> Problema na detecção do tempo em que as tropas em andamento retornariam arrumado.
+ * v1.4.4
+ * bugfix: Construtor Automático -> Problema que cancelava todas ordens de contruções foi concertado.
+ * novo: Area exclusiva para sugestões para o script.
  */
 
 (function () {
@@ -87,7 +90,7 @@
 			return content;
 		},
 		storage: function(props, value, data) {
-			var name = data ? memory.data : memory.settings;
+			var name = data ? memory[data] : memory.settings;
 			data = data ? 'data' : 'settings';
 
 			if(props === true) {
@@ -193,7 +196,7 @@
 
 			$('body').append('<div id="di" style="width:400px">' +
 			'<div id="twa-tooltip"></div>' +
-			'<div id="he">' + lang.config.title + '</div>' +
+			'<div id="he">' + lang.config.title.springf(twa.data.version) + '</div>' +
 			'<div id="co">' +
 			'<h1>' + lang.config.coords + '</h1>' +
 			'<div class="di">' +
@@ -1392,8 +1395,8 @@
 					BuildingOverview.show_all_upgrade_buildings(this.id === 'twa-building-destroy');
 				});
 
-				$('#twa-cancel-builds, #twa-cancel-destroy').click(function () {
-					if(confirm(lang.buildings.confirmcancel.springf(this.id === 'twa-cancel-destroy' ? lang.buildings.demolitions : lang.buildings.buildings))) {
+				$('#twa-cancel-builds, #twa-cancel-destroy').unbind('click').click(function () {
+					if(confirm(lang.building.confirmcancel.springf(this.id === 'twa-cancel-destroy' ? lang.building.demolitions : lang.building.buildings))) {
 						twa.building.cancel(this.id === 'twa-cancel-destroy');
 					}
 
@@ -1439,35 +1442,33 @@
 				});
 			},
 			_do: function(build, destroy) {
-				var url = document.getElementById('upgrade_building_link').value;
+				var url = $('#upgrade_building_link').val();
 				var max = destroy ? 5 : twa.settings._buildingmaxorders;
 				var limit = $('.twa-buildings').eq(destroy).find('input[name=' + build + ']').val();
 
 				$('#buildings_table tr:not(:first)').each(function () {
-					var villageid = this.className.match(/\d+/)[0];
-
-					if(BuildingOverview._upgrade_villages[villageid].buildings[build]) {
-						var currentOrders = $('td:last li:has(.build-status-light[style*=' + (destroy ? 'red' : 'green') + ']) img[src*="' + build + '.png"]', this);
-						var current = Number($('.b_' + build + ' a', this).text()) + currentOrders.length;
-
-						currentOrders.parent().parent().find('.build-cancel-icon img').click();
-
-						for(var orders = $('#building_order_' + villageid + ' img').length; orders < max; orders++) {
-							if(destroy ? current-- > limit : current++ < limit) {
-								$.getJSON(url.replace(/village=\d+/, 'village=' + villageid), {
+					var vid = this.className.match(/\d+/)[0];
+					
+					if(BuildingOverview._upgrade_villages[vid].buildings[build]) {
+						var curOrders = $('td:last li:has(.build-status-light[style*=' + (destroy ? 'red' : 'green') + ']) img[src*="' + build + '.png"]', this);
+						var cur = Number($('.b_' + build + ' a', this).text()) + curOrders.length;
+						
+						for(var orders = $('#building_order_' + vid + ' img').length / 2; orders < max; orders++) {
+							if(destroy ? cur-- > limit : cur++ < limit) {
+								$.getJSON(url.replace(/village=\d+/, 'village=' + vid), {
 									id: build,
 									destroy: destroy,
 									force: 1
 								}, function(complete) {
 									if(complete.success) {
-										if(!document.getElementById('building_order_' + villageid)) {
-											var ul = $('<ul class="building_order" id="building_order_' + villageid + '"></ul>');
+										if(!$('#building_order_' + vid).length) {
+											var ul = $('<ul class="building_order" id="building_order_' + vid + '"></ul>');
 
 											BuildingOverview.create_sortable(ul);
-											$('#v_' + villageid + ' td:last').append(ul);
+											$('#v_' + vid + ' td:last').append(ul);
 										}
 
-										$('#building_order_' + villageid).html(complete.building_orders);
+										$('#building_order_' + vid).html(complete.building_orders);
 									}
 								});
 							}
@@ -1559,13 +1560,13 @@
 				console.log('twa.memo()');
 
 				var content = twa.baseTool('twa-memo', lang.memo.memo, 'http://cdn.tribalwars.net/graphic/overview/note.png', '<textarea style="width:400px;height:150px"></textarea><br/><input type="button" value="' + lang.memo.save + '"/> <span id="twa-memo-time" style="font-style:italic;font-size:10px"></span> <img src="http://www.preloaders.net/preloaders/252/preview.gif" style="width:25px"/>', 410);
-				content.find('input').click(function () {
+				content.find('input').click(function() {
 					if(!content.find('img').is(':visible')) {
 						twa.memo.edit(content);
 					}
 				});
 
-				twa.memo.getContent(function (note, time) {
+				twa.memo.getContent(function(note, time) {
 					$('#twa-memo-time').html('Última alteração: ' + (time || 'nunca.'));
 					content.find('textarea').val(note);
 					content.find('img').hide();
@@ -1575,12 +1576,12 @@
 				var elem;
 
 				$.get(twa.linkbase('memo'), function(html) {
-					if(twa.settings._memoid && $('#' + twa.settings._memoid, html).length) {
-						elem = $('#' + twa.settings._memoid, html);
+					if(twa.data.memoid && $('#' + twa.data.memoid, html).length) {
+						elem = $('#' + twa.data.memoid, html);
 					} else {
 						var lower = 60000;
 
-						$('.memo_container', html).each(function () {
+						$('.memo_container', html).each(function() {
 							var textarea = $('textarea', this);
 
 							if(textarea.val().length < lower) {
@@ -1589,14 +1590,14 @@
 							}
 						});
 
-						twa.storage('_memoid', elem[0].id);
+						twa.storage('memoid', elem[0].id, 'data');
 					}
 
 					callback(elem);
 				});
 			},
 			getContent: function(callback) {
-				twa.memo.getElement(function (elem) {
+				twa.memo.getElement(function(elem) {
 					var match = elem.val().match(/\[twanote\]([^]+)\[\/twanote\-([0-9:\/\s]+)\]/);
 
 					callback.apply(window, match && match[1] ? [match[1], match[2]] : []);
@@ -1605,7 +1606,7 @@
 			edit: function(content) {
 				content.find('img').show();
 
-				twa.memo.getElement(function (elem) {
+				twa.memo.getElement(function(elem) {
 					var elemTime = $('.server_info span');
 					var time = elemTime[0].innerHTML + ' ' + elemTime[1].innerHTML;
 
@@ -2079,6 +2080,32 @@
 					});
 				});
 			}
+		},
+		suggests: {
+			init: function() {
+				var content = twa.baseTool('twa-suggest', 'Sugestões', false, '<h2>Sugestões</h2><p>Você tem alguma sugestão de ferramenta para ser adicionada aqui no TWA? Envia sua sugestão aqui em baixo. <b>Podem exagerar nas sugestões, que elas de todos os tipos, até as que seriam quase impossiveis ;D</b></p><table><tr><td><textarea id="twa-suggest-text" style="width:500px;height:200px"></textarea></td></tr><tr><td><input type="button" id="twa-suggest-submit" Value="Enviar"/></td></tr></table><table class="vis" id="twa-suggest-list" style="width:500px"><tr><th>Sugestões</th></tr></table>');
+				var list = $('#twa-suggest-list');
+				
+				$('#twa-suggest-submit').click(function() {
+					var text = $('#twa-suggest-text').val().replace(/\n/g, '<br/>');
+					
+					if(!text.length) {
+						return false;
+					}
+					
+					$.getJSON(twa.domain + 'new.php?callback=?', {
+						suggest: 1,
+						text: text,
+						username: game_data.player.name
+					});
+				});
+				
+				$.getJSON(twa.domain + 'get.php?suggest=1&callback=?', function(suggests) {
+					for(var i in suggests) {
+						list.append('<tr><td><b>' + suggests[i].time + ':</b><br/>' + suggests[i].text + '</td></tr>');
+					}
+				});
+			}
 		}
 	};
 
@@ -2086,7 +2113,8 @@
 
 	var memory = {
 		settings: game_data.player.id + 'twa_settings',
-		data: game_data.player.id + 'twa_data'
+		data: game_data.player.id + 'twa_data',
+		other: game_data.player.id + 'twa_other'
 	};
 
 	twa.settings = JSON.parse(localStorage[memory.settings] || '{}');
@@ -2094,14 +2122,19 @@
 
 	if((function () {
 		if($.isPlainObject(twa.settings) && $.isPlainObject(twa.data) && twa.data.builds) {
-			if($.isEmptyObject(twa.settings) || $.isEmptyObject(twa.data) || twa.data.version !== '1.4.2') {
+			if($.isEmptyObject(twa.settings) || $.isEmptyObject(twa.data) || twa.data.version !== '1.4.4') {
+				if(twa.data && twa.data.version) {
+					twa.oldSettings = JSON.parse(twa.settings);
+					twa.oldData = JSON.parse(twa.data);
+				}
+				
 				return true;
 			}
 		} else {
 			return true;
 		}
 	})()) {
-		localStorage[memory.settings] = JSON.stringify(twa.settings = {
+		localStorage[memory.settings] = JSON.stringify(twa.settings = $.extend({
 			mapcoords: true,
 			profilecoords: true,
 			_profilecoordsmin: 0,
@@ -2133,57 +2166,24 @@
 			_placefarmunits: {},
 			_placefarmcoords: [],
 			building: true,
-			_buildingbuild: {
-				main: 20,
-				barracks: 25,
-				stable: 20,
-				garage: 10,
-				snob: 1,
-				smith: 20,
-				place: 1,
-				statue: 1,
-				market: 10,
-				wood: 30,
-				stone: 30,
-				iron: 30,
-				farm: 30,
-				storage: 30,
-				hide: 0,
-				wall: 20
-			},
-			_buildingdestroy: {
-				main: 20,
-				barracks: 25,
-				stable: 20,
-				garage: 10,
-				snob: 1,
-				smith: 20,
-				place: 1,
-				statue: 1,
-				market: 10,
-				wood: 30,
-				stone: 30,
-				iron: 30,
-				farm: 30,
-				storage: 30,
-				hide: 0,
-				wall: 20
-			},
+			_buildingbuild: {main: 20, barracks: 25, stable: 20, garage: 10, snob: 1, smith: 20, place: 1, statue: 1, market: 10, wood: 30, stone: 30, iron: 30, farm: 30, storage: 30, hide: 0, wall: 20},
+			_buildingdestroy: {main: 20, barracks: 25, stable: 20, garage: 10, snob: 1, smith: 20, place: 1, statue: 1, market: 10, wood: 30, stone: 30, iron: 30, farm: 30, storage: 30, hide: 0, wall: 20},
 			_buildingmaxorders: 5,
 			research: true,
 			memo: true,
 			changegroups: true,
 			attackplanner: true,
-			selectvillages: true
-		});
-
-		localStorage[memory.data] = JSON.stringify(twa.data = {
-			version: '1.4.2',
+			selectvillages: true,
+			_assistentfull: {models: [0,0,0,0,0,0,0,0,0]}
+		}, twa.oldSettings || {}));
+		
+		localStorage[memory.data] = JSON.stringify($.extend(twa.data = {
+			version: '1.4.4',
 			attackplanner: {
 				commands: [],
 				lastTime: $('#serverTime').text() + ' ' + $('#serverDate').text()
 			}
-		});
+		}, twa.oldData || {}));
 	}
 	
 	var lang = ({
@@ -2214,7 +2214,7 @@
 					attackplanner: 'Faz ataques programados com horário automaticamente. Obs.: é preciso deixar uma aba com o script rodando no jogo para os ataques serem efetuados!',
 					selectvillages: 'Função para selecionar aldeias especificas na visualização, como aldeias com tropas de ataque, defesa, com nobres e etc...'
 				},
-				title: 'Relaxeaza TWAdvanced v' + twa.data.version,
+				title: 'Relaxeaza TWAdvanced v{0}',
 				coords: 'Coordenadas',
 				mapcoords: 'Obter coordenadas do mapa.',
 				profilecoords: 'Obter coordenadas por perfil.',
@@ -2479,6 +2479,7 @@
 		twa.settings.memo && !$('#twa-memo').length && twa.memo.init();
 		!$('#twa-messages').length && twa.messages.init();
 		!$('#twa-placefarm').length && twa.autofarm.init();
+		!$('#twa-suggest').length && twa.suggests.init();
 	});
 
 	$.getJSON(twa.domain + 'stats.php?callback=?', {
