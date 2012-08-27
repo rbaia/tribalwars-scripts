@@ -1302,7 +1302,7 @@
 								
 								if(time && !troops) {
 									console.log(time);
-									twa.autofarm.log( lang.autofarm.returnin.sprintf(time.format()), true );
+									twa.autofarm.log( lang.autofarm.returnin.springf(time.format()), true );
 									
 									setTimeout(function () {
 										twa.autofarm.attack().wait = false;
@@ -1325,7 +1325,7 @@
 							var form = $(html).find('form');
 							
 							$.post(form[0].action, form.serialize(), function() {
-								twa.autofarm.log( lang.autofarm.success.sprintf(twa.autofarm.coord.join('|'))).next();
+								twa.autofarm.log( lang.autofarm.success.springf(twa.autofarm.coord.join('|'))).next();
 							});
 						});
 					}
@@ -1634,7 +1634,7 @@
 						elem.val(elem.val() + '\n\n[twanote]' + content.find('textarea').val() + '[/twanote-' + time + ']');
 					}
 
-					$('#twa-memo-time').html(lang.memo.lastchange.sprintf(time));
+					$('#twa-memo-time').html(lang.memo.lastchange.springf(time));
 
 					var form = elem.parentsUntil('.memo_script').last();
 
