@@ -2356,7 +2356,7 @@
 				mapabandoneds: 'Obter coordenadas de abandonadas.'
 			},
 			mapmanual: {
-				gecoords: 'Coordenadas obtidas manualmente'
+				getcoords: 'Coordenadas obtidas manualmente'
 			},
 			profilecoords: {
 				everycoords: 'Todas coordenadas',
