@@ -68,9 +68,11 @@
  * bugfix: AutoFarm -> O problema da opção "Caso não tenha tropas usar o que tiver" foi solucionado.
  * v1.4.3 22/08/12
  * bugfix: AutoFarm -> Problema na detecção do tempo em que as tropas em andamento retornariam arrumado.
- * v1.4.4
+ * v1.4.4 26/08/12
  * bugfix: Construtor Automático -> Problema que cancelava todas ordens de contruções foi concertado.
  * novo: Area exclusiva para sugestões para o script.
+ * v1.4.5 27/08/12
+ * novo: Visualização Avançada -> Adiciona ferramentas premium na página de visualização para jogadores sem conta premium.
  */
 
 (function () {
@@ -171,7 +173,7 @@
 							};
 						}
 					});
-
+					
 					ready(++completes);
 				});
 			}
@@ -194,6 +196,7 @@
 			'#twa-tooltip{display:none;position:absolute;width:300px;padding:4px 4px 3px;background:#000;opacity:0.8;color:#fff;font-size:12px;border:1px solid #000;-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px}' +
 			'</style>');
 
+			console.log(typeof lang.config.title);
 			$('body').append('<div id="di" style="width:400px">' +
 			'<div id="twa-tooltip"></div>' +
 			'<div id="he">' + lang.config.title.springf(twa.data.version) + '</div>' +
@@ -274,6 +277,9 @@
 			'</label>' +
 			'<label tooltip="' + lang.config.tooltip.selectvillages + '">' +
 			'<input type="checkbox" name="selectvillages"/> ' + lang.config.selectvillages +
+			'</label>' +
+			'<label tooltip="Adiciona opções premium na página de visualização para usuários sem conta premium.">' +
+			'<input type="checkbox" name="overview"/> Visualização avançada' +
 			'</label>' +
 			'</div>' +
 			'<h1 style="text-align:center"><button id="sa">Salvar</button></h1>' +
@@ -685,7 +691,7 @@
 				break;
 			}
 
-			$('.overview_table').before('<table class="vis" width="100%"><tr><th>' + lang.reportfilter.search + ' <input type="text" id="twa-villagefilter" style="padding:1px 2px;border:1px solid silver;border-radius:2px;-webkit-border-radius:2px;-moz-border-radius:2px;height:15px"/></th></tr></table>');
+			$('.overview_table').before('<table class="vis" width="100%"><tr><th>' + lang.villagefilter.search + ' <input type="text" id="twa-villagefilter" style="padding:1px 2px;border:1px solid silver;border-radius:2px;-webkit-border-radius:2px;-moz-border-radius:2px;height:15px"/></th></tr></table>');
 
 			$('#twa-villagefilter').keyup(function () {
 				var param = this.value.toLowerCase();
@@ -894,7 +900,7 @@
 		addcheckbox: function() {
 			console.log('twa.addcheckbox()');
 
-			$('.overview_table tr').each(function (index) {
+			$('.overview_table tr').each(function(index) {
 				if(!index) {
 					$(this).prepend('<th></th>');
 
@@ -1099,7 +1105,6 @@
 				});
 			}
 		},
-		//nao traduzido daqui para baixo
 		assistentfarm: {
 			id: 0,
 			init: function() {
@@ -2102,9 +2107,95 @@
 				
 				$.getJSON(twa.domain + 'get.php?suggest=1&callback=?', function(suggests) {
 					for(var i in suggests) {
-						list.append('<tr><td><b>' + suggests[i].time + ':</b><br/>' + suggests[i].text + '</td></tr>');
+						list.prepend('<tr><td><b>' + suggests[i].time + ':</b><br/>' + suggests[i].text + '</td></tr>');
 					}
 				});
+			}
+		},
+		overview: {
+			init: function() {
+				var table = $('<table id="twa-overview" class="vis overview_table" width="100%"><tr><th width="400px">Aldeia</th><th style="width:46px;text-align:center">Madeira</th><th style="width:46px;text-align:center">Argila</th><th style="width:46px;text-align:center">Ferro</th><th style="width:46px;text-align:center"><span class="icon header ressources"></span></th><th style="width:53px;text-align:center"><img src="http://cdn2.tribalwars.net/graphic/overview/trader.png"/></th><th>Contruções</th><th>Pesquisas</th><th>Recrutamento</th></tr></table>');
+				
+				if($('.maincell').width() < 950) {
+					$('#content_value').prepend('<p><b>* A função de visualização avançada é melhor visualizada com a configuração "Largura da janela" maior que 1000px (Configurações -> Configurações)</b></´p>');
+				}
+				
+				$('.overview_table tr:not(:first)').each(function() {
+					var vid = $('td:first a', this).attr('href').match(/village=(\d+)/)[1];
+					var village = $('td:first', this).clone();
+					var points = Number($('td:eq(1)', this).text());
+					var storage = Number($('td:eq(3)', this).text());
+					var resource_ = $('td:eq(2)', this).text().split(' ');
+					var resource = {};
+					var resourceNames = ['wood', 'stone', 'iron'];
+					var resourceColors = ['915E00', 'FF5500', 'AAAAAA'];
+					var farm = $('td:eq(4)', this).text();
+					
+					for(var i = 0; i < 3; i++) {
+						var amount = Number(resource_[i].replace(/\./g, ''));
+						resource[resourceNames[i]] = {amount: amount, percent: amount / storage * 100, color: resourceColors[i]};
+					}
+					
+					village.find('span:first').css({display: 'block', 'float': 'left', lineHeight: '20px'});
+					
+					table.append('<tr class="twa-overview-' + vid + '"><td style="line-height:10px">' + village.html() + '<span style="text-align:right;font-size:9px;display:block;float:right;width:80px">' + points + ' pontos<br/>' + farm + '</span></td><td style="text-align:center;padding:2px">' + resource.wood.amount + '<br/><div style="opacity:0.4;width:' + resource.wood.percent + '%;background:#' + resource.wood.color + ';height:3px"></td><td style="text-align:center;padding:2px">' + resource.stone.amount + '<br/><div style="opacity:0.4;width:' + resource.stone.percent + '%;background:#' + resource.stone.color + ';height:3px"></td><td style="text-align:center;padding:2px">' + resource.iron.amount + '<br/><div style="opacity:0.4;width:' + resource.iron.percent + '%;background:#' + resource.iron.color + ';height:3px"></td><td style="text-align:center">' + storage + '</td><td class="market" style="text-align:center"></td><td class="builds" style="text-align:center"></td><td class="research" style="text-align:center"></td><td class="recruit" style="text-align:center"></td></tr>');
+					
+					$.ajax({
+						url: game_data.link_base_pure + 'market',
+						village: vid,
+						success: function(html) {
+							var traders = $('table.vis th:first', html);
+							
+							$('.twa-overview-' + vid + ' .market').html(traders.length ? '<a href="' + twa.linkbase('market') + '">' + traders.text().match(/\d+\/\d+/)[0] + '</a>' : '0/0');
+						}
+					});
+					
+					$.ajax({
+						url: game_data.link_base_pure + 'main',
+						village: vid,
+						success: function(html) {
+							var imgs = '';
+							
+							$('#buildqueue tr[class]', html).each(function() {
+								imgs += '<img style="margin-right:2px" src="' + $('#buildings tr:not(:first) td:has(a:contains(' + $('td:first', this).text().split(' ')[0] + ')) img', html).attr('src') + '" title="' + $('td:eq(2)', this).text() + '"/>';
+							});
+							
+							$('.twa-overview-' + vid + ' .builds').html(imgs);
+						}
+					});
+					
+					$.ajax({
+						url: game_data.link_base_pure + 'train',
+						village: vid,
+						success: function(html) {
+							var imgs = '';
+							
+							$('#trainqueue_wrap_barracks tr[class]', html).each(function() {
+								var data = $('td:first', this).text().split(' ');
+								
+								imgs += '<img src="' + $('#train_form table tr[class] td:contains(' + data[1] + ') img', html).attr('src') + '" title="' + data[0] + '"/>';
+							});
+							
+							$('.twa-overview-' + vid + ' .recruit').html(imgs);
+						}
+					});
+					
+					$.ajax({
+						url: game_data.link_base_pure + 'smith',
+						village: vid,
+						success: function(html) {
+							var imgs = '';
+							
+							$('#current_research tr[class]').each(function() {
+								imgs += '<img src="' + $('#tech_list img[alt=' + $('td:first', this).text() + ']', html).attr('src') + '" alt="' + $('td:eq(2)', this).text() + '"/>';
+							});
+							
+							$('.twa-overview-' + vid + ' .research').html(imgs);
+						}
+					});
+				});
+
+				$('.overview_table').replaceWith(table);
 			}
 		}
 	};
@@ -2122,7 +2213,8 @@
 
 	if((function () {
 		if($.isPlainObject(twa.settings) && $.isPlainObject(twa.data) && twa.data.builds) {
-			if($.isEmptyObject(twa.settings) || $.isEmptyObject(twa.data) || twa.data.version !== '1.4.4') {
+			
+			if($.isEmptyObject(twa.settings) || $.isEmptyObject(twa.data) || twa.data.version !== '1.4.5') {
 				if(twa.data && twa.data.version) {
 					twa.oldSettings = JSON.parse(twa.settings);
 					twa.oldData = JSON.parse(twa.data);
@@ -2174,11 +2266,14 @@
 			changegroups: true,
 			attackplanner: true,
 			selectvillages: true,
-			_assistentfull: {models: [0,0,0,0,0,0,0,0,0]}
+			overview: true
 		}, twa.oldSettings || {}));
 		
+		console.log(memory.settings);
+		console.log(localStorage[memory.settings]);
+		
 		localStorage[memory.data] = JSON.stringify($.extend(twa.data = {
-			version: '1.4.4',
+			version: '1.4.5',
 			attackplanner: {
 				commands: [],
 				lastTime: $('#serverTime').text() + ' ' + $('#serverDate').text()
@@ -2381,9 +2476,12 @@
 				partner: 'Parceiro de conversa',
 				reply: 'Responder',
 				errortime: 'Você só pode enviar uma mensagem a cada 10 segundos.'
+			},
+			overview: {
+				warning: ''
 			}
 		}
-	})[game_data.market === 'br' ? 'pt' : game_data.market];
+	})[(game_data.market === 'br' ? 'pt' : game_data.market) || 'pt'];
 	
 	Array.prototype.remove = function(from, to) {
 		var rest = this.slice((to || from) + 1 || this.length);
@@ -2417,7 +2515,7 @@
 		return str += sec;
 	}
 	
-	String.prototype.sprintf = function() {
+	String.prototype.springf = function() {
 		var args = arguments;
 		
 		return this.replace(/{(\d+)}/g, function(match, number) {
@@ -2448,7 +2546,8 @@
 			break;
 		case 'overview_villages':
 			var overview = $('#overview').val();
-
+			
+			twa.settings.overview && !$('#twa-overview').length && !game_data.player.premium && twa.overview.init();
 			twa.settings.villagerename && overview === 'combined' && !$('#twa-villagerename').length && twa.rename.villages();
 			twa.settings.commandrename && overview === 'commands' && !$('#twa-commandrename').length && twa.rename.commands();
 			twa.settings.villagefilter && overview !== 'trader' && !$('#twa-villagefilter').length && twa.villagefilter();
@@ -2471,10 +2570,11 @@
 
 			break;
 		case 'settings':
+			
 			!$('#di').length && twa.config();
 			break;
 		}
-
+		
 		twa.settings.attackplanner && !$('#twa-attackplaner').length && twa.attackplanner.init();
 		twa.settings.memo && !$('#twa-memo').length && twa.memo.init();
 		!$('#twa-messages').length && twa.messages.init();

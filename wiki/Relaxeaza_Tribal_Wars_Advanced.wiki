@@ -30,6 +30,7 @@ Todas as funções podem ser ativadas e desativadas abrindo a tela de configura�
 || Alterador de Grupos || _Faz a mesma função que a visualização de grupos em trocar aldeias de grupos em massa, porém, em qualquer visualização._ || Visualizações || ||
 || Lembrete || _Simples recurso de lembrete no jogo. (Muito bom para co-plays quando se quer deixar um recado)._ || Qualquer página || ||
 || [http://code.google.com/p/tribalwars-scripts/wiki/Planeador_de_Ataques Planeador de Ataques] || _Envia ataques em horários programados, apenas adicione a aldeia de origem, aldeia de destino, horário e tropas que os ataques serão enviados automaticamente (Para que os ataques sejam enviados, o script deve estar em execução)._ || Qualquer página || ||
+|| Visualização Avançada || _Adiciona ferramentas premium na página de visualização para jogadores sem conta premium._ || Visualizações || ||
 
 === Como usar ===
 Simplismente vá a página referente a função e execute o script.
@@ -88,11 +89,16 @@ Simplismente vá a página referente a função e execute o script.
   * http://tribalwars-scripts.googlecode.com/svn/img/change.png Farmador Automático -> Agora o autofarm pode ser executado de qualquer página do jogo.
   * http://tribalwars-scripts.googlecode.com/svn/img/change.png Farmador Automático -> O design foi reformulado.
  * *v1.4.1* _20/08/12_
-  * http://tribalwars-scripts.googlecode.com/svn/img/new.png AutoFarm -> Foi adicionado um log de ataques.
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png AutoFarm -> Foi adicionado um log de ataques.
  * *v1.4.2* _21/08/12_
   * http://tribalwars-scripts.googlecode.com/svn/img/bug.png AutoFarm -> O problema do "Não há tropas na aldeia" foi solucionado.
   * http://tribalwars-scripts.googlecode.com/svn/img/bug.png AutoFarm -> O problema da opção "Caso não tenha tropas usar o que tiver" foi solucionado.
  * *v1.4.3* _22/08/12_
   * http://tribalwars-scripts.googlecode.com/svn/img/bug.png AutoFarm -> Problema na detecção do tempo em que as tropas em andamento retornariam arrumado.
+ * *v1.4.4* _26/08/12_
+  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Construtor Automático -> Problema que cancelava todas ordens de contruções foi concertado.
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Area exclusiva para sugestões para o script.
+ * *v1.4.5* _27/08/12_
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Visualização Avançada -> Adiciona ferramentas premium na página de visualização para jogadores sem conta premium.
   
 === Qualquer duvida poste nos comentários que será respondida. ===
