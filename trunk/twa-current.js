@@ -58,16 +58,16 @@
  * alterado: Mensagens -> Proteção contra envio de multiplas mensagens (spam).
  * alterado: Coletor de Coordenadas Manual -> Ao clicar em uma aldeia que já foi selecionada, ela será removidada da lista de coordenadas.
  * alterado: Engine -> Os icones das ferramentas que são usadas em qualquer página do jogo foram movidas para uma barra independente.
- * alterado: AutoFarm -> Deixará de ser executado apenas na Praça e o modo de uso será parecido com o Planeador de Ataques.
- * alterado: AutoFarm -> Agora o autofarm pode ser executado de qualquer página do jogo.
- * alterado: AutoFarm -> O design foi reformulado.
+ * alterado: Farmador Automático -> Deixará de ser executado apenas na Praça e o modo de uso será parecido com o Planeador de Ataques.
+ * alterado: Farmador Automático -> Agora o Farmador Automático pode ser executado de qualquer página do jogo.
+ * alterado: Farmador Automático -> O design foi reformulado.
  * v1.4.1 20/08/12
- * novo: AutoFarm -> Foi adicionado um log de ataques.
+ * novo: Farmador Automático -> Foi adicionado um log de ataques.
  * v1.4.2 21/08/12
- * bugfix: AutoFarm -> O problema do "Não há tropas na aldeia" foi solucionado.
- * bugfix: AutoFarm -> O problema da opção "Caso não tenha tropas usar o que tiver" foi solucionado.
+ * bugfix: Farmador Automático -> O problema do "Não há tropas na aldeia" foi solucionado.
+ * bugfix: Farmador Automático -> O problema da opção "Caso não tenha tropas usar o que tiver" foi solucionado.
  * v1.4.3 22/08/12
- * bugfix: AutoFarm -> Problema na detecção do tempo em que as tropas em andamento retornariam arrumado.
+ * bugfix: Farmador Automático -> Problema na detecção do tempo em que as tropas em andamento retornariam arrumado.
  * v1.4.4 26/08/12
  * bugfix: Construtor Automático -> Problema que cancelava todas ordens de contruções foi concertado.
  * novo: Area exclusiva para sugestões para o script.

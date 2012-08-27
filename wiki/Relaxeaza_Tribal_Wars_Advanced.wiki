@@ -86,15 +86,15 @@ Simplismente vá a página referente a função e execute o script.
   * http://tribalwars-scripts.googlecode.com/svn/img/change.png Coletor de Coordenadas Manual -> Ao clicar em uma aldeia que já foi selecionada, ela será removidada da lista de coordenadas.
   * http://tribalwars-scripts.googlecode.com/svn/img/change.png Engine -> Os icones das ferramentas que são usadas em qualquer página do jogo foram movidas para uma barra independente.
   * http://tribalwars-scripts.googlecode.com/svn/img/change.png Farmador Automático -> Deixará de ser executado apenas na Praça e o modo de uso será parecido com o Planeador de Ataques.
-  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Farmador Automático -> Agora o autofarm pode ser executado de qualquer página do jogo.
+  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Farmador Automático -> Agora o Farmador Automático pode ser executado de qualquer página do jogo.
   * http://tribalwars-scripts.googlecode.com/svn/img/change.png Farmador Automático -> O design foi reformulado.
  * *v1.4.1* _20/08/12_
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png AutoFarm -> Foi adicionado um log de ataques.
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Farmador Automático -> Foi adicionado um log de ataques.
  * *v1.4.2* _21/08/12_
-  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png AutoFarm -> O problema do "Não há tropas na aldeia" foi solucionado.
-  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png AutoFarm -> O problema da opção "Caso não tenha tropas usar o que tiver" foi solucionado.
+  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Farmador Automático -> O problema do "Não há tropas na aldeia" foi solucionado.
+  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Farmador Automático -> O problema da opção "Caso não tenha tropas usar o que tiver" foi solucionado.
  * *v1.4.3* _22/08/12_
-  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png AutoFarm -> Problema na detecção do tempo em que as tropas em andamento retornariam arrumado.
+  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Farmador Automático -> Problema na detecção do tempo em que as tropas em andamento retornariam arrumado.
  * *v1.4.4* _26/08/12_
   * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Construtor Automático -> Problema que cancelava todas ordens de contruções foi concertado.
   * http://tribalwars-scripts.googlecode.com/svn/img/add.png Area exclusiva para sugestões para o script.
