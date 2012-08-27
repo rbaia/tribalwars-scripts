@@ -1,6 +1,6 @@
 /*!
- * Relaxeaza Tribal Wars Advanced v1.4.1
- * Release 20/08/12.
+ * Relaxeaza Tribal Wars Advanced v1.4.5
+ * Release 27/08/12.
  * relaxeaza.tw@gmail.com
  *
  * v1.1 03/02/12
@@ -77,6 +77,7 @@
 
 (function () {
 	var twa = {
+		version: '1.4.5',
 		domain: 'http://relaxeaza.orgfree.com/tw/',
 		baseTool: function(id, name, img, html, width) {
 			$('table.twa-bar').show().find('> tbody > tr').append('<td><table class="header-border"><tbody><tr><td><table class="box menu nowrap"><tbody><tr><td class="box-item" style="height: 22px;">' + (img ? '<img src="' + img + '" style="position:absolute">' : '') + '<a ' + (img ? 'style="margin-left:17px" ' : '') + 'href="#" id="' + id + '">' + name + '</a></td></tr></tbody></table></td></tr><tr class="newStyleOnly"><td class="shadow"><div class="leftshadow"></div><div class="rightshadow"></div></td></tr></tbody></table></td>');
@@ -2213,11 +2214,10 @@
 
 	if((function () {
 		if($.isPlainObject(twa.settings) && $.isPlainObject(twa.data) && twa.data.builds) {
-			
-			if($.isEmptyObject(twa.settings) || $.isEmptyObject(twa.data) || twa.data.version !== '1.4.5') {
+			if($.isEmptyObject(twa.settings) || $.isEmptyObject(twa.data) || twa.version !== '1.4.5') {
 				if(twa.data && twa.data.version) {
-					twa.oldSettings = JSON.parse(twa.settings);
-					twa.oldData = JSON.parse(twa.data);
+					twa.oldSettings = twa.settings;
+					twa.oldData = twa.data;
 				}
 				
 				return true;
@@ -2269,16 +2269,14 @@
 			overview: true
 		}, twa.oldSettings || {}));
 		
-		console.log(memory.settings);
-		console.log(localStorage[memory.settings]);
-		
-		localStorage[memory.data] = JSON.stringify($.extend(twa.data = {
-			version: '1.4.5',
+		twa.data = $.extend({
 			attackplanner: {
 				commands: [],
 				lastTime: $('#serverTime').text() + ' ' + $('#serverDate').text()
 			}
-		}, twa.oldData || {}));
+		}, twa.oldData || {});
+		
+		localStorage[memory.data] = JSON.stringify(twa.data);
 	}
 	
 	var lang = ({
