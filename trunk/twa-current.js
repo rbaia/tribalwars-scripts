@@ -322,13 +322,21 @@
 		mapelement: function(o, css) {
 			var img = $('#map_village_' + o.vid);
 			var pos = o.pos || [0, 0];
+			
+			/* var elem = $('<div/>').css($.extend(css, {
+				top: Number(img.css('top').replace('px', '')) + pos[0],
+				left: Number(img.css('left').replace('px', '')) + pos[1],
+				zIndex: 10,
+				position: 'absolute'
+			})).attr('id', o.id); */
+			
 			var elem = $('<div/>').css($.extend(css, {
 				top: Number(img.css('top').replace('px', '')) + pos[0],
 				left: Number(img.css('left').replace('px', '')) + pos[1],
 				zIndex: 10,
 				position: 'absolute'
-			})).attr('id', o.id);
-
+			}));
+			
 			o.html && elem.html(o.html);
 			o.Class && elem.addClass(o.Class);
 			css.borderRadius && elem.attr('style', elem.attr('style') + '-moz-border-radius:' + css.borderRadius + 'px;-webkit-border-radius:' + css.borderRadius + 'px');
@@ -525,7 +533,11 @@
 		},
 		lastattack: function() {
 			console.log('twa.lastattack()');
-
+			
+			if(!$('#show_popup').is(':checked') || !$('#map_popup_attack').is(':checked')) {
+				return false;
+			}
+			
 			$('.twa-lastattack').remove();
 
 			twa.mapvillages(function () {
@@ -547,7 +559,7 @@
 							var hour = Math.floor(time / 36E5);
 							var min = Math.floor(time / 6E4);
 							var format;
-
+							
 							if(year == 1) {
 								format = year + ' ' + lang.lastattack.year;
 							} else if(year > 1) {
@@ -563,7 +575,7 @@
 								min = min < 10 ? '0' + min : min;
 								format = '00:' + min + 'm';
 							}
-
+							
 							twa.mapelement({
 								vid: this.id,
 								html: format,
@@ -2357,7 +2369,7 @@
 			lastattack: {
 				year: 'ano',
 				years: 'anos',
-				days: 'dias'
+				days: 'd'
 			},
 			mapgenerator: {
 				generate: 'Gerar mapa',
