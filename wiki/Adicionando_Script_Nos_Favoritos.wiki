@@ -10,4 +10,6 @@ http://tribalwars-scripts.googlecode.com/svn/img/addbar0.png
 
 *3.* Em "Nome" coloque o nome que desejar, em "URL" coloque o script que você baixou (abra o script com o notepad) e clique em Salvar.
 
+http://tribalwars-scripts.googlecode.com/svn/img/addbar1.png
+
 Pronto, agora é só usar o script no TW, bem simples!
