@@ -6,7 +6,7 @@ Com o Renomeador de Aldeias lhe permite renomear aldeias em massa na visualizaç
 
 Usuários sem premium tem a possibilidade de renomear aldeias em massa e támbem renomear aldeias individuais diretamente na visualização de aldeias.
 
-http://tribalwars-scripts.googlecode.com/svn/img/renindivisual.png
+http://tribalwars-scripts.googlecode.com/svn/img/renindividual.png
 
 *Máscaras:*
 
