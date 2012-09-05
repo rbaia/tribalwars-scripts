@@ -12,7 +12,7 @@ http://tribalwars-scripts.googlecode.com/svn/img/renindividual.png
 
 Com as máscaras é possivel renomear aldeias "dinamicamente", usando valores da aldeia atual, veja as máscaras que você pode usar:
 
-|| Máscara || Descrição || Visualização que funciona ||
+|| *Máscara* || *Descrição* || *Visualização que funciona* ||
 || {points} || _É substituido pela pontuação da aldeia._ || Produção, Combinado, Sem visualização avançada ||
 || {wood} || _É substituido pela quantidade de madeira da aldeia._ || Produção, Sem visualização avançada ||
 || {stone} || _É substituido pela quantidade de argila da aldeia._ || Produção, Sem visualização avançada ||
