@@ -8,6 +8,8 @@ Usuários sem premium tem a possibilidade de renomear aldeias em massa e támbem
 
 http://tribalwars-scripts.googlecode.com/svn/img/renindivisual.png
 
+<font color="red">No momento as máscaras estão funcionando apenas para jogadores *sem premium*! Nas proximas atualizações já estará funcionando para todos e na maiorias das visualizações.</font>
+
 *Máscaras:*
 
 Com as máscaras é possivel renomear aldeias "dinamicamente", usando valores da aldeia atual, veja as máscaras que você pode usar:
@@ -23,12 +25,10 @@ Com as máscaras é possivel renomear aldeias "dinamicamente", usando valores da
 || {current} || _É substituido pelo nome atual da aldeia (muito bom para acrescentar algo ao nome)._ || Todas ||
 || {x} || _É substituido pela coordenada x da aldeia._ || Todas ||
 || {y} || _É substituido pela coordenada y da aldeia._ || Todas ||
-|| {random} || _É substituido por um numero aleatório - Caso queira adicionar um número mínimo e máximo use assim: *{random(MINIMO, MAXIMO)}*, substitua MINIMO e MAXIMO pelos númemos desejados._ || Todas ||
-|| {unit(UNIDADE)} || _É substituido pela quantidade de unidade especificada - Substitua *UNIDADE* pela unidade desejada. Os nomes são é ingles (a lista de nomes está logo abaixo)_ || Combinado ||
+|| {random(MINIMO, MAXIMO)} || _É substituido por um numero aleatório - Não é obrigatório especificar o número máximo e mínimo. Ex: *{random}*, *(random()}*._ || Todas ||
+|| {unit(UNIDADE)} || _É substituido pela quantidade de unidade especificada - Substitua *UNIDADE* pela unidade desejada. Os nomes são é ingles e obrigatório! (a lista de nomes está logo abaixo)_ || Combinado ||
 
-<font color="red">No momento as máscaras estão funcionando apenas para jogadores *sem premium*! Nas proximas atualizações já estará funcionando para todos e na maiorias das visualizações.</font>
-
-*{unit(UNIDADES)} - Nome das unidades:*
+*{unit(UNIDADE)} - Nome das unidades:*
  * *spear* - Lanceiro.
  * *sword* - Espadachim.
  * *axe* - Bárbaro.
