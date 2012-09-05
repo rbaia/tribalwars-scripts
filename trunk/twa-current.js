@@ -2579,30 +2579,23 @@
 	$('#header_info').after('<table id="header_info" class="twa-bar" style="display:none" cellspacing="0" align="left"><tr></tr></table>');
 
 	var memory = {
-		settings: game_data.player.id + 'twa_settings',
-		data: game_data.player.id + 'twa_data'
+		settings: 'TWASettings' + game_data.player.id,
+		data: 'TWAData' + game_data.player.id
 	};
 
-	twa.settings = JSON.parse(localStorage[memory.settings] || '{}');
-	twa.data = JSON.parse(localStorage[memory.data] || '{}');
+	twa.settings = localStorage[memory.settings] ? JSON.parse(localStorage[memory.settings]) : false;
+	twa.data = localStorage[memory.data] ? JSON.parse(localStorage[memory.data]) : false;
 	
-	if(!twa.data.version) {
-		twa.data.version = '1.4.5';
-	}
-	
-	if((function () {
-		if($.isPlainObject(twa.settings) && $.isPlainObject(twa.data) && twa.data.builds) {
-			if($.isEmptyObject(twa.settings) || $.isEmptyObject(twa.data) || twa.data.version && twa.version !== twa.data.version) {
-				if(twa.data && twa.data.version) {
-					twa.oldSettings = twa.settings;
-					twa.oldData = twa.data;
-					
-					//UI.SuccessMessage('TWA - Versão ' + twa.version + '. Veja as novidades da nova versão no site do script!', 6000);
-				}
-				
-				return true;
-			}
-		} else {
+	if((function() {
+		if(!twa.settings || !twa.data) {
+			return true;
+		} else if(twa.data.version !== twa.version) {
+			twa.data.version = twa.version;
+			twa.oldSettings = twa.settings;
+			twa.oldData = twa.data;
+			
+			UI.SuccessMessage('TWA - Versão ' + twa.version + '. Veja as novidades da nova versão no site do script!', 6000);
+			
 			return true;
 		}
 	})()) {
@@ -2650,15 +2643,13 @@
 			renamevillages: true
 		}, twa.oldSettings || {}));
 		
-		twa.data = $.extend({
+		localStorage[memory.data] = JSON.stringify(twa.data = $.extend({
+			version: twa.version,
 			attackplanner: {
 				commands: [],
-				version: '1.5',
 				lastTime: $('#serverTime').text() + ' ' + $('#serverDate').text()
 			}
-		}, twa.oldData || {});
-		
-		localStorage[memory.data] = JSON.stringify(twa.data);
+		}, twa.oldData || {}));
 	}
 	
 	var lang = ({
