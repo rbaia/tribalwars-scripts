@@ -6,13 +6,13 @@ Com o Renomeador de Aldeias lhe permite renomear aldeias em massa na visualizaç
 
 Usuários sem premium tem a possibilidade de renomear aldeias em massa e támbem renomear aldeias individuais diretamente na visualização de aldeias.
 
-http://tribalwars-scripts.googlecode.com/svn/img/renindividual.png
+http://tribalwars-scripts.googlecode.com/svn/img/renindivisual.png
 
 *Máscaras:*
 
 Com as máscaras é possivel renomear aldeias "dinamicamente", usando valores da aldeia atual, veja as máscaras que você pode usar:
 
-|| *Máscara* || *Descrição* || *Visualização que funciona* ||
+|| Máscara || Descrição || Visualização que funciona ||
 || {points} || _É substituido pela pontuação da aldeia._ || Produção, Combinado, Sem visualização avançada ||
 || {wood} || _É substituido pela quantidade de madeira da aldeia._ || Produção, Sem visualização avançada ||
 || {stone} || _É substituido pela quantidade de argila da aldeia._ || Produção, Sem visualização avançada ||
@@ -24,5 +24,21 @@ Com as máscaras é possivel renomear aldeias "dinamicamente", usando valores da
 || {x} || _É substituido pela coordenada x da aldeia._ || Todas ||
 || {y} || _É substituido pela coordenada y da aldeia._ || Todas ||
 || {random} || _É substituido por um numero aleatório - Caso queira adicionar um número mínimo e máximo use assim: *{random(MINIMO, MAXIMO)}*, substitua MINIMO e MAXIMO pelos númemos desejados._ || Todas ||
+|| {unit(UNIDADE)} || _É substituido pela quantidade de unidade especificada - Substitua *UNIDADE* pela unidade desejada. Os nomes são é ingles (a lista de nomes está logo abaixo)_ || Combinado ||
 
 <font color="red">No momento as máscaras estão funcionando apenas para jogadores *sem premium*! Nas proximas atualizações já estará funcionando para todos e na maiorias das visualizações.</font>
+
+*{unit(UNIDADES)} - Nome das unidades:*
+ * *spear* - Lanceiro.
+ * *sword* - Espadachim.
+ * *axe* - Bárbaro.
+ * *archer* - Arqueiro.
+ * *spy* - Explorador.
+ * *light* - Cavalaria leve.
+ * *marcher* - Arqueiro a cavalo.
+ * *heavy* - Cavalaria pesada.
+ * *ram* - Ariete.
+ * *catapult* - Catapulta.
+ * *knight* - Paladino.
+ * *snob* - Nobre.
+ * *militia* - Milicia.
