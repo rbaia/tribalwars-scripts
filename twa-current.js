@@ -2597,7 +2597,7 @@
 					twa.oldSettings = twa.settings;
 					twa.oldData = twa.data;
 					
-					UI.SuccessMessage('TWA - Versão ' + twa.version + '. Veja as novidades da nova versão no site do script!', 6000);
+					//UI.SuccessMessage('TWA - Versão ' + twa.version + '. Veja as novidades da nova versão no site do script!', 6000);
 				}
 				
 				return true;
