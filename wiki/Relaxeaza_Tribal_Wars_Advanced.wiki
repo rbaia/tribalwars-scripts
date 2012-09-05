@@ -105,9 +105,9 @@ Simplismente vá a página referente a função e execute o script.
  * *v1.4.5* _27/08/12_
   * http://tribalwars-scripts.googlecode.com/svn/img/add.png Visualização Avançada -> Adiciona ferramentas premium na página de visualização para jogadores sem conta premium.
  * v1.5 _05/09/12_
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png: Renomeador de Aldeias -> Agora é possivel renomear aldeias em massa e aldeias individuais em contas sem premium.
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png: Renomeador de Aldeias -> Máscaras foram adicionadas para ter mais opções de manipulação dos nomes das aldeias (apenas para usuarios sem premiumm, por enquanto).
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png: Visualização Avançada -> Modo "Combinado" foi adicionado aos modos de visulização (sem premium).
-  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png: Farmador Automático -> Problema que não dava continuidade aos ataques após retornarem foi concertado.
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Renomeador de Aldeias -> Agora é possivel renomear aldeias em massa e aldeias individuais em contas sem premium.
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Renomeador de Aldeias -> Máscaras foram adicionadas para ter mais opções de manipulação dos nomes das aldeias (apenas para usuarios sem premiumm, por enquanto).
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Visualização Avançada -> Modo "Combinado" foi adicionado aos modos de visulização (sem premium).
+  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Farmador Automático -> Problema que não dava continuidade aos ataques após retornarem foi concertado.
 
 === Qualquer duvida poste nos comentários que será respondida. ===
