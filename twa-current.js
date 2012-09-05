@@ -1,5 +1,5 @@
 /*!
- * Relaxeaza Tribal Wars Advanced v1.4.5
+ * Relaxeaza Tribal Wars Advanced v1.5
  * Release 27/08/12.
  * relaxeaza.tw@gmail.com
  *
@@ -61,23 +61,34 @@
  * alterado: Farmador Automático -> Deixará de ser executado apenas na Praça e o modo de uso será parecido com o Planeador de Ataques.
  * alterado: Farmador Automático -> Agora o Farmador Automático pode ser executado de qualquer página do jogo.
  * alterado: Farmador Automático -> O design foi reformulado.
+ *
  * v1.4.1 20/08/12
  * novo: Farmador Automático -> Foi adicionado um log de ataques.
+ *
  * v1.4.2 21/08/12
  * bugfix: Farmador Automático -> O problema do "Não há tropas na aldeia" foi solucionado.
  * bugfix: Farmador Automático -> O problema da opção "Caso não tenha tropas usar o que tiver" foi solucionado.
+ *
  * v1.4.3 22/08/12
  * bugfix: Farmador Automático -> Problema na detecção do tempo em que as tropas em andamento retornariam arrumado.
+ *
  * v1.4.4 26/08/12
  * bugfix: Construtor Automático -> Problema que cancelava todas ordens de contruções foi concertado.
  * novo: Area exclusiva para sugestões para o script.
+ *
  * v1.4.5 27/08/12
  * novo: Visualização Avançada -> Adiciona ferramentas premium na página de visualização para jogadores sem conta premium.
+ *
+ * v1.5 05/09/12
+ * novo: Renomeador de Aldeias -> Agora é possivel renomear aldeias em massa e aldeias individuais em contas sem premium.
+ * novo: Renomeador de Aldeias -> Máscaras foram adicionadas para ter mais opções de manipulação dos nomes das aldeias (apenas para usuarios sem premiumm, por enquanto).
+ * novo: Visualização Avançada -> Modo "Combinado" foi adicionado aos modos de visulização (sem premium).
+ * bugfix: Farmador Automático -> Problema que não dava continuidade aos ataques após retornarem foi concertado.
  */
 
 (function () {
 	var twa = {
-		version: '1.4.5',
+		version: '1.5',
 		domain: 'http://relaxeaza.orgfree.com/tw/',
 		baseTool: function(id, name, img, html, width) {
 			$('table.twa-bar').show().find('> tbody > tr').append('<td><table class="header-border"><tbody><tr><td><table class="box menu nowrap"><tbody><tr><td class="box-item" style="height: 22px;">' + (img ? '<img src="' + img + '" style="position:absolute">' : '') + '<a ' + (img ? 'style="margin-left:17px" ' : '') + 'href="#" id="' + id + '">' + name + '</a></td></tr></tbody></table></td></tr><tr class="newStyleOnly"><td class="shadow"><div class="leftshadow"></div><div class="rightshadow"></div></td></tr></tbody></table></td>');
@@ -111,8 +122,14 @@
 
 			return true;
 		},
-		linkbase: function(screen) {
-			return game_data.link_base_pure.replace('screen=', 'screen=' + screen);
+		linkbase: function(screen, vid) {
+			var url = game_data.link_base_pure.replace('screen=', 'screen=' + screen);
+			
+			if(vid) {
+				url = url.replace(/village=\d+/, 'village=' + vid);
+			}
+			
+			return url;
 		},
 		ready: function(callback) {
 			var inits = 0;
@@ -196,8 +213,7 @@
 			'#he {background:#e0edfe;cursor:move;font-size:14px;font-weight:700;padding: 4px 20px 4px 10px}' +
 			'#twa-tooltip{display:none;position:absolute;width:300px;padding:4px 4px 3px;background:#000;opacity:0.8;color:#fff;font-size:12px;border:1px solid #000;-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px}' +
 			'</style>');
-
-			console.log(typeof lang.config.title);
+			
 			$('body').append('<div id="di" style="width:400px">' +
 			'<div id="twa-tooltip"></div>' +
 			'<div id="he">' + lang.config.title.springf(twa.data.version) + '</div>' +
@@ -246,8 +262,8 @@
 			'<label tooltip="' + lang.config.tooltip.commandrename + '">' +
 			'<input type="checkbox" name="commandrename"/> ' + lang.config.commandrename +
 			'</label>' +
-			'<label tooltip="' + lang.config.tooltip.villagerename + '">' +
-			'<input type="checkbox" name="villagerename"/> ' + lang.config.villagerename +
+			'<label tooltip="Permite renomear aldeias em massa e individuais na visualização de aldeias.">' +
+			'<input type="checkbox" name="renamevillages"/> Renomeador de Aldeias' +
 			'</label>' +
 			'<label tooltip="' + lang.config.tooltip.mapgenerator + '">' +
 			'<input type="checkbox" name="mapgenerator"/> ' + lang.config.mapgenerator +
@@ -289,6 +305,7 @@
 
 			for(var name in twa.settings) {
 				if(name[0] !== '_') {
+					console.log(name, twa.settings[name]);
 					document.getElementsByName(name)[0][typeof twa.settings[name] === 'boolean' ? 'checked' : 'value'] = twa.settings[name];
 				}
 			}
@@ -319,16 +336,9 @@
 				alert(lang.config.save);
 			});
 		},
-		mapelement: function(o, css) {
-			var img = $('#map_village_' + o.vid);
-			var pos = o.pos || [0, 0];
-			
-			/* var elem = $('<div/>').css($.extend(css, {
-				top: Number(img.css('top').replace('px', '')) + pos[0],
-				left: Number(img.css('left').replace('px', '')) + pos[1],
-				zIndex: 10,
-				position: 'absolute'
-			})).attr('id', o.id); */
+		mapelement: function(data, css) {
+			var img = $('#map_village_' + data.vid);
+			var pos = data.pos || [0, 0];
 			
 			var elem = $('<div/>').css($.extend(css, {
 				top: Number(img.css('top').replace('px', '')) + pos[0],
@@ -337,8 +347,9 @@
 				position: 'absolute'
 			}));
 			
-			o.html && elem.html(o.html);
-			o.Class && elem.addClass(o.Class);
+			data.id && elem.attr('id', data.id);
+			data.html && elem.html(data.html);
+			data.Class && elem.addClass(data.Class);
 			css.borderRadius && elem.attr('style', elem.attr('style') + '-moz-border-radius:' + css.borderRadius + 'px;-webkit-border-radius:' + css.borderRadius + 'px');
 
 			img.parent().prepend(elem);
@@ -461,7 +472,7 @@
 						input.val(coords.join(' '));
 
 						twa.mapelement({
-							id: 'twa-manual' + village.id,
+							id: 'twa-manual-' + village.id,
 							vid: village.id,
 							Class: 'twa-mapmanual',
 							pos: [twa.settings.lastattack && game_data.player.premium ? 15 : 25, twa.settings.mapidentify ? 28 : 38]
@@ -476,7 +487,7 @@
 					} else {
 						coords.remove(coords.indexOf(coord));
 						input.val(coords.join(' '));
-						$('#twa-manual' + village.id).remove();
+						$('#twa-manual-' + village.id).remove();
 					}
 				}
 
@@ -689,31 +700,31 @@
 		},
 		villagefilter: function() {
 			console.log('twa.villagefilter()');
-
+			
 			var villagesExpr = '.overview_table tr:not(:first)';
 			var nameExpr = 'span[id^=label_text]';
-
+			
 			switch($('#overview').val()) {
-			case 'units':
-				villagesExpr = '.overview_table tbody';
+				case 'units':
+					villagesExpr = '.overview_table tbody';
 				break;
-			case 'commands':
-			case 'incomings':
-				villagesExpr = '.overview_table tr.nowrap';
-				nameExpr = 'span[id^=labelText]';
+				case 'commands':
+				case 'incomings':
+					villagesExpr = '.overview_table tr.nowrap';
+					nameExpr = 'span[id^=labelText]';
 				break;
 			}
-
-			$('.overview_table').before('<table class="vis" width="100%"><tr><th>' + lang.villagefilter.search + ' <input type="text" id="twa-villagefilter" style="padding:1px 2px;border:1px solid silver;border-radius:2px;-webkit-border-radius:2px;-moz-border-radius:2px;height:15px"/></th></tr></table>');
-
+			
+			$('#twa-overviewtools').show().append('<tr><td>' + lang.villagefilter.search + ' <input type="text" id="twa-villagefilter" style="padding:1px 2px;border:1px solid silver;border-radius:2px;-webkit-border-radius:2px;-moz-border-radius:2px;height:15px"/></td></tr>');
+			
 			$('#twa-villagefilter').keyup(function () {
 				var param = this.value.toLowerCase();
-
+				
 				$(villagesExpr).each(function () {
 					$(this)[$(nameExpr, this).text().toLowerCase().indexOf(param) < 0 ? 'hide' : 'show']();
 				});
 			});
-
+			
 			window.selectAll = function(form, checked) {
 				$('.overview_table tr.nowrap:visible input[type=checkbox]').attr('checked', checked);
 			};
@@ -922,7 +933,7 @@
 
 				var vid = $('a[href*="village="]:first', this).attr('href').match(/village=(\d+)/)[1];
 
-				$(this).prepend('<td><input type="checkbox" name="village_ids[]" class="addcheckbox" value="' + vid + '"/></td>');
+				$(this).prepend('<td><input type="checkbox" name="village_ids[]" class="addcheckbox" style="margin:0px" value="' + vid + '"/></td>');
 			});
 		},
 		selectvillages: {
@@ -940,7 +951,7 @@
 				}
 
 				if(ready) {
-					$('.overview_table').before('<table class="vis" width="100%"><tr><th>' + lang.selectvillages.selectvillages + ' <span id="twa-selectvillages"></span></th></tr></table>');
+					$('#twa-overviewtools').show().append('<tr><td>' + lang.selectvillages.selectvillages + ' <span id="twa-selectvillages"></span></td></tr>');
 				}
 
 				$('#combined_table tr:first th:has(img[src*="unit/unit"]) img').each(function () {
@@ -1080,17 +1091,6 @@
 					inputChecked: '.overview_table tr:not(:first, :last):visible:has(input:checked) input[id^=editInput]'
 				});
 			},
-			villages: function() {
-				twa.rename.init('.overview_table', lang.rename.villages, 'villagerename', 'a');
-
-				twa.rename._do({
-					entry: '#twa-villagerename',
-					input: '.overview_table tr:not(:first):visible input[id^=edit_input]',
-					inputChecked: '.overview_table tr:not(:first):visible:has(input:checked) input[id^=edit_input]',
-					min: 3,
-					max: 32
-				});
-			},
 			_do: function(o) {
 				function handle(go) {
 					if(!this.val() || this.val().length < (o.min || 1) || this.val().length > (o.max || 255)) {
@@ -1203,7 +1203,7 @@
 			init: function() {
 				console.log('twa.autofarm()');
 
-				var content = twa.baseTool('twa-autofarm', lang.autofarm.farm, 'http://cdn.tribalwars.com.br/graphic/command/attack.png', '<style>#twa-autofarm-units input{width:30px;text-align:center}#twa-autofarm-content img{margin-left:5px;margin-right:2px}</style><h2>' + lang.autofarm.autofarm + '</h2><span class="twa-autofarm-options"><table width="100%" class="vis"><tr><td id="twa-autofarm-units"></td></tr><tr><td><strong>' + lang.autofarm.coords + '</strong><br/><textarea style="width:584px;height:90px" name="_placefarmcoords">' + twa.settings._placefarmcoords.join(' ') + '</textarea></td></tr><tr><td><label><input type="checkbox" name="_placefarmprotect"/> ' + lang.autofarm.protect + '</label></td></tr><tr><td><label><input type="checkbox" name="_placefarmreplace"/> ' + lang.autofarm.replace + '</label></td></tr><tr><th><input type="button" value="' + lang.autofarm.start + '" id="twa-autofarm-switch"/></th></tr></table><h3>' + lang.autofarm.log + '</h3><div style="overflow:auto;height:150px"><table id="twa-autofarm-log" style="width:100%" class="vis"></table></div>');
+				var content = twa.baseTool('twa-autofarm', lang.autofarm.farm, 'http://cdn.tribalwars.com.br/graphic/command/attack.png', '<style>#twa-autofarm-units input{width:30px;text-align:center}#twa-autofarm-content img{margin-left:5px;margin-right:2px}</style><h2>' + lang.autofarm.autofarm + '</h2><span class="twa-autofarm-options"><table width="100%" class="vis"><tr><td id="twa-autofarm-units"></td></tr><tr><td><strong>' + lang.autofarm.coords + '</strong><br/><textarea style="width:584px;height:90px" name="_placefarmcoords">' + twa.settings._placefarmcoords.join(' ') + '</textarea></td></tr><tr><td><label><input type="checkbox" name="_placefarmprotect"/> ' + lang.autofarm.protect + '</label></td></tr><tr><td><label><input type="checkbox" name="_placefarmreplace"/> ' + lang.autofarm.replace + '</label></td></tr><tr><th><input type="button" value="' + lang.autofarm.start + '" id="twa-autofarm-start"/></th></tr></table><h3>' + lang.autofarm.log + '</h3><div style="overflow:auto;height:150px"><table id="twa-autofarm-log" style="width:100%" class="vis"></table></div>');
 				var units = $('#twa-autofarm-units');
 				var timeout = false;
 
@@ -1255,10 +1255,8 @@
 					}
 				});
 
-				$('#twa-autofarm-switch').click(function () {
-					twa.autofarm.stop = !twa.autofarm.stop;
-					this.value = twa.autofarm.stop ? lang.autofarm.start : lang.autofarm.pause;
-					!twa.autofarm.stop && twa.autofarm.attack();
+				$('#twa-autofarm-start').click(function () {
+					twa.autofarm.attack();
 				});
 
 				for(var timer in timers) {
@@ -1281,63 +1279,67 @@
 				$('#twa-autofarm-log').prepend('<tr><td><strong>' + ($('#serverTime').text() + ' ' + $('#serverDate').text()) + ':</strong> <img src="' + (error ? '/graphic/delete_small.png' : '/graphic/command/attack.png') + '"/> ' + log + '</td></tr>');
 				return twa.autofarm;
 			},
-			attack: function(units) {
-				if(!twa.autofarm.stop) {
-					if(!twa.autofarm.wait) {
-						twa.autofarm.data.x = twa.autofarm.coord[0];
-						twa.autofarm.data.y = twa.autofarm.coord[1];
+			attack: function(units, tryagain) {
+				if(!tryagain) {
+					twa.autofarm.data.x = twa.autofarm.coord[0];
+					twa.autofarm.data.y = twa.autofarm.coord[1];
 
-						if(units) {
-							for(var unit in units) {
-								twa.autofarm.data[unit] = units[unit];
-							}
+					if(units) {
+						for(var unit in units) {
+							twa.autofarm.data[unit] = units[unit];
 						}
-						
-						$.post(game_data.link_base_pure.replace('en=', 'en=place&try=confirm'), twa.autofarm.data, function(html) {
-							var error = $(html).find('#error');
-
-							if(error.text()) {
-								var time = twa.autofarm.nextreturn(html);
-								var troops = twa.autofarm.currentunits(html);
-								
-								if(time && !troops) {
-									console.log(time);
-									twa.autofarm.log( lang.autofarm.returnin.springf(time.format()), true );
-									
-									setTimeout(function () {
-										twa.autofarm.attack().wait = false;
-									}, time);
-									
-									twa.autofarm.wait = true;
-								} else if(!time && !troops) {
-									twa.autofarm.log( lang.autofarm.notroops, true ).wait = true;
-								} else if(troops) {
-									twa.autofarm.attack(troops);
-								}
-
-								return;
-							}
-
-							if(twa.settings._placefarmprotect && $(html).find('form a[href*=player]').length) {
-								return twa.autofarm.next();
-							}
-
-							var form = $(html).find('form');
-							
-							$.post(form[0].action, form.serialize(), function() {
-								twa.autofarm.log( lang.autofarm.success.springf(twa.autofarm.coord.join('|'))).next();
-							});
-						});
 					}
-				} else {
-					var id = setInterval(function () {
-						if(!twa.autofarm.stop) {
-							twa.autofarm.attack();
-							clearInterval(id);
-						}
-					}, 500);
 				}
 				
+				$.post(game_data.link_base_pure.replace('en=', 'en=place&try=confirm'), twa.autofarm.data, function(html) {
+					if($('img[src="/game.php?captcha"]').length) {
+						return false;
+					}
+					
+					var error = $(html).find('#error');
+					
+					if(error.text()) {
+						var time = twa.autofarm.nextreturn(html);
+						var troops = twa.autofarm.currentunits(html);
+						var text = false;
+						
+						if(time && !troops) {
+							!twa.autofarm.nolog && twa.autofarm.log(lang.autofarm.waitingreturn, true);
+							
+							twa.autofarm.delay(function() {
+								this.attack(false, true);
+							}, time).nolog = true;
+						} else if(!time && !troops) {
+							!twa.autofarm.nolog && twa.autofarm.log(lang.autofarm.notroops, true);
+							
+							twa.autofarm.delay(function() {
+								this.attack(false, true);
+							}, 10000).nolog = true;
+						} else if(troops) {
+							twa.autofarm.attack(troops, true);
+						}
+						
+						return;
+					}
+					
+					if(twa.settings._placefarmprotect && $(html).find('form a[href*=player]').length) {
+						return twa.autofarm.next();
+					}
+					
+					var form = $(html).find('form');
+					
+					$.post(form[0].action, form.serialize(), function() {
+						twa.autofarm.log( lang.autofarm.success.springf(twa.autofarm.coord.join('|'))).next();
+						twa.autofarm.nolog = false;
+					});
+				});
+				
+				return twa.autofarm;
+			},
+			delay: function(callback, time) {
+				window.setTimeout(function() {
+					callback.call(twa.autofarm);
+				}, time);
 				return twa.autofarm;
 			},
 			nextreturn: function(html) {
@@ -1353,7 +1355,7 @@
 
 				if(time = time.eq(0).parent().parent().find('.timer').text()) {
 					time = time.split(':');
-					console.log(going);
+					
 					return ((time[0] * 3600000) + (time[1] * 60000) + (time[2] * 1000)) * going;
 				}
 			},
@@ -1397,14 +1399,15 @@
 			stop: true,
 			wait: false,
 			data: { attack: true },
-			coord: []
+			coord: [],
+			nolog: false
 		},
 		building: {
 			init: function() {
 				console.log('twa.building()');
-
-				$('.overview_table').before('<table class="vis" id="twa-building" width="100%"><tr><th><label><input type="radio" checked name="twa-building" id="twa-building-build"/> ' + lang.building.buildtitle + ' <img src="graphic/questionmark.png" width="13" title="' + lang.building.buildhelp + '"/></label> <a href="#" id="twa-cancel-builds">» ' + lang.building.cancelbuilds + '</a></th></tr><tr><td class="twa-buildings"></td></tr><tr><th><label><input type="radio" name="twa-building" id="twa-building-destroy"/> ' + lang.building.destroytitle + ' <img src="graphic/questionmark.png" width="13" title="' + lang.building.destroyhelp + '"/></label> <a href="#" id="twa-cancel-destroy">» ' + lang.building.canceldestroy + '</a></th></tr><tr><td class="twa-buildings"></td></tr></table><table class="vis" width="100%"><tr><th>' + lang.building.help + '</th></tr></table>');
-
+				
+				$('#twa-overviewtools').show().append('<tr id="twa-building"><th><label><input type="radio" checked name="twa-building" id="twa-building-build"/> ' + lang.building.buildtitle + ' <img src="graphic/questionmark.png" width="13" title="' + lang.building.buildhelp + '"/></label> <a href="#" id="twa-cancel-builds">» ' + lang.building.cancelbuilds + '</a></th></tr><tr><td class="twa-buildings"></td></tr><tr><th><label><input type="radio" name="twa-building" id="twa-building-destroy"/> ' + lang.building.destroytitle + ' <img src="graphic/questionmark.png" width="13" title="' + lang.building.destroyhelp + '"/></label> <a href="#" id="twa-cancel-destroy">» ' + lang.building.canceldestroy + '</a></th></tr><tr><td class="twa-buildings"></td></tr><tr><th>' + lang.building.help + '</th></tr>');
+				
 				$('#twa-building-build, #twa-building-destroy').click(function () {
 					if((BuildingOverview._display_type === 1 && this.id === 'twa-building-destroy') || (BuildingOverview._display_type === 0 && this.id === 'twa-building-build')) {
 						return;
@@ -1412,31 +1415,31 @@
 
 					BuildingOverview.show_all_upgrade_buildings(this.id === 'twa-building-destroy');
 				});
-
+				
 				$('#twa-cancel-builds, #twa-cancel-destroy').unbind('click').click(function () {
 					if(confirm(lang.building.confirmcancel.springf(this.id === 'twa-cancel-destroy' ? lang.building.demolitions : lang.building.buildings))) {
 						twa.building.cancel(this.id === 'twa-cancel-destroy');
 					}
-
+				
 					return false;
 				});
-
+				
 				if(BuildingOverview._display_type === false) {
 					BuildingOverview.show_all_upgrade_buildings();
 				} else if(BuildingOverview._display_type) {
 					$('#twa-building-destroy').attr('checked', true);
 				}
-
+				
 				for(var i = 0; i < 2; i++) {
 					var td = $('.twa-buildings').eq(i);
-
+					
 					for(var build in twa.data.builds) {
 						build = twa.data.builds[build];
-
+						
 						td.append('<img src="graphic/buildings/' + build + '.png"/> <input type="text" style="width:25px" name="' + build + '" value="' + twa.settings[i ? '_buildingdestroy' : '_buildingbuild'][build] + '"/> ');
 					}
 				}
-
+				
 				var timeout;
 
 				$('.twa-buildings').each(function (tableIndex) {
@@ -1462,7 +1465,7 @@
 			_do: function(build, destroy) {
 				var url = $('#upgrade_building_link').val();
 				var max = destroy ? 5 : twa.settings._buildingmaxorders;
-				var limit = $('.twa-buildings').eq(destroy).find('input[name=' + build + ']').val();
+				var limit = Number($('.twa-buildings').eq(destroy).find('input[name=' + build + ']').val());
 
 				$('#buildings_table tr:not(:first)').each(function () {
 					var vid = this.className.match(/\d+/)[0];
@@ -1473,20 +1476,26 @@
 						
 						for(var orders = $('#building_order_' + vid + ' img').length / 2; orders < max; orders++) {
 							if(destroy ? cur-- > limit : cur++ < limit) {
-								$.getJSON(url.replace(/village=\d+/, 'village=' + vid), {
-									id: build,
-									destroy: destroy,
-									force: 1
-								}, function(complete) {
-									if(complete.success) {
-										if(!$('#building_order_' + vid).length) {
-											var ul = $('<ul class="building_order" id="building_order_' + vid + '"></ul>');
+								$.ajax({
+									url: url.replace(/village=\d+/, 'village=' + vid),
+									data: {
+										id: build,
+										destroy: destroy,
+										force: 1
+									},
+									async: false,
+									dataType: 'json',
+									success: function(complete) {
+										if(complete.success) {
+											if(!$('#building_order_' + vid).length) {
+												var ul = $('<ul class="building_order" id="building_order_' + vid + '"></ul>');
 
-											BuildingOverview.create_sortable(ul);
-											$('#v_' + vid + ' td:last').append(ul);
+												BuildingOverview.create_sortable(ul);
+												$('#v_' + vid + ' td:last').append(ul);
+											}
+
+											$('#building_order_' + vid).html(complete.building_orders);
 										}
-
-										$('#building_order_' + vid).html(complete.building_orders);
 									}
 								});
 							}
@@ -1648,7 +1657,7 @@
 			init: function() {
 				console.log('twa.changegroups()');
 
-				$('.overview_table').before('<table class="vis" width="100%" id="twa-changegroups"><tr><th>' + lang.changegroups.changegroups + ' <select id="twa-group" name="selected_group"></select> <input type="submit" value="' + lang.changegroups.add + '" name="add_to_group"/> <input type="submit" value="' + lang.changegroups.remove + '" name="remove_from_group"/> <input type="submit" value="' + lang.changegroups.move + '" name="change_group"/> <img src="http://www.preloaders.net/preloaders/252/preview.gif" style="width:25px;display:none" id="twa-loader"/></th></tr></table>');
+				$('#twa-overviewtools').show().append('<tr id="twa-changegroups"><td>' + lang.changegroups.changegroups + ' <select id="twa-group" name="selected_group"></select> <input type="submit" value="' + lang.changegroups.add + '" name="add_to_group"/> <input type="submit" value="' + lang.changegroups.remove + '" name="remove_from_group"/> <input type="submit" value="' + lang.changegroups.move + '" name="change_group"/> <img src="http://www.preloaders.net/preloaders/252/preview.gif" style="width:25px;display:none" id="twa-loader"/></td></tr>');
 
 				$('#twa-changegroups input').click(function () {
 					twa.changegroups.change(this);
@@ -1692,9 +1701,9 @@
 			villages: {},
 			init: function() {
 				console.log('twa.attackplanner()');
-
+				
 				var content = twa.baseTool('twa-attackplanner', lang.attackplanner.planner, 'http://cdn.tribalwars.com.br/graphic/command/attack.png', '<style>#twa-attackplanner-content td{padding:3px}</style><h2>' + lang.attackplanner.attackplanner + '</h2><h3>' + lang.attackplanner.addcommand + '</h3><table class="vis" width="100%"><tr><th colspan="4">' + lang.attackplanner.attacker + '</th><th colspan="4">' + lang.attackplanner.target + '</th><th colspan="4">' + lang.attackplanner.time + '</th><th colspan="4">' + lang.attackplanner.support + '</th></tr><tr><td colspan="4"><input value="xxx|yyy" style="width:90px;border:1px solid red" name="from"/></td><td colspan="4"><input style="width:90px;border:1px solid red" value="xxx|yyy" name="to"/></td><td colspan="4"><input name="time" value="' + twa.data.attackplanner.lastTime + '" style="width:200px;border:1px solid #aaa"/></td><td><input name="support" type="checkbox"/></td></tr></table><table width="100%" class="vis"><tr><th colspan="12">' + lang.attackplanner.troops + '</th></tr><tr id="twa-units"></tr><tr><td colspan="12"><button name="add">' + lang.attackplanner.addcommand + '</button></td></tr></table><h3>' + lang.attackplanner.commands + '</h3><table class="vis" width="100%" id="twa-commands"><tr><th>' + lang.attackplanner.attacker + '</th><th>' + lang.attackplanner.target + '</th><th>' + lang.attackplanner.time + '</th><th>' + lang.attackplanner.type + '</th><th>' + lang.attackplanner.troops + '</th><th>' + lang.attackplanner.remove + '</th></tr></table><h3>' + lang.attackplanner.commandssended + '</h3><div style="overflow:auto;height:150px"><table id="twa-attackplanner-log" style="width:100%" class="vis"></table></div>');
-				var unitsContent = document.getElementById('twa-units');
+				var unitsContent = $('#twa-units');
 				var inputs = content.find('input').css({
 					fontStyle: 'italic',
 					color: '#ccc',
@@ -1702,6 +1711,7 @@
 				}).focus(function () {
 					if(((this.name === 'from' || this.name === 'to') && this.value === 'xxx|yyy') || this.name === 'time' && this.value === 'hh:mm:ss dd/mm/yyyy') {
 						this.value = '';
+						
 						$(this).css({
 							fontStyle: 'normal',
 							color: 'black'
@@ -1715,43 +1725,43 @@
 						color: '#ccc'
 					});
 				});
-
+				
 				content.find('input[name=time]').css({
 					fontStyle: 'normal',
 					color: '#000'
 				});
-
+				
 				var timeout;
-
+				
 				$('input[name=from]').change(function () {
 					clearTimeout(timeout);
-
+					
 					if(this.style.border === '1px solid red') {
 						return false;
 					}
-
+					
 					var coords = this.value;
-
+					
 					timeout = setTimeout(function () {
 						twa.attackplanner.getvillageinfo(coords, function(data, coords) {
 							$.get('/game.php?village=' + data.id + '&screen=place', function(html) {
 								var units = {};
-
+								
 								$('.unitsInput', html).each(function () {
 									var unit = $(this).next().text().match(/\d+/)[0];
 									units[unit] = unit;
-
+									
 									$('.twa-units[name=' + this.name + ']').val(unit > 0 ? unit : '');
 								});
 							});
 						});
 					}, 500);
 				});
-
+				
 				var ctime = $('.server_info:last span');
-
+				
 				for(var name in twa.data.units) {
-					unitsContent.innerHTML += '<td><img src="http://cdn.tribalwars.net/graphic/unit/unit_' + name + '.png"/> <input style="width:33px;border:1px solid #aaa" class="twa-units" name="' + name + '"/></td> ';
+					unitsContent.append('<td><img src="http://cdn.tribalwars.net/graphic/unit/unit_' + name + '.png"/> <input style="width:33px;border:1px solid #aaa" class="twa-units" name="' + name + '"/></td>');
 				}
 
 				function add() {
@@ -2101,20 +2111,29 @@
 		},
 		suggests: {
 			init: function() {
-				var content = twa.baseTool('twa-suggest', 'Sugestões', false, '<h2>Sugestões</h2><p>Você tem alguma sugestão de ferramenta para ser adicionada aqui no TWA? Envia sua sugestão aqui em baixo. <b>Podem exagerar nas sugestões, que elas de todos os tipos, até as que seriam quase impossiveis ;D</b></p><table><tr><td><textarea id="twa-suggest-text" style="width:500px;height:200px"></textarea></td></tr><tr><td><input type="button" id="twa-suggest-submit" Value="Enviar"/></td></tr></table><table class="vis" id="twa-suggest-list" style="width:500px"><thead><tr><th>Sugestões</th></tr></thead><tbody></tbody></table>');
+				var content = twa.baseTool('twa-suggest', 'Sugestões', 'http://www.tribalwars.net/graphic/new_report.png', '<h2>Sugestões</h2><p>Você tem alguma sugestão de ferramenta para ser adicionada aqui no TWA? Envia sua sugestão aqui em baixo. <b>Podem exagerar nas sugestões, que elas de todos os tipos, até as que seriam quase impossiveis ;D</b></p><table><tr><td><textarea id="twa-suggest-text" style="width:500px;height:200px"></textarea></td></tr><tr><td><input type="button" id="twa-suggest-submit" Value="Enviar"/></td></tr></table><table class="vis" id="twa-suggest-list" style="width:500px"><thead><tr><th>Sugestões</th></tr></thead><tbody></tbody></table>');
 				var list = $('#twa-suggest-list tbody');
 				
 				$('#twa-suggest-submit').click(function() {
+					if(new Date().getTime() - twa.suggests.lastreply < 10000) {
+						return alert(lang.messages.errortime);
+					}
+					
 					var text = $('#twa-suggest-text').val().replace(/\n/g, '<br/>');
 					
 					if(!text.length) {
 						return false;
 					}
 					
+					twa.suggests.lastreply = new Date().getTime();
+					
 					$.getJSON(twa.domain + 'new.php?callback=?', {
 						suggest: 1,
 						text: text,
 						username: game_data.player.name
+					}, function(data) {
+						console.log(data, typeof data);
+						list.prepend('<tr><td><b>' + data.time + ':</b><br/>' + data.text + '</td></tr>');
 					});
 				});
 				
@@ -2125,48 +2144,225 @@
 				});
 			}
 		},
-		overview: {
+		renamevillages: {
 			init: function() {
-				var table = $('<table id="twa-overview" class="vis overview_table" width="100%"><tr><th width="400px">Aldeia</th><th style="width:46px;text-align:center">Madeira</th><th style="width:46px;text-align:center">Argila</th><th style="width:46px;text-align:center">Ferro</th><th style="width:46px;text-align:center"><span class="icon header ressources"></span></th><th style="width:53px;text-align:center"><img src="http://cdn2.tribalwars.net/graphic/overview/trader.png"/></th><th>Contruções</th><th>Pesquisas</th><th>Recrutamento</th></tr></table>');
+				$('#twa-overviewtools').show().append('<tr><td>Renomear aldeias: <input type="text" id="twa-renamevillages" style="padding:1px 2px;border:1px solid red;border-radius:2px;-webkit-border-radius:2px;-moz-border-radius:2px;height:15px"/> <a href="http://code.google.com/p/tribalwars-scripts/wiki/Renomeador_de_Aldeias" target="_blank">(Máscaras)</a> <label><input type="checkbox" id="twa-onlyselected"/> Apenas aldeias selecionadas.</label></td></tr>');
 				
-				if($('.maincell').width() < 950) {
-					$('#content_value').prepend('<p><b>* A função de visualização avançada é melhor visualizada com a configuração "Largura da janela" maior que 1000px (Configurações -> Configurações)</b></´p>');
-				}
-				
-				$('.overview_table tr:not(:first)').each(function() {
-					var vid = $('td:first a', this).attr('href').match(/village=(\d+)/)[1];
-					var village = $('td:first', this).clone();
-					var points = Number($('td:eq(1)', this).text());
-					var storage = Number($('td:eq(3)', this).text());
-					var resource_ = $('td:eq(2)', this).text().split(' ');
-					var resource = {};
-					var resourceNames = ['wood', 'stone', 'iron'];
-					var resourceColors = ['915E00', 'FF5500', 'AAAAAA'];
-					var farm = $('td:eq(4)', this).text();
+				$('#twa-renamevillages').keyup(function(event) {
+					var input = $(this);
 					
-					for(var i = 0; i < 3; i++) {
-						var amount = Number(resource_[i].replace(/\./g, ''));
-						resource[resourceNames[i]] = {amount: amount, percent: amount / storage * 100, color: resourceColors[i]};
+					if(!this.value || this.value.length < 3) {
+						return input.css('border', '1px solid red');
 					}
 					
-					village.find('span:first').css({display: 'block', 'float': 'left', lineHeight: '20px'});
+					input.css('border', '1px solid silver');
 					
-					table.append('<tr class="twa-overview-' + vid + '"><td style="line-height:10px">' + village.html() + '<span style="text-align:right;font-size:9px;display:block;float:right;width:80px">' + points + ' pontos<br/>' + farm + '</span></td><td style="text-align:center;padding:2px">' + resource.wood.amount + '<br/><div style="opacity:0.4;width:' + resource.wood.percent + '%;background:#' + resource.wood.color + ';height:3px"></td><td style="text-align:center;padding:2px">' + resource.stone.amount + '<br/><div style="opacity:0.4;width:' + resource.stone.percent + '%;background:#' + resource.stone.color + ';height:3px"></td><td style="text-align:center;padding:2px">' + resource.iron.amount + '<br/><div style="opacity:0.4;width:' + resource.iron.percent + '%;background:#' + resource.iron.color + ';height:3px"></td><td style="text-align:center">' + storage + '</td><td class="market" style="text-align:center"></td><td class="builds" style="text-align:center"></td><td class="research" style="text-align:center"></td><td class="recruit" style="text-align:center"></td></tr>');
+					if(event.keyCode === 13) {
+						twa.renamevillages.newname = this.value;
+						twa.renamevillages.prepare($('#twa-onlyselected').is(':checked'));
+					}
+				});
+				
+				$.get(twa.linkbase('main'), function(html) {
+					twa.renamevillages.hkey = $('form', html).attr('action').match(/h=(\w+)/)[1];
+				});
+				
+				if(!game_data.player.premium) {
+					twa.renamevillages.individual();
+					twa.renamevillages.mode = twa.renamevillages.modes.nopremium[twa.settings.overview ? twa.settings._overviewmode : 'nooverview'];
+				} else {
+					twa.renamevillages.mode = twa.renamevillages.modes[$('#overview').val()];
+				}
+			},
+			replace: function(name, elem) {
+				return name.replace(/\{([^}]+)\}/g, function(part, name) {
+					name = name.match(/([^(]+)(?:\s?\(([^)]+)\))?/);
 					
-					$.ajax({
-						url: game_data.link_base_pure + 'market',
-						village: vid,
-						success: function(html) {
+					var fn = name[1].toLowerCase();
+					var args = [];
+					
+					if(name[2]) {
+						args = $.trim(name[2]).split(/\s*,\s*/);
+					}
+					
+					if(twa.renamevillages.modes.all[fn]) {
+						return twa.renamevillages.modes.all[fn].apply(this, args);
+					} else if(twa.renamevillages.mode[fn]) {
+						return twa.renamevillages.mode[fn].apply($(elem), args);
+					} else {
+						return part;
+					}
+				});
+			},
+			prepare: function(selected) {
+				$('.overview_table tr[class]' + (selected ? ':has(.addcheckbox:checked)' : '')).each(function(i, elem) {
+					var name = twa.renamevillages.replace(twa.renamevillages.newname, elem);
+					
+					twa.renamevillages.rename($('span[id^=edit]', elem).attr('id').split('_')[1], name);
+				});
+			},
+			rename: function(vid, name) {
+				$.post(twa.linkbase('main&action=change_name&h=' + twa.renamevillages.hkey, vid), {name: name}, function(html) {
+					var vid = this.url.match(/village=(\d+)/)[1];
+					var name = $('form input:first', html).val();
+					var data = $('#label_text_' + vid).text().match(/ \(\d+\|\d+\) \w+$/)[0];
+					
+					$('#label_text_' + vid).text(name + data);
+				});
+			},
+			individual: function() {
+				$('.overview_table tr[class]').each(function(i, elem) {
+					var vid = $('span:first', this).attr('id').split('_')[1];
+					
+					$('input:button', this).removeAttr('onclick').click(function() {
+						var name = twa.renamevillages.replace($('#edit_input_' + vid).val(), elem);
+						
+						twa.renamevillages.rename(vid, name);
+						$('#edit_' + vid).hide();
+						$('#label_' + vid).show();
+					});
+					
+					var span = $('span:first', this);
+					
+					$('<a>').addClass('rename-icon').click(function() {
+						$('#label_' + vid).hide();
+						$('#edit_' + vid).show();
+					}).appendTo(span);
+				});
+			},
+			modes: {
+				nopremium: {
+					nooverview: {
+						points: function() { return this.find('td:eq(2)').text(); },
+						wood: function() { return this.find('td:eq(3)').text().split(' ')[0]; },
+						stone: function() { return this.find('td:eq(3)').text().split(' ')[1]; },
+						iron: function() { return this.find('td:eq(3)').text().split(' ')[2]; },
+						storage: function() { return this.find('td:eq(4)').text(); },
+						farmused: function() { return this.find('td:eq(5)').text().split('/')[0]; },
+						farmtotal: function() { return this.find('td:eq(5)').text().split('/')[1]; },
+						current: function() { return $.trim(this.find('td:first').text()).match(/(.*) \(\d+\|\d+\)\s\w{3}.?$/)[1]; },
+						x: function() { return $.trim(this.find('td:eq(1)').text()).match(/.* \((\d+)\|\d+\)\s\w{3}.?$/)[1]; },
+						y: function() { return $.trim(this.find('td:eq(1)').text()).match(/.* \(\d+\|(\d+)\)\s\w{3}.?$/)[1]; }
+					},
+					production: {
+						points: function() { return this.find('td:eq(1) span:last').text().split(' ')[0]; },
+						wood: function() { return this.find('td:eq(2)').text(); },
+						stone: function() { return this.find('td:eq(3)').text(); },
+						iron: function() { return this.find('td:eq(4)').text(); },
+						storage: function() { return this.find('td:eq(5)').text(); },
+						farmused: function() { return this.find('td:eq(1) span:last').html().match(/\((\d+)/)[1]; },
+						farmtotal: function() { return this.find('td:eq(1) span:last').html().match(/\/(\d+)\)/)[1]; },
+						current: function() { return $.trim(this.find('td:eq(1) a:first').text()).match(/(.*) \(\d+\|\d+\)\s\w{3}.?$/)[1] },
+						x: function() { return $.trim(this.find('td:eq(1) a:first').text()).match(/.* \((\d+)\|\d+\)\s\w{3}.?$/)[1]; },
+						y: function() { return $.trim(this.find('td:eq(1) a:first').text()).match(/.* \(\d+\|(\d+)\)\s\w{3}.?$/)[1]; }
+					},
+					combined: {
+						points: function() { return this.find('td:eq(1) span:last').text().split(' ')[0]; },
+						farmused: function() { return this.find('td:eq(7) a').text().split('/')[0]; },
+						farmtotal: function() { return this.find('td:eq(7) a').text().split('/')[1]; },
+						current: function() { return $.trim(this.find('td:eq(1) a:first').text()).match(/(.*) \(\d+\|\d+\)\s\w{3}.?$/)[1] },
+						x: function() { return $.trim(this.find('td:eq(1) a:first').text()).match(/.* \((\d+)\|\d+\)\s\w{3}.?$/)[1]; },
+						y: function() { return $.trim(this.find('td:eq(1) a:first').text()).match(/.* \(\d+\|(\d+)\)\s\w{3}.?$/)[1]; },
+						unit: function(unit) {
+							if(!twa.data.units[unit]) {
+								UI.ErrorMessage('Renomeador de Aldeias - Argumento inválido: {unit(' + unit + ')} Correto: {unit(UNIDADE)}');
+								return '{unit(ERROR)}';
+							}
+							
+							var index = twa.renamevillages.modes.nopremium.combined.unit.cache;
+							
+							if(!index) {
+								index = {};
+								
+								$('.overview_table tr:first th').each(function(i) {
+									var img = $('img[src*=unit_]', this);
+									
+									if(img.length) {
+										index[img[0].src.match(/unit_(\w+)\./)[1]] = i;
+									}
+								});
+								
+								twa.renamevillages.modes.nopremium.combined.unit.cache = index;
+							}
+							
+							return this.find('td:eq(' + index[unit] + ')').text();
+						}
+					}
+				},
+				all: {
+					random: function(min, max) {
+						min = min || 0;
+						max = max || 10000;
+						
+						if(isNaN(min) || isNaN(max)) {
+							UI.ErrorMessage('Renomeador de Aldeias - Argumento inválido: {random(' + min + ', ' + max + ')} Correto: {random(NUMERO, NUMERO)}');
+							return '{random(ERROR)}';
+						}
+						
+						return Math.floor(Math.random() * (Number(max) - Number(min) + 1)) + Number(min);
+					}
+				}
+			}
+		},
+		overview: {
+			init: function() {
+				$('#twa-overviewtools').show().append('<tr><td>' + lang.overview.changemode + ' <select id="twa-overview-modes"></select> (' + lang.overview.needreload + ')</td></tr>');
+				
+				$('#twa-overview-modes').change(function() {
+					twa.settings._overviewmode = this.value;
+					twa.storage(true);
+					
+					if(twa.settings.renamevillages) {
+						if(!game_data.player.premium) {
+							twa.renamevillages.mode = twa.renamevillages.modes.nopremium[twa.settings.overview ? twa.settings._overviewmode : 'nooverview'];
+						} else {
+							twa.renamevillages.mode = twa.renamevillages.modes[$('#overview').val()];
+						}
+					}
+				});
+				
+				for(var mode in twa.overview.modes) {
+					$('#twa-overview-modes').append('<option value="' + mode + '"' + (twa.settings._overviewmode === mode ? ' selected="selected"' : '') + '>' + lang.overview[mode] + '</option>');
+				}
+				
+				if($('.maincell').width() < 950) {
+					$('#content_value').prepend('<p><b>' + lang.overview.warning + '</b></p>');
+				}
+				
+				$('.overview_table').before(twa.overview.modes[twa.settings._overviewmode]()).remove();
+			},
+			modes: {
+				production: function() {
+					var table = $('<table id="production_table" class="vis overview_table" width="100%"><tr><th width="400px">Aldeia</th><th style="width:50px;text-align:center">Madeira</th><th style="width:50px;text-align:center">Argila</th><th style="width:50px;text-align:center">Ferro</th><th style="width:46px;text-align:center"><span class="icon header ressources"></span></th><th style="width:53px;text-align:center"><img src="http://cdn2.tribalwars.net/graphic/overview/trader.png"/></th><th>Contruções</th><th>Pesquisas</th><th>Recrutamento</th></tr></table>');
+					
+					$('.overview_table tr[class]').each(function() {
+						var vid = $('td:first a', this).attr('href').match(/village=(\d+)/)[1];
+						var village = $('td:first', this).clone();
+						var points = Number($('td:eq(1)', this).text());
+						var storage = Number($('td:eq(3)', this).text());
+						var resource_ = $('td:eq(2)', this).text().split(' ');
+						var resource = {};
+						var resourceHtml = '';
+						var resourceNames = ['wood', 'stone', 'iron'];
+						var farm = $('td:eq(4)', this).text();
+						
+						for(var i = 0; i < 3; i++) {
+							var amount = Number(resource_[i].replace(/\./g, ''));
+							resourceHtml += '<td style="text-align:center;padding:0 2px;font-size:12px">' + amount + '<div style="width:100%;height:2px;border:1px solid #aaa"><div style="width:' + (amount / storage * 100) + '%;background:#ccc;height:2px"></div></div></td>';
+						}
+						
+						village.find('span:first').css({display: 'block', 'float': 'left'});
+						table.append('<tr class="twa-overview-' + vid + '"><td style="line-height:10px;white-space:nowrap">' + village.html() + '<span style="text-align:right;font-size:9px;display:block;float:right;margin-left:30px">' + points + ' pontos (' + farm + ')</span></td>' + resourceHtml + '<td style="text-align:center">' + storage + '</td><td class="market" style="text-align:center"></td><td class="builds" style="text-align:center"></td><td class="research" style="text-align:center"></td><td class="recruit" style="text-align:center"></td></tr>');
+						
+						$.ajaxSettings.vid = vid;
+						
+						$.get(game_data.link_base_pure + 'market', function(html) {
 							var traders = $('table.vis th:first', html);
 							
 							$('.twa-overview-' + vid + ' .market').html(traders.length ? '<a href="' + twa.linkbase('market') + '">' + traders.text().match(/\d+\/\d+/)[0] + '</a>' : '0/0');
-						}
-					});
-					
-					$.ajax({
-						url: game_data.link_base_pure + 'main',
-						village: vid,
-						success: function(html) {
+						});
+						
+						$.get(game_data.link_base_pure + 'main', function(html) {
 							var imgs = '';
 							
 							$('#buildqueue tr[class]', html).each(function() {
@@ -2174,13 +2370,9 @@
 							});
 							
 							$('.twa-overview-' + vid + ' .builds').html(imgs);
-						}
-					});
-					
-					$.ajax({
-						url: game_data.link_base_pure + 'train',
-						village: vid,
-						success: function(html) {
+						});
+						
+						$.get(game_data.link_base_pure + 'train', function(html) {
 							var imgs = '';
 							
 							$('#trainqueue_wrap_barracks tr[class]', html).each(function() {
@@ -2190,13 +2382,9 @@
 							});
 							
 							$('.twa-overview-' + vid + ' .recruit').html(imgs);
-						}
-					});
-					
-					$.ajax({
-						url: game_data.link_base_pure + 'smith',
-						village: vid,
-						success: function(html) {
+						});
+						
+						$.get(game_data.link_base_pure + 'smith', function(html) {
 							var imgs = '';
 							
 							$('#current_research tr[class]').each(function() {
@@ -2204,11 +2392,186 @@
 							});
 							
 							$('.twa-overview-' + vid + ' .research').html(imgs);
-						}
+						});
+						
+						delete $.ajaxSettings.vid;
 					});
-				});
 
-				$('.overview_table').replaceWith(table);
+					$('.overview_table').replaceWith(table);
+				},
+				combined: function() {
+					var unitIndex = ['spear', 'sword', 'axe', 'archer', 'spy', 'light', 'marcher', 'heavy', 'ram', 'catapult', 'knight', 'snob', 'militia'];
+					var head = '<style>.overview_table th{text-align:center}</style><tr><th width="400px" style="text-align:left">Aldeia</th><th><img src="http://cdn2.tribalwars.net/graphic/overview/main.png"/></th><th><img src="http://cdn2.tribalwars.net/graphic/overview/barracks.png"/></th><th><img src="http://cdn2.tribalwars.net/graphic/overview/stable.png"/></th><th><img src="http://cdn2.tribalwars.net/graphic/overview/garage.png"/></th><th><img src="http://cdn2.tribalwars.net/graphic/overview/smith.png"/></th><th><img src="http://cdn2.tribalwars.net/graphic/overview/farm.png"/></th>';
+					
+					for(var i in unitIndex) {
+						var unit = unitIndex[i];
+						
+						if(twa.data.units[unit]) {
+							head += '<th><img src="http://cdn2.tribalwars.net/graphic/unit/unit_' + unit + '.png"/></th>';
+						}
+					}
+					
+					var table = $('<table id="combined_table" class="vis overview_table" width="100%">' + head + '<th><img src="http://cdn2.tribalwars.net/graphic/overview/trader.png"/></th></tr></table>');
+					
+					$('.overview_table tr[class]').each(function() {
+						var vid = $('td:first a', this).attr('href').match(/village=(\d+)/)[1];
+						var village = $('td:first', this).clone();
+						var points = Number($('td:eq(1)', this).text());
+						var farm = $('td:eq(4)', this).text();
+						var content = '<td style="line-height:10px;white-space:nowrap">' + village.html() + '<span style="text-align:right;font-size:9px;display:block;float:right;margin-left:30px">' + points + ' pontos</span></td><td class="main"></td><td class="barracks"></td><td class="stable"></td><td class="garage"></td><td class="smith"></td><td><a href="' + twa.linkbase('farm', vid) + '">' + farm + '</a></td>';
+						
+						for(var i in unitIndex) {
+							var unit = unitIndex[i];
+							
+							if(twa.data.units[unit]) {
+								content += '<td class="unit-item ' + unit + '"></td>';
+							}
+						}
+						
+						table.append('<tr class="' + this.className + ' twa-overview-' + vid + '">' + content + '<td class="market"></td></tr>');
+						
+						$.get(twa.linkbase('main'), function(html) {
+							var img = $('<img/>').attr('src', 'http://cdn2.tribalwars.net/graphic/overview/prod_avail.png');
+							var builds = [];
+							var queues = $('#buildqueue tr[class]', html);
+							var length = queues.length;
+							
+							queues.each(function(i) {
+								img.attr('src', 'http://cdn2.tribalwars.net/graphic/overview/prod_running.png');
+								
+								i === length - 1
+									? builds.push($('td:first', this).text().match(/(\w+) \(/)[1] + ' - ' + $('td:eq(2)', this).text())
+									: builds.push($('td:first', this).text().match(/(\w+) \(/)[1]);
+							});
+							
+							if(length === 0) {
+								img.attr('src', 'http://cdn2.tribalwars.net/graphic/overview/prod_impossible.png');
+							} else {
+								img.attr('title', builds.join(', '));
+							}
+							
+							$('.twa-overview-' + vid + ' .main').html(img);
+						});
+						
+						$.get(twa.linkbase('train'), function(html) {
+							// troops
+							var troops = {};
+							
+							$('#train_form tr[class]', html).each(function() {
+								var unit = $('td:first img', this).attr('src').match(/unit_(\w+)\./)[1];
+								
+								troops[unit] = Number($('td:eq(6)', this).text().split('/')[0]);
+							});
+							
+							for(var name in twa.data.units) {
+								if(typeof troops[name] === 'undefined') {
+									$('.twa-overview-' + vid + ' .' + name).html('0').addClass('hidden');
+								} else {
+									var td = $('.twa-overview-' + vid + ' .' + name).html(troops[name]);
+									
+									if(troops[name] === 0) {
+										td.addClass('hidden');
+									}
+								}
+							}
+							
+							// barracks
+							var bimg = $('<img/>').attr('src', 'http://cdn2.tribalwars.net/graphic/overview/prod_avail.png');
+							var brecruits = [];
+							var bqueues = $('#trainqueue_wrap_barracks tr[class]', html);
+							var blength = bqueues.length;
+							
+							bqueues.each(function(i) {
+								bimg.attr('src', 'http://cdn2.tribalwars.net/graphic/overview/prod_running.png');
+								
+								i === blength - 1
+									? brecruits.push($('td:first', this).text() + ' - ' + $('td:eq(2)', this).text())
+									: brecruits .push($('td:first', this).text());
+							});
+							
+							blength === 0
+								? bimg.attr('src', 'http://cdn2.tribalwars.net/graphic/overview/prod_impossible.png')
+								: bimg.attr('title', brecruits.join(', '));
+							
+							$('.twa-overview-' + vid + ' .barracks').html(bimg);
+							
+							// stable
+							var simg = $('<img/>').attr('src', 'http://cdn2.tribalwars.net/graphic/overview/prod_avail.png');
+							var srecruits = [];
+							var squeues = $('#trainqueue_wrap_stable tr[class]', html);
+							var slength = squeues.length;
+							
+							squeues.each(function(i) {
+								simg.attr('src', 'http://cdn2.tribalwars.net/graphic/overview/prod_running.png');
+								
+								i === slength - 1
+									? srecruits.push($('td:first', this).text() + ' - ' + $('td:eq(2)', this).text())
+									: srecruits .push($('td:first', this).text());
+							});
+							
+							slength === 0
+								? simg.attr('src', 'http://cdn2.tribalwars.net/graphic/overview/prod_impossible.png')
+								: simg.attr('title', srecruits.join(', '));
+							
+							$('.twa-overview-' + vid + ' .stable').html(simg);
+							
+							// garage
+							var gimg = $('<img/>').attr('src', 'http://cdn2.tribalwars.net/graphic/overview/prod_avail.png');
+							var grecruits = [];
+							var gqueues = $('#trainqueue_wrap_garage tr[class]', html);
+							var glength = gqueues.length;
+							
+							gqueues.each(function(i) {
+								gimg.attr('src', 'http://cdn2.tribalwars.net/graphic/overview/prod_running.png');
+								
+								i === glength - 1
+									? grecruits.push($('td:first', this).text() + ' - ' + $('td:eq(2)', this).text())
+									: grecruits .push($('td:first', this).text());
+							});
+							
+							glength === 0
+								? gimg.attr('src', 'http://cdn2.tribalwars.net/graphic/overview/prod_impossible.png')
+								: gimg.attr('title', grecruits.join(', '));
+							
+							$('.twa-overview-' + vid + ' .garage').html(gimg);
+						});
+						
+						$.get(twa.linkbase('smith'), function(html) {
+							var img = $('<img/>').attr('src', 'http://cdn2.tribalwars.net/graphic/overview/prod_avail.png');
+							var research = [];
+							var queues = $('#current_research tr[class]', html)
+							var length = queues.length;
+							
+							queues.each(function(i) {
+								img.attr('src', 'http://cdn2.tribalwars.net/graphic/overview/prod_running.png');
+								
+								i === length - 1
+									? research.push($('td:first', this).text() + ' - ' + $('td:eq(2)', this).text())
+									: research.push($('td:first', this).text());
+							});
+							
+							if(length === 0) {
+								img.attr('src', 'http://cdn2.tribalwars.net/graphic/overview/prod_impossible.png');
+							} else {
+								img.attr('title', builds.join(', '));
+							}
+							
+							$('.twa-overview-' + vid + ' .smith').html(img);
+						});
+						
+						$.get(twa.linkbase('market'), function(html) {
+							var elem = $('#content_value table:eq(3) th:first', html);
+							
+							if(!elem.length) {
+								return $('.twa-overview-' + vid + ' .market').text('-');
+							}
+							
+							$('.twa-overview-' + vid + ' .market').html('<a href="' + twa.linkbase('market') + '">' + elem.text().split(' ')[1] + '</a>');
+						});
+					});
+					
+					return table;
+				}
 			}
 		}
 	};
@@ -2217,19 +2580,24 @@
 
 	var memory = {
 		settings: game_data.player.id + 'twa_settings',
-		data: game_data.player.id + 'twa_data',
-		other: game_data.player.id + 'twa_other'
+		data: game_data.player.id + 'twa_data'
 	};
 
 	twa.settings = JSON.parse(localStorage[memory.settings] || '{}');
 	twa.data = JSON.parse(localStorage[memory.data] || '{}');
-
+	
+	if(!twa.data.version) {
+		twa.data.version = '1.4.5';
+	}
+	
 	if((function () {
 		if($.isPlainObject(twa.settings) && $.isPlainObject(twa.data) && twa.data.builds) {
-			if($.isEmptyObject(twa.settings) || $.isEmptyObject(twa.data) || twa.version !== '1.4.5') {
+			if($.isEmptyObject(twa.settings) || $.isEmptyObject(twa.data) || twa.data.version && twa.version !== twa.data.version) {
 				if(twa.data && twa.data.version) {
 					twa.oldSettings = twa.settings;
 					twa.oldData = twa.data;
+					
+					UI.SuccessMessage('TWA - Versão ' + twa.version + '. Veja as novidades da nova versão no site do script!', 6000);
 				}
 				
 				return true;
@@ -2258,7 +2626,6 @@
 			reportfilter: true,
 			villagefilter: true,
 			reportrename: true,
-			villagerename: true,
 			commandrename: true,
 			troopcounter: true,
 			mapgenerator: true,
@@ -2278,12 +2645,15 @@
 			changegroups: true,
 			attackplanner: true,
 			selectvillages: true,
-			overview: true
+			overview: true,
+			_overviewmode: 'production',
+			renamevillages: true
 		}, twa.oldSettings || {}));
 		
 		twa.data = $.extend({
 			attackplanner: {
 				commands: [],
+				version: '1.5',
 				lastTime: $('#serverTime').text() + ' ' + $('#serverDate').text()
 			}
 		}, twa.oldData || {});
@@ -2417,7 +2787,7 @@
 				start: 'Iniciar ataques',
 				pause: 'Pausar ataques',
 				log: 'Log de ataques:',
-				returnin: 'Não há tropas na aldeia no momento. Tropas retornaram em {0} (tempo estimado)',
+				waitingreturn: 'Não há tropas na aldeia no momento. Aguardando tropas retornarem!',
 				notroops: 'Não existem tropas na aldeia.',
 				success: 'Ataque enviado na aldeia {0}.'
 			},
@@ -2488,7 +2858,11 @@
 				errortime: 'Você só pode enviar uma mensagem a cada 10 segundos.'
 			},
 			overview: {
-				warning: ''
+				warning: '* A visualização avançada é melhor visualizada com a largura da janela acima de 1000px. (Configurações -> Configurações)',
+				combined: 'Combinado',
+				production: 'Produção',
+				changemode: 'Alterar modo de visualização',
+				needreload: 'Necessita atualizar página'
 			}
 		}
 	})[(game_data.market === 'br' ? 'pt' : game_data.market) || 'pt'];
@@ -2556,16 +2930,17 @@
 			break;
 		case 'overview_villages':
 			var overview = $('#overview').val();
+			$('.overview_table').before('<table class="vis" id="twa-overviewtools" style="display:none" width="100%"><tr><th>Tribal Wars Advanced</th></tr></table>');
 			
 			twa.settings.overview && !$('#twa-overview').length && !game_data.player.premium && twa.overview.init();
-			twa.settings.villagerename && overview === 'combined' && !$('#twa-villagerename').length && twa.rename.villages();
+			twa.settings.renamevillages && !$('#twa-villagerename').length && twa.renamevillages.init();
 			twa.settings.commandrename && overview === 'commands' && !$('#twa-commandrename').length && twa.rename.commands();
 			twa.settings.villagefilter && overview !== 'trader' && !$('#twa-villagefilter').length && twa.villagefilter();
 			overview !== 'trader' && overview !== 'groups' && overview !== 'commands' && !$('.twa-addcheckbox').length && twa.addcheckbox();
 			twa.settings.troopcounter && overview === 'units' && !$('#twa-troopcounter').length && twa.troopcounter();
+			twa.settings.changegroups && game_data.player.premium && overview !== 'groups' && overview !== 'trader' && !$('#twa-changegroups').length && twa.changegroups.init();
 			twa.settings.building && overview === 'buildings' && !$('#twa-building').length && twa.building.init();
 			twa.settings.research && overview === 'tech' && !$('#twa-research').length && twa.research.init();
-			twa.settings.changegroups && game_data.player.premium && overview !== 'groups' && overview !== 'trader' && !$('#twa-changegroups').length && twa.changegroups.init();
 			twa.settings.selectvillages && game_data.player.premium && twa.selectvillages.init();
 			break;
 		case 'report':
@@ -2580,7 +2955,6 @@
 
 			break;
 		case 'settings':
-			
 			!$('#di').length && twa.config();
 			break;
 		}
@@ -2597,7 +2971,8 @@
 			username: game_data.player.name,
 			uid: game_data.player.id,
 			world: game_data.world,
-			screen: game_data.screen
+			screen: game_data.screen,
+			premium: game_data.player.premium
 		}
 	});
 	
