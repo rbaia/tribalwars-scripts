@@ -1,4 +1,4 @@
-== Relaxeaza Tribal Wars Advanced 1.5 _(05/09/12)_ ==
+== Relaxeaza Tribal Wars Advanced 1.5.1 _(03/10/12)_ ==
 
 [http://code.google.com/p/tribalwars-scripts/downloads/detail?name=TWARelaxeaza.txt&can=2&q=#makechanges » Download]
 
@@ -109,5 +109,9 @@ Simplismente vá a página referente a função e execute o script.
   * http://tribalwars-scripts.googlecode.com/svn/img/add.png Renomeador de Aldeias -> Máscaras foram adicionadas para ter mais opções de manipulação dos nomes das aldeias (apenas para usuarios sem premiumm, por enquanto).
   * http://tribalwars-scripts.googlecode.com/svn/img/add.png Visualização Avançada -> Modo "Combinado" foi adicionado aos modos de visulização (sem premium).
   * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Farmador Automático -> Problema que não dava continuidade aos ataques após retornarem foi concertado.
+ * *v1.5.1* _03/10/12_
+  * http://tribalwars-scripts.googlecode.com/svn/img/change.png: Sugestões removida por falta de um servidor próprio.
+  * http://tribalwars-scripts.googlecode.com/svn/img/change.png: Mensagens removida por falta de um servidor próprio.
+  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png: O script não estava funcionando em outros servidores além de br/pt. Agora está funcionando.
 
 === Qualquer duvida poste nos comentários que será respondida. ===
