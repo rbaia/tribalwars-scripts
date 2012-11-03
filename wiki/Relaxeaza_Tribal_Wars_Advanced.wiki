@@ -110,8 +110,8 @@ Simplismente vá a página referente a função e execute o script.
   * http://tribalwars-scripts.googlecode.com/svn/img/add.png Visualização Avançada -> Modo "Combinado" foi adicionado aos modos de visulização (sem premium).
   * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Farmador Automático -> Problema que não dava continuidade aos ataques após retornarem foi concertado.
  * *v1.5.1* _03/10/12_
-  * http://tribalwars-scripts.googlecode.com/svn/img/change.png: Sugestões removida por falta de um servidor próprio.
-  * http://tribalwars-scripts.googlecode.com/svn/img/change.png: Mensagens removida por falta de um servidor próprio.
-  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png: O script não estava funcionando em outros servidores além de br/pt. Agora está funcionando.
+  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Sugestões removida por falta de um servidor próprio.
+  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Mensagens removida por falta de um servidor próprio.
+  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png O script não estava funcionando em outros servidores além de br/pt. Agora está funcionando.
 
 === Qualquer duvida poste nos comentários que será respondida. ===
