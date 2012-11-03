@@ -11,7 +11,7 @@ Todas as funções podem ser ativadas e desativadas abrindo a tela de configura�
 
 === Contribuidores ===
 
-*wtfko* - _Tradução do script para a linguagem Eslovaca_
+*wtfko* - _Tradução do script para a linguagem Eslovaca._
 
 *Clique no nome da função para saber mais sobre ela!*
 
