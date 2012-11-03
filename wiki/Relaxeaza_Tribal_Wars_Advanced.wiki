@@ -9,6 +9,10 @@ Caso não saiba salvar o script na barra de favoritos do navegador, [http://code
 Todas as funções podem ser ativadas e desativadas abrindo a tela de configuração executando o script na página de configuração do Tribal Wars.
 [http://farm8.staticflickr.com/7159/6834807473_4a19ea722d_z.jpg Imagem da tela de configuração]
 
+=== Contribuidores ===
+
+*wtfko* - _Tradução do script para a linguagem Eslovaca_
+
 *Clique no nome da função para saber mais sobre ela!*
 
 || *Funções* || *Descrição* || *Execução* || *Imagem* ||
