@@ -17,6 +17,7 @@ Atualmente o script está sendo traduzido para outras linguagens e logo mais est
 
 === Tradutores ===
  * *wtfko* - _Tradução do script para a linguagem Eslovaca._
+ * *Fcéčko* - _Tradução do script para a linguagem Tcheca._
 
 === Ferramentas ===
 *Clique no nome da função para saber mais sobre ela!*
