@@ -50,6 +50,14 @@ Atualmente o script está sendo traduzido para outras linguagens e logo mais est
 === Como usar ===
 Simplismente vá a página referente a função e execute o script.
 
+=== Ferramentas premium para jogadores sem premium ===
+
+*Visualização avançada*
+
+O TWA permite que jogadores *sem conta premium* tenhas os seguintes modos de visualização:
+ * Combinado
+ * Produção
+
 === Histórico de atualizações ===
 
  * *v1.1* _03/02/12_
