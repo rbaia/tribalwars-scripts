@@ -10,7 +10,7 @@ Todas as funções podem ser ativadas e desativadas abrindo a tela de configura�
 [http://farm8.staticflickr.com/7159/6834807473_4a19ea722d_z.jpg Imagem da tela de configuração]
 
 === Linguagens/Languages ===
-<font color="red">*Want to translate the script into your language? Add me on skype: rafaelcps2.*</font>
+<font color="red">*Help translate script here/Ajude a traduzir o script aqui: [http://goo.gl/gcdBW aqui].*</font>
  * *pt_BR - Português *
 
 Atualmente o script está sendo traduzido para outras linguagens e logo mais estará disponível.
