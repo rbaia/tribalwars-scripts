@@ -1,99 +1,107 @@
 /*!
- * Relaxeaza Tribal Wars Advanced v1.5
- * Release 27/08/12.
+ * Relaxeaza Tribal Wars Advanced v1.5.1
+ * Release 03/10/12.
  * relaxeaza.tw@gmail.com
  *
  * v1.1 03/02/12
- * novo: Função para renomear relatórios.
- * novo: Função para renomear comandos na visualização.
- * alterado: Largura do display de configuração aumentada para melhor visualização.
- * bugfix: Erros de digitação na ajuda no display de configuração.
+ * novo: FunÃ§Ã£o para renomear relatÃ³rios.
+ * novo: FunÃ§Ã£o para renomear comandos na visualizaÃ§Ã£o.
+ * alterado: Largura do display de configuraÃ§Ã£o aumentada para melhor visualizaÃ§Ã£o.
+ * bugfix: Erros de digitaÃ§Ã£o na ajuda no display de configuraÃ§Ã£o.
  * novo: Adicionada checkboxes para poder renomear apenas aldeias selecionadas.
- * novo: Filtro de aldeias na visualização.
- * novo: Contador de tropas em visualizações > tropas.
- * novo: Função para calcular recursos exatos em uma aldeia apartir de um relatório de espionagem.
+ * novo: Filtro de aldeias na visualizaÃ§Ã£o.
+ * novo: Contador de tropas em visualizaÃ§Ãµes > tropas.
+ * novo: FunÃ§Ã£o para calcular recursos exatos em uma aldeia apartir de um relatÃ³rio de espionagem.
  *
  * v1.2 07/02/12
- * novo: Assistente de Farm automático.
+ * novo: Assistente de Farm automÃ¡tico.
  * alterado: Algumas melhoras na performance do script.
  *
  * v1.3 22/02/12
- * novo: Construção e demolição em massa.
- * novo: Função para cancelar todas as construções/demolições.
+ * novo: ConstruÃ§Ã£o e demoliÃ§Ã£o em massa.
+ * novo: FunÃ§Ã£o para cancelar todas as construÃ§Ãµes/demoliÃ§Ãµes.
  * novo: Farmador automatico.
- * bugfix: Bug ao mostrar a pontuação mínima/máxima da função de obter coordenadas.
- * novo: Atalho para ataque direto na função de calcular recursos.
- * novo: Imagem indicando que o script está trabalhando ao renomear aldeias/relatórios/comandos.
- * novo: Função para selecionar aldeias por rácio de tropas de ataque e defesa.
+ * bugfix: Bug ao mostrar a pontuaÃ§Ã£o mÃ­nima/mÃ¡xima da funÃ§Ã£o de obter coordenadas.
+ * novo: Atalho para ataque direto na funÃ§Ã£o de calcular recursos.
+ * novo: Imagem indicando que o script estÃ¡ trabalhando ao renomear aldeias/relatÃ³rios/comandos.
+ * novo: FunÃ§Ã£o para selecionar aldeias por rÃ¡cio de tropas de ataque e defesa.
  * novo: Pesquisa em Massa.
- * novo: Opção para cancelar todas as pesquisas.
+ * novo: OpÃ§Ã£o para cancelar todas as pesquisas.
  *
  * v1.3.1 24/02/12
- * alterado: Assistente de Farm -> Os ataques começam mais rapido quando o Assistente de Farm é iniciado.
- * novo: Assistente de Farm -> Mostrará o log dos ataques enquanto são enviados.
- * bugfix: Engine -> Erro em algumas funções quando usado apartir do Modo de Férias
+ * alterado: Assistente de Farm -> Os ataques comeÃ§am mais rapido quando o Assistente de Farm Ã© iniciado.
+ * novo: Assistente de Farm -> MostrarÃ¡ o log dos ataques enquanto sÃ£o enviados.
+ * bugfix: Engine -> Erro em algumas funÃ§Ãµes quando usado apartir do Modo de FÃ©rias
  *
  * v1.3.2 24/05/12
- * alterado: Configurações -> Layout do tooltip de ajuda no display configurações.
- * novo: Função de lembrete.
- * alterado: Coletor de Coordenadas -> Cores dos identificadores de coletor de coordenadas foram alteradas para melhor visualização.
- * alterado: Coletor de Coordenadas -> Agora as configurações de pontuação mínima e máxima das funções de obter coordenadas no mapa e no perfil de jogadores são configuradas na própria página.
- * novo: Alterador de Grupos -> Agora é possivel alterar os grupos das aldeias em qualquer modo de visualização
- * novo: Planeador de Ataques -> Envio de ataques em horários programados.
- * alterado: Assistente de Farm -> Agora o assistent de farm também usa a opção C quando disponível.
+ * alterado: ConfiguraÃ§Ãµes -> Layout do tooltip de ajuda no display configuraÃ§Ãµes.
+ * novo: FunÃ§Ã£o de lembrete.
+ * alterado: Coletor de Coordenadas -> Cores dos identificadores de coletor de coordenadas foram alteradas para melhor visualizaÃ§Ã£o.
+ * alterado: Coletor de Coordenadas -> Agora as configuraÃ§Ãµes de pontuaÃ§Ã£o mÃ­nima e mÃ¡xima das funÃ§Ãµes de obter coordenadas no mapa e no perfil de jogadores sÃ£o configuradas na prÃ³pria pÃ¡gina.
+ * novo: Alterador de Grupos -> Agora Ã© possivel alterar os grupos das aldeias em qualquer modo de visualizaÃ§Ã£o
+ * novo: Planeador de Ataques -> Envio de ataques em horÃ¡rios programados.
+ * alterado: Assistente de Farm -> Agora o assistent de farm tambÃ©m usa a opÃ§Ã£o C quando disponÃ­vel.
  *
  * v1.3.3 04/08/12
- * novo: Selecionador -> Função para selecionar aldeias especificas na visualização, como aldeias com tropas de ataque, defesa, etc.
- * novo: Mensagens -> Area para troca de mensagens com o desenvolvedor. (perguntas, sugestões...)
+ * novo: Selecionador -> FunÃ§Ã£o para selecionar aldeias especificas na visualizaÃ§Ã£o, como aldeias com tropas de ataque, defesa, etc.
+ * novo: Mensagens -> Area para troca de mensagens com o desenvolvedor. (perguntas, sugestÃµes...)
  *
  * v1.3.4 15/08/12
  * alterado: Mensagens -> Forma para troca de mensagens com o desenvolvedor foi melhorada.
  *
  * v1.4 19/08/12
- * alterado: Planeador de Ataques -> No campo Horário o valor é sempre o último horário inserido.
- * alterado: Planeador de Ataques -> Ao adicionar as coordenadas da aldeia atacante automaticamente será adicionada todas as tropas da aldeia nos campos das unidades.
- * novo: Planeador de Ataques -> Agora é possivel adicionar apoio aos ataques programados.
- * novo: Planeador de Ataques -> Foi adicionado um log de comandos para melhor visualização dos ataques/apoios e ataques com problemas.
+ * alterado: Planeador de Ataques -> No campo HorÃ¡rio o valor Ã© sempre o Ãºltimo horÃ¡rio inserido.
+ * alterado: Planeador de Ataques -> Ao adicionar as coordenadas da aldeia atacante automaticamente serÃ¡ adicionada todas as tropas da aldeia nos campos das unidades.
+ * novo: Planeador de Ataques -> Agora Ã© possivel adicionar apoio aos ataques programados.
+ * novo: Planeador de Ataques -> Foi adicionado um log de comandos para melhor visualizaÃ§Ã£o dos ataques/apoios e ataques com problemas.
  * alterado: Mensagens -> A troca de mensagens deixou de ser "Contato" para "Mensagens".
- * alterado: Mensagens -> Proteção contra envio de multiplas mensagens (spam).
- * alterado: Coletor de Coordenadas Manual -> Ao clicar em uma aldeia que já foi selecionada, ela será removidada da lista de coordenadas.
- * alterado: Engine -> Os icones das ferramentas que são usadas em qualquer página do jogo foram movidas para uma barra independente.
- * alterado: Farmador Automático -> Deixará de ser executado apenas na Praça e o modo de uso será parecido com o Planeador de Ataques.
- * alterado: Farmador Automático -> Agora o Farmador Automático pode ser executado de qualquer página do jogo.
- * alterado: Farmador Automático -> O design foi reformulado.
+ * alterado: Mensagens -> ProteÃ§Ã£o contra envio de multiplas mensagens (spam).
+ * alterado: Coletor de Coordenadas Manual -> Ao clicar em uma aldeia que jÃ¡ foi selecionada, ela serÃ¡ removidada da lista de coordenadas.
+ * alterado: Engine -> Os icones das ferramentas que sÃ£o usadas em qualquer pÃ¡gina do jogo foram movidas para uma barra independente.
+ * alterado: Farmador AutomÃ¡tico -> DeixarÃ¡ de ser executado apenas na PraÃ§a e o modo de uso serÃ¡ parecido com o Planeador de Ataques.
+ * alterado: Farmador AutomÃ¡tico -> Agora o Farmador AutomÃ¡tico pode ser executado de qualquer pÃ¡gina do jogo.
+ * alterado: Farmador AutomÃ¡tico -> O design foi reformulado.
  *
  * v1.4.1 20/08/12
- * novo: Farmador Automático -> Foi adicionado um log de ataques.
+ * novo: Farmador AutomÃ¡tico -> Foi adicionado um log de ataques.
  *
  * v1.4.2 21/08/12
- * bugfix: Farmador Automático -> O problema do "Não há tropas na aldeia" foi solucionado.
- * bugfix: Farmador Automático -> O problema da opção "Caso não tenha tropas usar o que tiver" foi solucionado.
+ * bugfix: Farmador AutomÃ¡tico -> O problema do "NÃ£o hÃ¡ tropas na aldeia" foi solucionado.
+ * bugfix: Farmador AutomÃ¡tico -> O problema da opÃ§Ã£o "Caso nÃ£o tenha tropas usar o que tiver" foi solucionado.
  *
  * v1.4.3 22/08/12
- * bugfix: Farmador Automático -> Problema na detecção do tempo em que as tropas em andamento retornariam arrumado.
+ * bugfix: Farmador AutomÃ¡tico -> Problema na detecÃ§Ã£o do tempo em que as tropas em andamento retornariam arrumado.
  *
  * v1.4.4 26/08/12
- * bugfix: Construtor Automático -> Problema que cancelava todas ordens de contruções foi concertado.
- * novo: Area exclusiva para sugestões para o script.
+ * bugfix: Construtor AutomÃ¡tico -> Problema que cancelava todas ordens de contruÃ§Ãµes foi concertado.
+ * novo: Area exclusiva para sugestÃµes para o script.
  *
  * v1.4.5 27/08/12
- * novo: Visualização Avançada -> Adiciona ferramentas premium na página de visualização para jogadores sem conta premium.
+ * novo: VisualizaÃ§Ã£o AvanÃ§ada -> Adiciona ferramentas premium na pÃ¡gina de visualizaÃ§Ã£o para jogadores sem conta premium.
  *
  * v1.5 05/09/12
- * novo: Renomeador de Aldeias -> Agora é possivel renomear aldeias em massa e aldeias individuais em contas sem premium.
- * novo: Renomeador de Aldeias -> Máscaras foram adicionadas para ter mais opções de manipulação dos nomes das aldeias (apenas para usuarios sem premiumm, por enquanto).
- * novo: Visualização Avançada -> Modo "Combinado" foi adicionado aos modos de visulização (sem premium).
- * bugfix: Farmador Automático -> Problema que não dava continuidade aos ataques após retornarem foi concertado.
+ * novo: Renomeador de Aldeias -> Agora Ã© possivel renomear aldeias em massa e aldeias individuais em contas sem premium.
+ * novo: Renomeador de Aldeias -> MÃ¡scaras foram adicionadas para ter mais opÃ§Ãµes de manipulaÃ§Ã£o dos nomes das aldeias (apenas para usuarios sem premiumm, por enquanto).
+ * novo: VisualizaÃ§Ã£o AvanÃ§ada -> Modo "Combinado" foi adicionado aos modos de visulizaÃ§Ã£o (sem premium).
+ * bugfix: Farmador AutomÃ¡tico -> Problema que nÃ£o dava continuidade aos ataques apÃ³s retornarem foi concertado.
+ *
+ * v1.5.1 06/10/12
+ * removido: SugestÃµes -> Por falta de um servidor prÃ³prio.
+ * removido: Mensagens -> Por falta de um servidor prÃ³prio.
+ * bugfix: O script nÃ£o estava funcionando em outros servidores alÃ©m de br/pt. Agora estÃ¡ funcionando.
  */
 
 (function () {
+	var $serverTime = $('#serverTime'),
+		$serverDate = $('#serverDate'),
+		contentValueWidth = $('#content_value').width();
+	
 	var twa = {
-		version: '1.5',
-		domain: 'http://relaxeaza.orgfree.com/tw/',
+		version: '1.5.1',
 		baseTool: function(id, name, img, html, width) {
 			$('table.twa-bar').show().find('> tbody > tr').append('<td><table class="header-border"><tbody><tr><td><table class="box menu nowrap"><tbody><tr><td class="box-item" style="height: 22px;">' + (img ? '<img src="' + img + '" style="position:absolute">' : '') + '<a ' + (img ? 'style="margin-left:17px" ' : '') + 'href="#" id="' + id + '">' + name + '</a></td></tr></tbody></table></td></tr><tr class="newStyleOnly"><td class="shadow"><div class="leftshadow"></div><div class="rightshadow"></div></td></tr></tbody></table></td>');
 
-			var width = width ? width : $('#content_value').width();
+			var width = width ? width : contentValueWidth;
 			var content = $('<div id="' + id + '-content" class="popup_content" style="width:' + width + 'px;padding:5px;border:2px solid #840;z-index:999;display:none;position:absolute">' + html + '</div>').appendTo('body').center().css('top', $('#content_value').offset().top);
 
 			$('#' + id).unbind('click').click(function () {
@@ -245,7 +253,7 @@
 			'<input type="checkbox" name="profilestats"/> ' + lang.config.profilestats +
 			'</label>' +
 			'</div>' +
-			'<h1>Outras Opções</h1>' +
+			'<h1>Outras OpÃ§Ãµes</h1>' +
 			'<div class="di">' +
 			'<label tooltip="' + lang.config.tooltip.lastattack + '">' +
 			'<input type="checkbox" name="lastattack"/> ' + lang.config.lastattack +
@@ -262,7 +270,7 @@
 			'<label tooltip="' + lang.config.tooltip.commandrename + '">' +
 			'<input type="checkbox" name="commandrename"/> ' + lang.config.commandrename +
 			'</label>' +
-			'<label tooltip="Permite renomear aldeias em massa e individuais na visualização de aldeias.">' +
+			'<label tooltip="Permite renomear aldeias em massa e individuais na visualizaÃ§Ã£o de aldeias.">' +
 			'<input type="checkbox" name="renamevillages"/> Renomeador de Aldeias' +
 			'</label>' +
 			'<label tooltip="' + lang.config.tooltip.mapgenerator + '">' +
@@ -295,8 +303,8 @@
 			'<label tooltip="' + lang.config.tooltip.selectvillages + '">' +
 			'<input type="checkbox" name="selectvillages"/> ' + lang.config.selectvillages +
 			'</label>' +
-			'<label tooltip="Adiciona opções premium na página de visualização para usuários sem conta premium.">' +
-			'<input type="checkbox" name="overview"/> Visualização avançada' +
+			'<label tooltip="Adiciona opÃ§Ãµes premium na pÃ¡gina de visualizaÃ§Ã£o para usuÃ¡rios sem conta premium.">' +
+			'<input type="checkbox" name="overview"/> VisualizaÃ§Ã£o avanÃ§ada' +
 			'</label>' +
 			'</div>' +
 			'<h1 style="text-align:center"><button id="sa">Salvar</button></h1>' +
@@ -388,7 +396,7 @@
 			init: function() {
 				console.log('twa.mapcoords()');
 
-				$('#map_whole').after('<br/><table class="vis" width="100%" id="twa-getcoords"><tr><th>' + lang.mapcoords.getcoords + ' <a href="#" id="twa-mapcoords-refresh">» ' + lang.mapcoords.update + '</a></th></tr><tr><td style="text-align:center"><textarea style="width:100%;background:none;border:none;resize:none;font-size:11px"></textarea></td></tr><tr><td id="twa-getcoords-options"><label><input type="checkbox" name="_mapplayers"> ' + lang.mapcoords.mapplayers + '</label> ' + lang.mapcoords.min + ': <input name="_mapplayersmin" style="width:35px"> ' + lang.mapcoords.max + ': <input name="_mapplayersmax" style="width:35px"><br/><label><input name="_mapabandoneds" type="checkbox"> ' + lang.mapcoords.mapabandoneds + '</label> ' + lang.mapcoords.min + ': <input name="_mapabandonedsmin" style="width:35px"> ' + lang.mapcoords.max + ': <input name="_mapabandonedsmax" style="width:35px"></td></tr></table>');
+				$('#map_whole').after('<br/><table class="vis" width="100%" id="twa-getcoords"><tr><th>' + lang.mapcoords.getcoords + ' <a href="#" id="twa-mapcoords-refresh">Â» ' + lang.mapcoords.update + '</a></th></tr><tr><td style="text-align:center"><textarea style="width:100%;background:none;border:none;resize:none;font-size:11px"></textarea></td></tr><tr><td id="twa-getcoords-options"><label><input type="checkbox" name="_mapplayers"> ' + lang.mapcoords.mapplayers + '</label> ' + lang.mapcoords.min + ': <input name="_mapplayersmin" style="width:35px"> ' + lang.mapcoords.max + ': <input name="_mapplayersmax" style="width:35px"><br/><label><input name="_mapabandoneds" type="checkbox"> ' + lang.mapcoords.mapabandoneds + '</label> ' + lang.mapcoords.min + ': <input name="_mapabandonedsmin" style="width:35px"> ' + lang.mapcoords.max + ': <input name="_mapabandonedsmax" style="width:35px"></td></tr></table>');
 
 				var timeout;
 
@@ -776,7 +784,7 @@
 			console.log('twa.reportcalc()');
 
 			if(!$('#twa-reportcalc').length) {
-				$('table[width=470]').before('<table class="vis" width="470" id="twa-reportcalc"><tbody><tr><th>' + lang.reportcalc.neededunits + '</th></tr><tr><td align="center"><label><input type="checkbox" id="twa-currentvillage"> ' + lang.reportcalc.currentvillage + '</label></td></tr><tr><td align="center" id="twa-units"></td></tr><tr><th>' + lang.reportcalc.unitscalc + ' <img src="http://www.preloaders.net/preloaders/252/preview.gif" style="width:25px;display:none" id="twa-loader"/></th></tr><tr><td align="center" id="twa-unitscalc" style="font-weight:bold"></td></tr><tr><td align="center" id="twa-attack"><a href="#">» ' + lang.reportcalc.attack + '</a></td></tr></tbody></table>');
+				$('table[width=470]').before('<table class="vis" width="470" id="twa-reportcalc"><tbody><tr><th>' + lang.reportcalc.neededunits + '</th></tr><tr><td align="center"><label><input type="checkbox" id="twa-currentvillage"> ' + lang.reportcalc.currentvillage + '</label></td></tr><tr><td align="center" id="twa-units"></td></tr><tr><th>' + lang.reportcalc.unitscalc + ' <img src="http://www.preloaders.net/preloaders/252/preview.gif" style="width:25px;display:none" id="twa-loader"/></th></tr><tr><td align="center" id="twa-unitscalc" style="font-weight:bold"></td></tr><tr><td align="center" id="twa-attack"><a href="#">Â» ' + lang.reportcalc.attack + '</a></td></tr></tbody></table>');
 
 				$(document).ajaxStart(function () {
 					$('#twa-loader').show();
@@ -1276,7 +1284,7 @@
 				}
 			},
 			log: function(log, error) {
-				$('#twa-autofarm-log').prepend('<tr><td><strong>' + ($('#serverTime').text() + ' ' + $('#serverDate').text()) + ':</strong> <img src="' + (error ? '/graphic/delete_small.png' : '/graphic/command/attack.png') + '"/> ' + log + '</td></tr>');
+				$('#twa-autofarm-log').prepend('<tr><td><strong>' + ($serverTime.text() + ' ' + $serverDate.text()) + ':</strong> <img src="' + (error ? '/graphic/delete_small.png' : '/graphic/command/attack.png') + '"/> ' + log + '</td></tr>');
 				return twa.autofarm;
 			},
 			attack: function(units, tryagain) {
@@ -1303,18 +1311,27 @@
 						var troops = twa.autofarm.currentunits(html);
 						var text = false;
 						
+						// quando hÃ¡ comandos em andamento e sem tropas na aldeia
 						if(time && !troops) {
 							!twa.autofarm.nolog && twa.autofarm.log(lang.autofarm.waitingreturn, true);
 							
+							console.log(time);
+							
+							// aguarda as tropas retornarem para iniciar os ataques novamente
 							twa.autofarm.delay(function() {
 								this.attack(false, true);
 							}, time).nolog = true;
+						
+						// quando nÃ£o hÃ¡ tropas em andamento nem tropas na aldeia
 						} else if(!time && !troops) {
 							!twa.autofarm.nolog && twa.autofarm.log(lang.autofarm.notroops, true);
 							
+							// tenta iniciar os ataques a cada 10 segundos (caso tropas sejam recrutadas)
 							twa.autofarm.delay(function() {
 								this.attack(false, true);
 							}, 10000).nolog = true;
+						
+						// se houver tropas na aldeia, apenas envia.
 						} else if(troops) {
 							twa.autofarm.attack(troops, true);
 						}
@@ -1322,6 +1339,7 @@
 						return;
 					}
 					
+					// caso a aldeia atacada tenha dono e a opÃ§Ã£o de proteÃ§Ã£o esteja ativada, passa para a proxima coordenada.
 					if(twa.settings._placefarmprotect && $(html).find('form a[href*=player]').length) {
 						return twa.autofarm.next();
 					}
@@ -1329,7 +1347,7 @@
 					var form = $(html).find('form');
 					
 					$.post(form[0].action, form.serialize(), function() {
-						twa.autofarm.log( lang.autofarm.success.springf(twa.autofarm.coord.join('|'))).next();
+						twa.autofarm.log(lang.autofarm.success.springf(twa.autofarm.coord.join('|'))).next();
 						twa.autofarm.nolog = false;
 					});
 				});
@@ -1406,7 +1424,7 @@
 			init: function() {
 				console.log('twa.building()');
 				
-				$('#twa-overviewtools').show().append('<tr id="twa-building"><th><label><input type="radio" checked name="twa-building" id="twa-building-build"/> ' + lang.building.buildtitle + ' <img src="graphic/questionmark.png" width="13" title="' + lang.building.buildhelp + '"/></label> <a href="#" id="twa-cancel-builds">» ' + lang.building.cancelbuilds + '</a></th></tr><tr><td class="twa-buildings"></td></tr><tr><th><label><input type="radio" name="twa-building" id="twa-building-destroy"/> ' + lang.building.destroytitle + ' <img src="graphic/questionmark.png" width="13" title="' + lang.building.destroyhelp + '"/></label> <a href="#" id="twa-cancel-destroy">» ' + lang.building.canceldestroy + '</a></th></tr><tr><td class="twa-buildings"></td></tr><tr><th>' + lang.building.help + '</th></tr>');
+				$('#twa-overviewtools').show().append('<tr id="twa-building"><th><label><input type="radio" checked name="twa-building" id="twa-building-build"/> ' + lang.building.buildtitle + ' <img src="graphic/questionmark.png" width="13" title="' + lang.building.buildhelp + '"/></label> <a href="#" id="twa-cancel-builds">Â» ' + lang.building.cancelbuilds + '</a></th></tr><tr><td class="twa-buildings"></td></tr><tr><th><label><input type="radio" name="twa-building" id="twa-building-destroy"/> ' + lang.building.destroytitle + ' <img src="graphic/questionmark.png" width="13" title="' + lang.building.destroyhelp + '"/></label> <a href="#" id="twa-cancel-destroy">Â» ' + lang.building.canceldestroy + '</a></th></tr><tr><td class="twa-buildings"></td></tr><tr><th>' + lang.building.help + '</th></tr>');
 				
 				$('#twa-building-build, #twa-building-destroy').click(function () {
 					if((BuildingOverview._display_type === 1 && this.id === 'twa-building-destroy') || (BuildingOverview._display_type === 0 && this.id === 'twa-building-build')) {
@@ -1513,7 +1531,7 @@
 			init: function() {
 				console.log('twa.research()');
 
-				$('.overview_table').before('<table class="vis" width="100%" id="twa-research"><tr><th>' + lang.research.help + ' <a href="#" id="twa-research-cancel">» ' + lang.research.cancel + '</a></th></tr></table>');
+				$('.overview_table').before('<table class="vis" width="100%" id="twa-research"><tr><th>' + lang.research.help + ' <a href="#" id="twa-research-cancel">Â» ' + lang.research.cancel + '</a></th></tr></table>');
 
 				$('#twa-research-cancel').click(function () {
 					if(confirm(lang.research.confirmcancel)) {
@@ -1594,7 +1612,7 @@
 				});
 
 				twa.memo.getContent(function(note, time) {
-					$('#twa-memo-time').html('Última alteração: ' + (time || 'nunca.'));
+					$('#twa-memo-time').html('Ãšltima alteraÃ§Ã£o: ' + (time || 'nunca.'));
 					content.find('textarea').val(note);
 					content.find('img').hide();
 				});
@@ -2003,150 +2021,9 @@
 			},
 			id: 0
 		},
-		messages: {
-			conversation: {},
-			lastreply: 0,
-			init: function() {
-				var content = twa.baseTool('twa-messages', lang.messages.messages, 'http://cdn2.tribalwars.net/graphic/new_mail.png', '<style>#twa-messages-text{width:700px;heigth:100px;font-size:11px} #twa-messages-content td{padding:3px}</style><h2>' + lang.messages.messages + '</h2><h3>' + lang.messages.desc + '</h3><table><tr><td>' + lang.messages.messagetype + '</td><td><select id="twa-messages-type"><option>' + lang.messages.question + '</option><option>' + lang.messages.suggest + '</option><option>' + lang.messages.bug + '</option><option>' + lang.messages.critic + '</option><option>' + lang.messages.other + '</option></select></td></tr><tr><td>' + lang.messages.subject + ':</td><td><input type="text" id="twa-messages-subject" size="40"/></td></tr><tr><td colspan="2"><textarea id="twa-messages-text"></textarea><br/><input type="button" value="' + lang.messages.send + '" id="twa-messages-submit"/></td></tr></table><h3>' + lang.messages.yourmessages + '</h3><table style="width:500px" class="vis" id="twa-messages-list"><thead><tr><th style="width:250px">' + lang.messages.subject + '</th><th>' + lang.messages.lastmessage + '</th><th>' + lang.messages.type + '</th></tr></thead><tbody></tbody></table><div id="twa-messages-conversation"></div>');
-
-				twa.messages.update();
-				twa.messages.newmessage();
-				twa.messages.reply();
-
-				setInterval(function () {
-					if(content.is(':visible')) {
-						twa.messages.update();
-					}
-				}, 10000);
-			},
-			reply: function() {
-				$('#twa-messages-list tbody a.message').live('click', function() {
-					var mid = Number($(this).attr('mid'));
-					var html = $('<p><a href="javascript:void(0);" class="back">» ' + lang.messages.back + '</a></p><table class="vis" 	style="width:500px"><tr><th>' + lang.messages.subject + '</th><th>' + twa.messages.conversation[mid].subject + '</th></tr><tr><td>' + lang.messages.partner + '</td><td><img src="http://cdn2.tribalwars.net/graphic/new_mail.png"/> <a href="http://code.google.com/p/tribalwars-scripts/wiki/Relaxeaza_Tribal_Wars_Advanced">Relaxeaza</a></td></tr><tr><td colspan="2"><a href="javascript:void(0)" class="reply">» ' + lang.messages.reply + '</a><div style="display:none"><textarea style="width:490px;height:60px"></textarea><br/><input type="button" value="' + lang.messages.reply + '"/></div></td></td></tr><tr><td colspan="2" class="conversation-list"></td></tr></table>');
-					var convList = $('.conversation-list', html);
-					var convContent = $('#twa-messages-conversation');
-					var listTable = $('#twa-messages-list ');
-
-					$.each(twa.messages.conversation[mid].messages, function(mid, message) {
-						convList.prepend('<div class="post"><div class="igmline"><span class="author"><strong>' + (message.response === '1' ? 'Relaxeaza' : game_data.player.name) + '</strong></span><span class="date">' + message.time + '</span></div><div class="text">' + message.text + '</div></div>');
-					});
-
-					$('.reply', html).click(function () {
-						$(this).hide().next().show();
-					});
-
-					$('input', html).click(function () {
-						if(new Date().getTime() - twa.messages.lastreply < 10000) {
-							return alert(lang.messages.errortime);
-						}
-
-						var text = $('textarea', html).val().replace(/\n/g, '<br/>');
-
-						if(!text.length) {
-							return false;
-						}
-
-						twa.messages.lastreply = new Date().getTime();
-
-						$.getJSON(twa.domain + 'new.php?callback=?', {
-							mid: mid,
-							text: text
-						}, function(time) {
-							convList.prepend('<div class="post"><div class="igmline"><span class="author"><strong>' + game_data.player.name + '</strong></span><span class="date">' + time + '</span></div><div class="text">' + text + '</div></div>');
-						});
-					});
-
-					$('.back', html).click(function () {
-						convContent.hide();
-						listTable.show();
-					});
-
-					listTable.hide();
-					convContent.show().html(html);
-
-					return false;
-				});
-			},
-			update: function() {
-				$.getJSON(twa.domain + 'get.php?uid=' + game_data.player.id + '&callback=?', function(data) {
-					if(data) {
-						$('#twa-messages-list tbody').empty();
-
-						$.each(data, function(mid, msg) {
-							twa.messages.conversation[mid] = msg;
-
-							$('#twa-messages-list tbody').append('<tr><td><a class="message" mid="' + mid + '" href="javascript:void(0);">' + msg.subject + '</a></td><td>' + msg.last + '</td><td>' + msg.type + '</td></tr>');
-						});
-					}
-				});
-			},
-			newmessage: function() {
-				$('#twa-messages-submit').click(function () {
-					if(new Date().getTime() - twa.messages.lastreply < 10000) {
-						return alert(lang.messages.errortime);
-					}
-
-					var type = $('#twa-messages-type').val();
-					var subject = $('#twa-messages-subject').val();
-					var text = $('#twa-messages-text').val().replace(/\n/g, '<br/>');
-
-					if(!subject.length || !text.length) {
-						return false;
-					}
-
-					twa.messages.lastreply = new Date().getTime();
-
-					$.getJSON(twa.domain + 'new.php?callback=?', {
-						username: game_data.player.name,
-						uid: game_data.player.id,
-						type: type,
-						subject: subject,
-						text: text
-					}, function(msg) {
-						$('#twa-messages-list tbody').append('<tr><td><a class="message" mid="' + msg.mid + '" href="#">' + subject + '</a></td><td>' + msg.last + '</td><td>' + type + '</td></tr>');
-						twa.messages.conversation[msg.mid] = msg;
-					});
-				});
-			}
-		},
-		suggests: {
-			init: function() {
-				var content = twa.baseTool('twa-suggest', 'Sugestões', 'http://www.tribalwars.net/graphic/new_report.png', '<h2>Sugestões</h2><p>Você tem alguma sugestão de ferramenta para ser adicionada aqui no TWA? Envia sua sugestão aqui em baixo. <b>Podem exagerar nas sugestões, que elas de todos os tipos, até as que seriam quase impossiveis ;D</b></p><table><tr><td><textarea id="twa-suggest-text" style="width:500px;height:200px"></textarea></td></tr><tr><td><input type="button" id="twa-suggest-submit" Value="Enviar"/></td></tr></table><table class="vis" id="twa-suggest-list" style="width:500px"><thead><tr><th>Sugestões</th></tr></thead><tbody></tbody></table>');
-				var list = $('#twa-suggest-list tbody');
-				
-				$('#twa-suggest-submit').click(function() {
-					if(new Date().getTime() - twa.suggests.lastreply < 10000) {
-						return alert(lang.messages.errortime);
-					}
-					
-					var text = $('#twa-suggest-text').val().replace(/\n/g, '<br/>');
-					
-					if(!text.length) {
-						return false;
-					}
-					
-					twa.suggests.lastreply = new Date().getTime();
-					
-					$.getJSON(twa.domain + 'new.php?callback=?', {
-						suggest: 1,
-						text: text,
-						username: game_data.player.name
-					}, function(data) {
-						console.log(data, typeof data);
-						list.prepend('<tr><td><b>' + data.time + ':</b><br/>' + data.text + '</td></tr>');
-					});
-				});
-				
-				$.getJSON(twa.domain + 'get.php?suggest=1&callback=?', function(suggests) {
-					for(var i in suggests) {
-						list.prepend('<tr><td><b>' + suggests[i].time + ':</b><br/>' + suggests[i].text + '</td></tr>');
-					}
-				});
-			}
-		},
 		renamevillages: {
 			init: function() {
-				$('#twa-overviewtools').show().append('<tr><td>Renomear aldeias: <input type="text" id="twa-renamevillages" style="padding:1px 2px;border:1px solid red;border-radius:2px;-webkit-border-radius:2px;-moz-border-radius:2px;height:15px"/> <a href="http://code.google.com/p/tribalwars-scripts/wiki/Renomeador_de_Aldeias" target="_blank">(Máscaras)</a> <label><input type="checkbox" id="twa-onlyselected"/> Apenas aldeias selecionadas.</label></td></tr>');
+				$('#twa-overviewtools').show().append('<tr><td>Renomear aldeias: <input type="text" id="twa-renamevillages" style="padding:1px 2px;border:1px solid red;border-radius:2px;-webkit-border-radius:2px;-moz-border-radius:2px;height:15px"/> <a href="http://code.google.com/p/tribalwars-scripts/wiki/Renomeador_de_Aldeias" target="_blank">(MÃ¡scaras)</a> <label><input type="checkbox" id="twa-onlyselected"/> Apenas aldeias selecionadas.</label></td></tr>');
 				
 				$('#twa-renamevillages').keyup(function(event) {
 					var input = $(this);
@@ -2265,7 +2142,7 @@
 						y: function() { return $.trim(this.find('td:eq(1) a:first').text()).match(/.* \(\d+\|(\d+)\)\s\w{3}.?$/)[1]; },
 						unit: function(unit) {
 							if(!twa.data.units[unit]) {
-								UI.ErrorMessage('Renomeador de Aldeias - Argumento inválido: {unit(' + unit + ')} Correto: {unit(UNIDADE)}');
+								UI.ErrorMessage('Renomeador de Aldeias - Argumento invÃ¡lido: {unit(' + unit + ')} Correto: {unit(UNIDADE)}');
 								return '{unit(ERROR)}';
 							}
 							
@@ -2295,7 +2172,7 @@
 						max = max || 10000;
 						
 						if(isNaN(min) || isNaN(max)) {
-							UI.ErrorMessage('Renomeador de Aldeias - Argumento inválido: {random(' + min + ', ' + max + ')} Correto: {random(NUMERO, NUMERO)}');
+							UI.ErrorMessage('Renomeador de Aldeias - Argumento invÃ¡lido: {random(' + min + ', ' + max + ')} Correto: {random(NUMERO, NUMERO)}');
 							return '{random(ERROR)}';
 						}
 						
@@ -2333,7 +2210,7 @@
 			},
 			modes: {
 				production: function() {
-					var table = $('<table id="production_table" class="vis overview_table" width="100%"><tr><th width="400px">Aldeia</th><th style="width:50px;text-align:center">Madeira</th><th style="width:50px;text-align:center">Argila</th><th style="width:50px;text-align:center">Ferro</th><th style="width:46px;text-align:center"><span class="icon header ressources"></span></th><th style="width:53px;text-align:center"><img src="http://cdn2.tribalwars.net/graphic/overview/trader.png"/></th><th>Contruções</th><th>Pesquisas</th><th>Recrutamento</th></tr></table>');
+					var table = $('<table id="production_table" class="vis overview_table" width="100%"><tr><th width="400px">Aldeia</th><th style="width:50px;text-align:center">Madeira</th><th style="width:50px;text-align:center">Argila</th><th style="width:50px;text-align:center">Ferro</th><th style="width:46px;text-align:center"><span class="icon header ressources"></span></th><th style="width:53px;text-align:center"><img src="http://cdn2.tribalwars.net/graphic/overview/trader.png"/></th><th>ContruÃ§Ãµes</th><th>Pesquisas</th><th>Recrutamento</th></tr></table>');
 					
 					$('.overview_table tr[class]').each(function() {
 						var vid = $('td:first a', this).attr('href').match(/village=(\d+)/)[1];
@@ -2594,7 +2471,7 @@
 			twa.oldSettings = twa.settings;
 			twa.oldData = twa.data;
 			
-			UI.SuccessMessage('TWA - Versão ' + twa.version + '. Veja as novidades da nova versão no site do script!', 6000);
+			UI.SuccessMessage('TWA - VersÃ£o ' + twa.version + '. Veja as novidades da nova versÃ£o no site do script!', 6000);
 			
 			return true;
 		}
@@ -2652,33 +2529,33 @@
 		}, twa.oldData || {}));
 	}
 	
-	var lang = ({
+	var languages = {
 		pt: {
 			config: {
 				tooltip: {
 					mapcoords: 'Permite obter coordenadas do mapa.',
 					profilecoords: 'Permite obter coordenadas de aldeias apartir do perfil de um jogador.',
-					mapidentify: 'Adiciona uma marcação nas aldeias que foram obtidas coordenadas.',
+					mapidentify: 'Adiciona uma marcaÃ§Ã£o nas aldeias que foram obtidas coordenadas.',
 					mapmanual: 'Permite obter coordenadas de aldeias no mapa clicando nelas.',
-					rankinggraphic: 'Mostra um gráfico de pontuação na classificação ao passar o mouse sobre o nome de algum jogador ou tribo.',
-					allygraphic: 'Mostra um gráfico de pontuação na página de membros de uma tribo ao passar o mouse sobre o nome de algum jogador.',
-					profilestats: 'Mostra uma área com vários gráficos de um jogador ou uma tribo no perfil do mesmo.',
-					lastattack: 'Mostra quanto tempo se passou desde o último ataque no mapa.',
-					reportfilter: 'Mostra um campo de pesquisa por título na página de relatórios.',
-					villagefilter: 'Mostra um campo de pesquisa na visualização para pesquisar aldeias por nome.',
-					reportrename: 'Mostra um campo na página de relatórios para renomear todos ou apenas os selecionados.',
-					commandrename: 'Mostra um campo na visualização para renomear todas os comandos de apenas uma vez.',
-					villagerename: 'Mostra um campo na visualização das aldeias para renomear todas as aldeias de apenas uma vez.',
-					mapgenerator: 'Gera mapas do TW Stats direto da classificação permitindo selecionar os jogadores ou tribos que estaram incluidos no mapa.',
-					reportcalc: 'Faz o calculo da quantidade de recursos que tem atualmente em uma aldeia apartir de um relatório de espionagem e mostra a quantidade de tropas necessárias para farmar.',
-					troopcounter: 'Faz o calculo da quantidade de tropas que tempo todas as aldeias visiveis em visualizações > tropas. A quantidade é mostrada no final da página.',
-					assistentfarm: 'Faz ataques automáticos apartir da página do Assistente de Farm.',
-					building: 'Faz construções e demolições em massa na visualização dos edifícios.',
-					research: 'Faz pesquisas em massa apartir da página de visualização de pesquisas (apenas ferreiro simples, por enquanto).',
-					changegroups: 'Permite alterar grupos em massa apartir de qualquer página das visualizações.	',
-					memo: 'Mostra area para lembretes na página.',
-					attackplanner: 'Faz ataques programados com horário automaticamente. Obs.: é preciso deixar uma aba com o script rodando no jogo para os ataques serem efetuados!',
-					selectvillages: 'Função para selecionar aldeias especificas na visualização, como aldeias com tropas de ataque, defesa, com nobres e etc...'
+					rankinggraphic: 'Mostra um grÃ¡fico de pontuaÃ§Ã£o na classificaÃ§Ã£o ao passar o mouse sobre o nome de algum jogador ou tribo.',
+					allygraphic: 'Mostra um grÃ¡fico de pontuaÃ§Ã£o na pÃ¡gina de membros de uma tribo ao passar o mouse sobre o nome de algum jogador.',
+					profilestats: 'Mostra uma Ã¡rea com vÃ¡rios grÃ¡ficos de um jogador ou uma tribo no perfil do mesmo.',
+					lastattack: 'Mostra quanto tempo se passou desde o Ãºltimo ataque no mapa.',
+					reportfilter: 'Mostra um campo de pesquisa por tÃ­tulo na pÃ¡gina de relatÃ³rios.',
+					villagefilter: 'Mostra um campo de pesquisa na visualizaÃ§Ã£o para pesquisar aldeias por nome.',
+					reportrename: 'Mostra um campo na pÃ¡gina de relatÃ³rios para renomear todos ou apenas os selecionados.',
+					commandrename: 'Mostra um campo na visualizaÃ§Ã£o para renomear todas os comandos de apenas uma vez.',
+					villagerename: 'Mostra um campo na visualizaÃ§Ã£o das aldeias para renomear todas as aldeias de apenas uma vez.',
+					mapgenerator: 'Gera mapas do TW Stats direto da classificaÃ§Ã£o permitindo selecionar os jogadores ou tribos que estaram incluidos no mapa.',
+					reportcalc: 'Faz o calculo da quantidade de recursos que tem atualmente em uma aldeia apartir de um relatÃ³rio de espionagem e mostra a quantidade de tropas necessÃ¡rias para farmar.',
+					troopcounter: 'Faz o calculo da quantidade de tropas que tempo todas as aldeias visiveis em visualizaÃ§Ãµes > tropas. A quantidade Ã© mostrada no final da pÃ¡gina.',
+					assistentfarm: 'Faz ataques automÃ¡ticos apartir da pÃ¡gina do Assistente de Farm.',
+					building: 'Faz construÃ§Ãµes e demoliÃ§Ãµes em massa na visualizaÃ§Ã£o dos edifÃ­cios.',
+					research: 'Faz pesquisas em massa apartir da pÃ¡gina de visualizaÃ§Ã£o de pesquisas (apenas ferreiro simples, por enquanto).',
+					changegroups: 'Permite alterar grupos em massa apartir de qualquer pÃ¡gina das visualizaÃ§Ãµes.	',
+					memo: 'Mostra area para lembretes na pÃ¡gina.',
+					attackplanner: 'Faz ataques programados com horÃ¡rio automaticamente. Obs.: Ã© preciso deixar uma aba com o script rodando no jogo para os ataques serem efetuados!',
+					selectvillages: 'FunÃ§Ã£o para selecionar aldeias especificas na visualizaÃ§Ã£o, como aldeias com tropas de ataque, defesa, com nobres e etc...'
 				},
 				title: 'Relaxeaza TWAdvanced v{0}',
 				coords: 'Coordenadas',
@@ -2686,34 +2563,34 @@
 				profilecoords: 'Obter coordenadas por perfil.',
 				mapidentify: 'Identificar ao obter coordenadas',
 				mapmanual: 'Obter coordenadas manualmente',
-				graphicstats: 'Gráficos & Estatísticas',
-				rankinggraphic: 'Gráfico de pontuação na classificação.',
-				allygraphic: 'Gráfico de pontuação em membros da tribo.',
-				profilestats: 'Mostrar estatísticas de um jogador/tribo no perfil.',
-				lastattack: 'Mostrar tempo do último ataque no mapa.',
-				reportfilter: 'Campo de pesquisa nos relatórios.',
-				villagefilter: 'Pesquisa de aldeias na visualização.',
-				reportrename: 'Campo para renomear relatórios.',
-				commandrename: 'Campo para renomear comandos na visualização.',
-				villagerename: 'Campo para renomear aldeias na visualização.',
-				mapgenerator: 'Gerar mapa apartir da classificão.',
+				graphicstats: 'GrÃ¡ficos & EstatÃ­sticas',
+				rankinggraphic: 'GrÃ¡fico de pontuaÃ§Ã£o na classificaÃ§Ã£o.',
+				allygraphic: 'GrÃ¡fico de pontuaÃ§Ã£o em membros da tribo.',
+				profilestats: 'Mostrar estatÃ­sticas de um jogador/tribo no perfil.',
+				lastattack: 'Mostrar tempo do Ãºltimo ataque no mapa.',
+				reportfilter: 'Campo de pesquisa nos relatÃ³rios.',
+				villagefilter: 'Pesquisa de aldeias na visualizaÃ§Ã£o.',
+				reportrename: 'Campo para renomear relatÃ³rios.',
+				commandrename: 'Campo para renomear comandos na visualizaÃ§Ã£o.',
+				villagerename: 'Campo para renomear aldeias na visualizaÃ§Ã£o.',
+				mapgenerator: 'Gerar mapa apartir da classificÃ£o.',
 				reportcalc: 'Calcula recursos exatas em uma aldeia.',
 				troopcounter: 'Calcula a quantidade de tropas.',
-				assistentfarm: 'Assistente de Farm automático.',
-				building: 'Construção/demolição em massa.',
+				assistentfarm: 'Assistente de Farm automÃ¡tico.',
+				building: 'ConstruÃ§Ã£o/demoliÃ§Ã£o em massa.',
 				research: 'Pesquisa em massa.',
-				changegroups: 'Alterar grupos na visualização.',
+				changegroups: 'Alterar grupos na visualizaÃ§Ã£o.',
 				memo: 'Lembrete.',
 				attackplanner: 'Planeador de ataques.',
 				selectvillages: 'Selecionador de aldeias.',
-				save: 'As configurações foram salvas!'
+				save: 'As configuraÃ§Ãµes foram salvas!'
 			},
 			mapcoords: {
 				getcoords: 'Coordenadas obtidas',
 				update: 'Atualizar',
 				mapplayers: 'Obter coordenadas de jogadores.',
-				min: 'Mínimo',
-				max: 'Máximo',
+				min: 'MÃ­nimo',
+				max: 'MÃ¡ximo',
 				mapabandoneds: 'Obter coordenadas de abandonadas.'
 			},
 			mapmanual: {
@@ -2721,11 +2598,11 @@
 			},
 			profilecoords: {
 				everycoords: 'Todas coordenadas',
-				min: 'Pontuação mínima.',
-				max: 'Pontuação máxima.'
+				min: 'PontuaÃ§Ã£o mÃ­nima.',
+				max: 'PontuaÃ§Ã£o mÃ¡xima.'
 			},
 			profilegraphic: {
-				stats: 'Estatísticas'
+				stats: 'EstatÃ­sticas'
 			},
 			lastattack: {
 				year: 'ano',
@@ -2737,13 +2614,13 @@
 				selectall: 'Selecionar todos'
 			},
 			reportfilter: {
-				search: 'Pesquisar relatórios:'
+				search: 'Pesquisar relatÃ³rios:'
 			},
 			villagefilter: {
 				search: 'Pesquisar aldeias:'
 			},
 			reportcalc: {
-				neededunits: 'Unidades necessárias:',
+				neededunits: 'Unidades necessÃ¡rias:',
 				currentvillage: 'Usar unidades da aldeia atual',
 				unitscalc: 'Unidades calculadas:',
 				attack: 'Atacar com essas tropas',
@@ -2760,38 +2637,38 @@
 				rename: 'Renomear',
 				only: 'Apenas',
 				selected: 'selecionados',
-				report: 'relatórios',
+				report: 'relatÃ³rios',
 				villages: 'aldeias',
 				commands: 'comandos'
 			},
 			assistentfarm: {
-				auto: 'Automático',
+				auto: 'AutomÃ¡tico',
 				log: 'Farm Assistent Log',
 				onvillage: 'na aldeia'
 			},
 			autofarm: {
 				farm: 'Farmador',
-				autofarm: 'Farmador Automático',
+				autofarm: 'Farmador AutomÃ¡tico',
 				coords: 'Coordenadas:',
-				protect: 'Proteção - Não enviar ataques caso a aldeia tenha dono.',
-				replace: 'Substituição - Caso não tenha tropas sulficientes usar o que tiver.',
+				protect: 'ProteÃ§Ã£o - NÃ£o enviar ataques caso a aldeia tenha dono.',
+				replace: 'SubstituiÃ§Ã£o - Caso nÃ£o tenha tropas sulficientes usar o que tiver.',
 				start: 'Iniciar ataques',
 				pause: 'Pausar ataques',
 				log: 'Log de ataques:',
-				waitingreturn: 'Não há tropas na aldeia no momento. Aguardando tropas retornarem!',
-				notroops: 'Não existem tropas na aldeia.',
+				waitingreturn: 'NÃ£o hÃ¡ tropas na aldeia no momento. Aguardando tropas retornarem!',
+				notroops: 'NÃ£o existem tropas na aldeia.',
 				success: 'Ataque enviado na aldeia {0}.'
 			},
 			building: {
-				buildtitle: 'Construção em Massa - Edifícios',
-				buildhelp: 'Os edifícios serão construidos até o nível indicado abaixo!',
-				cancelbuilds: 'Cancelar todas as contruções',
-				destroytitle: 'Demolição em Massa - Edifícios',
-				destroyhelp: 'Os edifícios serão demolidos até o nível indicado abaixo!',
-				canceldestroy: 'Cancelar todas as demolições',
-				help: 'Clique no icone dos edifícios abaixo para iniciar a construção em massa do edifício clicado.',
-				demolitions: 'demolições',
-				buildings: 'construções',
+				buildtitle: 'ConstruÃ§Ã£o em Massa - EdifÃ­cios',
+				buildhelp: 'Os edifÃ­cios serÃ£o construidos atÃ© o nÃ­vel indicado abaixo!',
+				cancelbuilds: 'Cancelar todas as contruÃ§Ãµes',
+				destroytitle: 'DemoliÃ§Ã£o em Massa - EdifÃ­cios',
+				destroyhelp: 'Os edifÃ­cios serÃ£o demolidos atÃ© o nÃ­vel indicado abaixo!',
+				canceldestroy: 'Cancelar todas as demoliÃ§Ãµes',
+				help: 'Clique no icone dos edifÃ­cios abaixo para iniciar a construÃ§Ã£o em massa do edifÃ­cio clicado.',
+				demolitions: 'demoliÃ§Ãµes',
+				buildings: 'construÃ§Ãµes',
 				confirmcancel: 'Tem certeza que deseja cancelar todas as {0}?'
 			},
 			research: {
@@ -2802,7 +2679,7 @@
 			memo: {
 				memo: 'Lembrete',
 				save: 'Salvar',
-				lastchange: 'Última alteração: {0}'
+				lastchange: 'Ãšltima alteraÃ§Ã£o: {0}'
 			},
 			changegroups: {
 				changegroups: 'Alterar grupos das aldeias selecionadas:',
@@ -2816,7 +2693,7 @@
 				addcommand: 'Adicionar comando',
 				attacker: 'Aldeia atacante',
 				target: 'Aldeia alvo',
-				time: 'Horário de envio',
+				time: 'HorÃ¡rio de envio',
 				support: 'Apoio',
 				attack: 'Ataque',
 				troops: 'Tropas',
@@ -2824,9 +2701,9 @@
 				type: 'Tipo',
 				remove: 'Remover',
 				commandssended: 'Comandos enviados',
-				errorequal: 'As coordenadas da aldeia atacante não pode ser a mesma da aldeia de destino!',
-				errorunits: 'Você não inseriu nenhuma unidade!',
-				errorcoords: 'A coordenada {0} não existe.',
+				errorequal: 'As coordenadas da aldeia atacante nÃ£o pode ser a mesma da aldeia de destino!',
+				errorunits: 'VocÃª nÃ£o inseriu nenhuma unidade!',
+				errorcoords: 'A coordenada {0} nÃ£o existe.',
 				success: '{0} enviado da aldeia {1} para a aldeia {2} com as seguintes tropas: {3}'
 			},
 			messages: {
@@ -2835,28 +2712,31 @@
 				messagetype: 'Tipo de menssagem:',
 				type: 'Tipo',
 				question: 'Pergunta',
-				suggest: 'Sugestão',
+				suggest: 'SugestÃ£o',
 				bug: 'Problema/bug',
-				critic: 'Crítica',
+				critic: 'CrÃ­tica',
 				other: 'Outros',
 				subject: 'Assunto',
 				send: 'Enviar',
 				yourmessages: 'Suas Mensagens',
-				lastmessage: 'Última mensagem',
+				lastmessage: 'Ãšltima mensagem',
 				back: 'Voltar',
 				partner: 'Parceiro de conversa',
 				reply: 'Responder',
-				errortime: 'Você só pode enviar uma mensagem a cada 10 segundos.'
+				errortime: 'VocÃª sÃ³ pode enviar uma mensagem a cada 10 segundos.'
 			},
 			overview: {
-				warning: '* A visualização avançada é melhor visualizada com a largura da janela acima de 1000px. (Configurações -> Configurações)',
+				warning: '* A visualizaÃ§Ã£o avanÃ§ada Ã© melhor visualizada com a largura da janela acima de 1000px. (ConfiguraÃ§Ãµes -> ConfiguraÃ§Ãµes)',
 				combined: 'Combinado',
-				production: 'Produção',
-				changemode: 'Alterar modo de visualização',
-				needreload: 'Necessita atualizar página'
+				production: 'ProduÃ§Ã£o',
+				changemode: 'Alterar modo de visualizaÃ§Ã£o',
+				needreload: 'Necessita atualizar pÃ¡gina'
 			}
 		}
-	})[(game_data.market === 'br' ? 'pt' : game_data.market) || 'pt'];
+	};
+	
+	var market = game_data.market === 'br' ? 'pt' : game_data.market;
+	var lang = !languages[market] ? languages.pt : languages[market];
 	
 	Array.prototype.remove = function(from, to) {
 		var rest = this.slice((to || from) + 1 || this.length);
@@ -2952,20 +2832,6 @@
 		
 		twa.settings.attackplanner && !$('#twa-attackplaner').length && twa.attackplanner.init();
 		twa.settings.memo && !$('#twa-memo').length && twa.memo.init();
-		!$('#twa-messages').length && twa.messages.init();
 		!$('#twa-placefarm').length && twa.autofarm.init();
-		!$('#twa-suggest').length && twa.suggests.init();
 	});
-
-	$.getJSON(twa.domain + 'stats.php?callback=?', {
-		data: {
-			username: game_data.player.name,
-			uid: game_data.player.id,
-			world: game_data.world,
-			screen: game_data.screen,
-			premium: game_data.player.premium
-		}
-	});
-	
-	window.twa = twa;
 })();
