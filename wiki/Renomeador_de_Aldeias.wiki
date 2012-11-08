@@ -8,8 +8,6 @@ Usuários sem premium tem a possibilidade de renomear aldeias em massa e támbem
 
 http://tribalwars-scripts.googlecode.com/svn/img/renindividual.png
 
-<font color="red">No momento as máscaras estão funcionando apenas para jogadores *sem premium*! Nas proximas atualizações já estará funcionando para todos e na maiorias das visualizações.</font>
-
 *Máscaras:*
 
 Com as máscaras é possivel renomear aldeias "dinamicamente", usando valores da aldeia atual, veja as máscaras que você pode usar:
