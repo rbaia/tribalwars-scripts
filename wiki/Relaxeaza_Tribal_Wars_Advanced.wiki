@@ -53,11 +53,8 @@ Simplismente vá a página referente a função e execute o script.
 
 === Ferramentas premium para jogadores sem premium ===
 
-*Visualização avançada*
-
-O TWA permite que jogadores *sem conta premium* tenhas os seguintes modos de visualização:
- * Combinado
- * Produção
+ * *Visualização avançada combinado/produção*
+ * *Renomear aldeia individuais na página de visualização.*
 
 === Histórico de atualizações ===
 
