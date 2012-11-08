@@ -16,8 +16,9 @@ Todas as funções podem ser ativadas e desativadas abrindo a tela de configura�
 Atualmente o script está sendo traduzido para outras linguagens e logo mais estará disponível.
 
 === Tradutores ===
- * *wtfko* - _Tradução do script para a linguagem Eslovaca._
- * *Fcéčko* - _Tradução do script para a linguagem Tcheca._
+ * *wtfko* - _Tradução do script para o *eslovaco*._
+ * *Fcéčko* - _Tradução do script para o *tcheco*._
+ * *Rafaclott* - _Tradução do script para o *inglês*._
 
 === Ferramentas ===
 *Clique no nome da função para saber mais sobre ela!*
