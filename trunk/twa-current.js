@@ -1,5 +1,5 @@
 /*!
- * Relaxeaza Tribal Wars Advanced v1.5.1
+ * Relaxeaza Tribal Wars Advanced v1.5.2
  * Release 03/10/12.
  * relaxeaza.tw@gmail.com
  *
@@ -89,6 +89,9 @@
  * removido: Sugestões -> Por falta de um servidor próprio.
  * removido: Mensagens -> Por falta de um servidor próprio.
  * bugfix: O script não estava funcionando em outros servidores além de br/pt. Agora está funcionando.
+ *
+ * v1.5.2 06/10/12
+ * novo: Linguagem -> Inglês e Eslovaca adicionadas.
  */
 
 (function () {
@@ -97,7 +100,7 @@
 		contentValueWidth = $('#content_value').width();
 	
 	var twa = {
-		version: '1.5.1',
+		version: '1.5.2',
 		baseTool: function(id, name, img, html, width) {
 			$('table.twa-bar').show().find('> tbody > tr').append('<td><table class="header-border"><tbody><tr><td><table class="box menu nowrap"><tbody><tr><td class="box-item" style="height: 22px;">' + (img ? '<img src="' + img + '" style="position:absolute">' : '') + '<a ' + (img ? 'style="margin-left:17px" ' : '') + 'href="#" id="' + id + '">' + name + '</a></td></tr></tbody></table></td></tr><tr class="newStyleOnly"><td class="shadow"><div class="leftshadow"></div><div class="rightshadow"></div></td></tr></tbody></table></td>');
 
@@ -208,7 +211,7 @@
 		},
 		config: function() {
 			console.log('twa.config()');
-
+			
 			$('head').append('<style>' +
 			'#di {background:#c1d9ff;border:1px solid #3a5774;font-family:arial;font-size:12px;padding:4px;position:absolute;z-index:99999}' +
 			'#di textarea {border:1px solid #999;width:280px;height:80px;font-size:12px}' +
@@ -222,10 +225,21 @@
 			'#twa-tooltip{display:none;position:absolute;width:300px;padding:4px 4px 3px;background:#000;opacity:0.8;color:#fff;font-size:12px;border:1px solid #000;-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px}' +
 			'</style>');
 			
+			var langs = {};
+			var langsHtml = ['<select style="width:120px" name="lang">'];
+			
+			for(var i in languages) {
+				langsHtml.push('<option ' + (twa.settings.lang === i ? 'selected ' : '') + 'value=' + i + '>' + languages[i].lang + '</option>');
+			}
+			
+			langsHtml.push('</select>');
+			langsHtml = langsHtml.join('');
+			
 			$('body').append('<div id="di" style="width:400px">' +
 			'<div id="twa-tooltip"></div>' +
 			'<div id="he">' + lang.config.title.springf(twa.data.version) + '</div>' +
 			'<div id="co">' +
+			'<label>Language: ' + langsHtml + '</label>' +
 			'<h1>' + lang.config.coords + '</h1>' +
 			'<div class="di">' +
 			'<label tooltip="' + lang.config.tooltip.mapcoords + '">' +
@@ -253,7 +267,7 @@
 			'<input type="checkbox" name="profilestats"/> ' + lang.config.profilestats +
 			'</label>' +
 			'</div>' +
-			'<h1>Outras Opções</h1>' +
+			'<h1>' + lang.config.tooltip.other + '</h1>' +
 			'<div class="di">' +
 			'<label tooltip="' + lang.config.tooltip.lastattack + '">' +
 			'<input type="checkbox" name="lastattack"/> ' + lang.config.lastattack +
@@ -270,8 +284,8 @@
 			'<label tooltip="' + lang.config.tooltip.commandrename + '">' +
 			'<input type="checkbox" name="commandrename"/> ' + lang.config.commandrename +
 			'</label>' +
-			'<label tooltip="Permite renomear aldeias em massa e individuais na visualização de aldeias.">' +
-			'<input type="checkbox" name="renamevillages"/> Renomeador de Aldeias' +
+			'<label tooltip="' + lang.config.tooltip.renamevillages + '">' +
+			'<input type="checkbox" name="renamevillages"/> ' + lang.config.renamevillages +
 			'</label>' +
 			'<label tooltip="' + lang.config.tooltip.mapgenerator + '">' +
 			'<input type="checkbox" name="mapgenerator"/> ' + lang.config.mapgenerator +
@@ -303,17 +317,16 @@
 			'<label tooltip="' + lang.config.tooltip.selectvillages + '">' +
 			'<input type="checkbox" name="selectvillages"/> ' + lang.config.selectvillages +
 			'</label>' +
-			'<label tooltip="Adiciona opções premium na página de visualização para usuários sem conta premium.">' +
-			'<input type="checkbox" name="overview"/> Visualização avançada' +
+			'<label tooltip="' + lang.config.tooltip.overview + '">' +
+			'<input type="checkbox" name="overview"/> ' + lang.config.overview +
 			'</label>' +
 			'</div>' +
-			'<h1 style="text-align:center"><button id="sa">Salvar</button></h1>' +
+			'<h1 style="text-align:center"><button id="sa">' + lang.config.save + '</button></h1>' +
 			'</div>' +
 			'</div>');
 
 			for(var name in twa.settings) {
 				if(name[0] !== '_') {
-					console.log(name, twa.settings[name]);
 					document.getElementsByName(name)[0][typeof twa.settings[name] === 'boolean' ? 'checked' : 'value'] = twa.settings[name];
 				}
 			}
@@ -338,10 +351,11 @@
 				$('#di input').each(function () {
 					twa.settings[this.name] = this.type === 'checkbox' ? this.checked : this.value;
 				});
-
+				
+				twa.settings.lang = $('[name=lang]').val();
 				twa.storage(true);
-
-				alert(lang.config.save);
+				
+				alert(lang.config.savealert);
 			});
 		},
 		mapelement: function(data, css) {
@@ -1612,7 +1626,7 @@
 				});
 
 				twa.memo.getContent(function(note, time) {
-					$('#twa-memo-time').html('Última alteração: ' + (time || 'nunca.'));
+					$('#twa-memo-time').html(lang.memo.lastchange.springf(time || '00:00:00 00/00/0000'));
 					content.find('textarea').val(note);
 					content.find('img').hide();
 				});
@@ -2454,12 +2468,55 @@
 	};
 
 	$('#header_info').after('<table id="header_info" class="twa-bar" style="display:none" cellspacing="0" align="left"><tr></tr></table>');
+	
+	Array.prototype.remove = function(from, to) {
+		var rest = this.slice((to || from) + 1 || this.length);
+		this.length = from < 0 ? this.length + from : from;
+		return this.push.apply(this, rest);
+	}
 
+	$.fn.center = function() {
+		this.css('position', 'absolute');
+		this.css('top', Math.max(0, (($(window).height() - this.outerHeight()) / 2) + $(window).scrollTop()) + 'px');
+		this.css('left', Math.max(0, (($(window).width() - this.outerWidth()) / 2) + $(window).scrollLeft()) + 'px');
+		return this;
+	}
+	
+	Number.prototype.format = function() {
+		var hours = Math.floor(this / 3600000);
+		var min = Math.floor(this / 60000) % 60;
+		var sec = (this / 1000) % 60;
+		var str = hours + ':';
+		
+		if(min < 10) {
+			str += '0';
+		}
+		
+		str += min + ':';
+		
+		if(sec < 10) {
+			str += '0';
+		}
+		
+		return str += sec;
+	}
+	
+	String.prototype.springf = function() {
+		var args = arguments;
+		
+		return this.replace(/{(\d+)}/g, function(match, number) {
+			return typeof args[number] != 'undefined' ? args[number] : match;
+		});
+	};
+	
 	var memory = {
 		settings: 'TWASettings' + game_data.player.id,
 		data: 'TWAData' + game_data.player.id
 	};
-
+	
+	var market = game_data.market === 'br' ? 'pt' : game_data.market;
+	var newversion = false;
+	
 	twa.settings = localStorage[memory.settings] ? JSON.parse(localStorage[memory.settings]) : false;
 	twa.data = localStorage[memory.data] ? JSON.parse(localStorage[memory.data]) : false;
 	
@@ -2470,8 +2527,7 @@
 			twa.data.version = twa.version;
 			twa.oldSettings = twa.settings;
 			twa.oldData = twa.data;
-			
-			UI.SuccessMessage('TWA - Versão ' + twa.version + '. Veja as novidades da nova versão no site do script!', 6000);
+			newversion = true;
 			
 			return true;
 		}
@@ -2517,7 +2573,8 @@
 			selectvillages: true,
 			overview: true,
 			_overviewmode: 'production',
-			renamevillages: true
+			renamevillages: true,
+			lang: market
 		}, twa.oldSettings || {}));
 		
 		localStorage[memory.data] = JSON.stringify(twa.data = $.extend({
@@ -2530,7 +2587,390 @@
 	}
 	
 	var languages = {
+		en: {
+			lang: 'English',
+			config: {
+				tooltip: {
+					mapcoords: 'Allow to obtain map coords.',
+					profilecoords: 'Allow to obtain village coords from player profile.',
+					mapidentify: 'Add a mark in the villages that were obtained coordinates.',
+					mapmanual: 'Allows you to obtain coordinates of villages from the map just clicking them.',
+					rankinggraphic: 'Shows a pontuation graph on ranking page on hover over the name of player/tribe.',
+					allygraphic: 'Shows a pontuation graph on members tribe on hover over the name of any player.',
+					profilestats: 'Shows an area with multiple charts of a player/tribe in the same profile.',
+					lastattack: 'Shows how much time has passed since the last attack on the map.',
+					reportfilter: 'Shows a search field by title on report page.',
+					villagefilter: 'Shows a field of search on overview page to search villages by name.',
+					reportrename: 'Shows a field of search on report page to rename reports.',
+					commandrename: 'Shows a field to rename commands on overview.',
+					villagerename: 'Shows a field to rename villages on overview.',
+					mapgenerator: 'Generate TW Stats maps from ranking page allowing select players or tribes that will be included on the map.',
+					reportcalc: 'Makes calculating the amount of resources they currently have in starting a village of a spy report and shows the amount of troops needed to farm.',
+					troopcounter: 'Makes the calculation of the amount of troops that has all the villages visible in views> troops. The amount is shown on the bottom.',
+					assistentfarm: 'Make automatic attacks from the Assistent Farm page.',
+					building: 'Mass constructions and demolitions in overview of buildings.',
+					research: 'Mass research on overview page (just simple blacksmith, for now).',
+					changegroups: 'Allows change in mass groups from any page of views.',
+					memo: 'Display area for reminders on the page.',
+					attackplanner: 'Attacks with scheduled time automatically. Note: You must leave a tab with the script running in the game for the attacks being made??!',
+					selectvillages: 'Function to select specific villages in overview, as villages with troops attack, defense, and with noble etc ...',
+					overview: 'Add premium options on overview page for users without premium account.',
+					renamevillages: 'Allow rename mass village on overview.'
+				},
+				title: 'Relaxeaza TWAdvanced v{0}',
+				coords: 'Coords',
+				mapcoords: 'Get map coords.',
+				profilecoords: 'Get profile player coords.',
+				mapidentify: 'Identify on get coords',
+				mapmanual: 'Obtain coordinates manually',
+				graphicstats: 'Graphics and Statistics',
+				rankinggraphic: 'Ponctuation graphic on ranking.',
+				allygraphic: 'Ponctuation graphic on members tribe.',
+				profilestats: 'Shows stats of a player on player/trible profile.',
+				lastattack: 'Show time of last attack on map.',
+				reportfilter: 'Search field on reports.',
+				villagefilter: 'Search villages on overview.',
+				reportrename: 'Rename field to rename reports.',
+				commandrename: 'Rename field to rename commands on overview.',
+				villagerename: 'Field to rename villages on overview.',
+				mapgenerator: 'Generate map from ranking page.',
+				reportcalc: 'Calculate amount of resources in a village.',
+				troopcounter: 'Calculate amount of troops.',
+				assistentfarm: 'Auto-Farm Assistent',
+				building: 'Mass builder/demolition.',
+				research: 'Massive search Units',
+				changegroups: 'Change groups on overview.',
+				memo: 'Remember.',
+				attackplanner: 'Attack planner',
+				selectvillages: 'Village picker.',
+				overview: 'Advanced overview.',
+				savealert: 'Settings have been saved!',
+				save: 'Save',
+				other: 'Other options',
+				renamevillages: 'Village renamer.'
+			},
+			mapcoords: {
+				getcoords: 'Coords obtained',
+				update: 'Update',
+				mapplayers: 'Obtain player coords.',
+				min: 'Min',
+				max: 'Max',
+				mapabandoneds: 'Obtain abandoneds coords.'
+			},
+			mapmanual: {
+				getcoords: 'Coords obtained manually'
+			},
+			profilecoords: {
+				everycoords: 'All coords',
+				min: 'Min points.',
+				max: 'Max points.'
+			},
+			profilegraphic: {
+				stats: 'Stats'
+			},
+			lastattack: {
+				year: 'year',
+				years: 'years',
+				days: 'd'
+			},
+			mapgenerator: {
+				generate: 'Generate map',
+				selectall: 'Select all'
+			},
+			reportfilter: {
+				search: 'Report search:'
+			},
+			villagefilter: {
+				search: 'Village search:'
+			},
+			reportcalc: {
+				neededunits: 'Necessary units',
+				currentvillage: 'Use current village troops',
+				unitscalc: 'Units calculated:',
+				attack: 'Attack with these troops ',
+				error: 'An error occurred on send attack:',
+				success: 'Attack successfully sent!'
+			},
+			selectvillages: {
+				selectvillages: 'Select villages:',
+				unitsattack: 'with offense troops',
+				unitsdefence: 'with deffense troops',
+				unitsnob: 'with nobles'
+			},
+			rename: {
+				rename: 'Rename',
+				only: 'Only',
+				selected: 'selected',
+				report: 'reports',
+				villages: 'villages',
+				commands: 'commands'
+			},
+			assistentfarm: {
+				auto: 'Auto',
+				log: 'Assistent Farm Log',
+				onvillage: 'on village'
+			},
+			autofarm: {
+				farm: 'Farmer',
+				autofarm: 'Auto-Farmer',
+				coords: 'Coordinates:',
+				protect: 'Protection - Don\'t send attack if village has an owner.',
+				replace: 'Substitution - If you have not enough troops use what you have.',
+				start: 'Start attacks',
+				pause: 'Pause attacks',
+				log: 'Attacks log',
+				waitingreturn: 'There is no troops on the village right now. Waiting for troops come back!',
+				notroops: 'There is no troops on the village.',
+				success: 'Attacks sent in village {0}.'
+			},
+			building: {
+				buildtitle: 'Mass Builder - Buildings',
+				buildhelp: 'The buildings will be built to level indicated below!',
+				cancelbuilds: 'Cancel all builders',
+				destroytitle: 'Mass Demolition - Buildings',
+				destroyhelp: 'The buildings will be demolished to the level indicated below!',
+				canceldestroy: 'Cancel all demolitions',
+				help: 'Click on the icon below the buildings to start construction on the building mass clicked.',
+				demolitions: 'demolitions',
+				buildings: 'builders',
+				confirmcancel: 'Are you sure cancel all {0}?'
+			},
+			research: {
+				help: 'Click the icon of the units below to start searching mass unit clicked.',
+				cancel: 'Cancel all researches?',
+				confirmcancel: 'Ara you sure cancel all researches?'
+			},
+			memo: {
+				memo: 'Remember',
+				save: 'Save',
+				lastchange: 'Last change: {0}'
+			},
+			changegroups: {
+				changegroups: 'Change groups of selected villages:',
+				add: 'Add',
+				remove: 'Remove',
+				move: 'Move'
+			},
+			attackplanner: {
+				planner: 'Plannet',
+				attackplanner: 'Attack planner',
+				addcommand: 'Add comand',
+				attacker: 'Attacker village',
+				target: 'Village target',
+				time: 'Send time',
+				support: 'Support',
+				attack: 'Attack',
+				troops: 'Troops',
+				commands: 'Commands',
+				type: 'Type',
+				remove: 'Remove',
+				commandssended: 'Commands sent',
+				errorequal: '',
+				errorunits: 'You aren\'t entered any unit!',
+				errorcoords: 'Coords {0} doesn\'t exist.',
+				success: '{0} send on village {1} to village {2} with the troops: {3}'
+			},
+			overview: {
+				warning: '* The advanced visualization is best viewed with the window width above 1000px. (Settings -> Settings)',
+				combined: 'Combined',
+				production: 'Production',
+				changemode: 'Change overview mode',
+				needreload: 'You need to refresh page'
+			}
+		},
+		sk: {
+			lang: 'Slovak',
+			config: {
+				tooltip: {
+					mapcoords: 'Umožòuje zobrazi súradníce na mape.',
+					profilecoords: 'Umožòuje zobrazi súradnice všetkých dedín hráèa.',
+					mapidentify: 'Pridá udalos v dedinách, kde boli získané súradnice.',
+					mapmanual: 'Umožòuje získa súradnice dedín v mape kliknutím na ne.',
+					rankinggraphic: 'Ukazuje graf rastu v tabu¾ke každého hráèa alebo kmeòa.',
+					allygraphic: 'Zobrazuje štatistiky vybraného kmeòa.',
+					profilestats: 'Zobrazuje štatistiky vybraného hráèa.',
+					lastattack: 'Ukazuje, ko¾ko èasu uplynulo od posledného útoku na mape.',
+					reportfilter: 'Filter oznámení.',
+					villagefilter: 'Filter dedín.',
+					reportrename: 'Premenováva všetky alebo len vybrané oznámenia.',
+					commandrename: 'Premenováva vybrané útoky.',
+					villagerename: 'Premenováva vybrané dediny.',
+					mapgenerator: 'TW Stats vygeneruje mapu vybraného hráèa alebo kmeòa.',
+					reportcalc: 'Automaticky vypoèíta ko¾ko vojakov treba posla na kompletné vyfarmenie barbarky (potrebný špeh v predchádzajúcom útoku). ',
+					troopcounter: 'Spoèítavá vojská. Zobrazenie> Jednotky. Suma sa zobrazí v dolnej èasti.',
+					assistentfarm: 'Automaticky odosiela útoky v náh¾ade.',
+					building: 'Stavia a búra budovy v náh¾ade.',
+					research: 'Automaticky vyskúma všetky výskumy (zatia¾ len pre jednoduchý výskum).',
+					changegroups: 'Umožnuje zmeni skupinu pre skupinu jednotlivých dedín.',
+					memo: 'Pripomienka.',
+					attackplanner: 'Napadá dediny automaticky. Poznámka: Musíte opusti kartu a skript necha spustený!',
+					selectvillages: 'Funkcia pre výber konkrétnej dediny v zobrazení, ako napr. útoèná dedina, obranná, šåachtic ...',
+					overview: 'Pridat prémiové možnosti na stránke náhladu pre užívatelov bez premium úctu.',
+					renamevillages: 'Premenovanie dedín v individuálnej a hromadnej prezeranie dedín.'
+				},
+				title: 'Relaxeaza TWAdvanced v{0}',
+				coords: 'Súradnice',
+				mapcoords: 'Získa súradnice na mape.',
+				profilecoords: 'Získa súradnice z profilu hráèa.',
+				mapidentify: 'Identifikova k získaniu súradníc',
+				mapmanual: 'Zada súradnice ruène.',
+				graphicstats: 'Grafy a štatistiky.',
+				rankinggraphic: 'Bodový graf',
+				allygraphic: 'Bodový graf kmeòa.',
+				profilestats: 'Zobrazi štatistiky pre hráèa / kmeò.',
+				lastattack: 'Zobrazi èas posledného útoku na mape.',
+				reportfilter: 'Filter oznámenii.',
+				villagefilter: 'Filter dediny v náh¾ade.',
+				reportrename: 'Premenováva oznámenie.',
+				commandrename: 'Premenováva útoky.',
+				villagerename: 'Premenováva dediny.',
+				mapgenerator: 'Generator mapy pod¾a predvolených bodov',
+				reportcalc: 'Poèíta presne suroviny v dedine.',
+				troopcounter: 'Vypoèítava množstvo vojakov.',
+				assistentfarm: 'Autofarmiaci pomocník.',
+				building: 'Stavanie / búranie budov.',
+				research: 'Výskum.',
+				changegroups: 'Zmena skupín v náh¾ade.',
+				memo: 'Pripomienka.',
+				attackplanner: 'Plánovaè útokov.',
+				selectvillages: 'Výber dedín.',
+				overview: 'Advanced vizualizácie.',
+				savealert: 'Nastavenia boli uložené!',
+				save: 'Uložit',
+				other: 'Dalšie možnosti',
+				renamevillages: 'Renamer dediny'
+			},
+			mapcoords: {
+				getcoords: 'Súradnice získané.',
+				update: 'Aktualizova.',
+				mapplayers: 'Získáva súradníce hráèov.',
+				min: 'Minimálna.',
+				max: 'Maximálna.',
+				mapabandoneds: 'Súradnice barbariek získané.'
+			},
+			mapmanual: {
+				getcoords: 'Suradnice, zadané ruène'
+			},
+			profilecoords: {
+				everycoords: 'Všetky súradnice.',
+				min: 'Minimálne hranica bodov.',
+				max: 'Maximálna hranica bodov.'
+			},
+			profilegraphic: {
+				stats: 'Štatistika.'
+			},
+			lastattack: {
+				year: 'rok',
+				years: 'rokov',
+				days: 'd'
+			},
+			mapgenerator: {
+				generate: 'Generova mapu',
+				selectall: 'Vybra všetko'
+			},
+			reportfilter: {
+				search: 'H¾ada oznámenia:'
+			},
+			villagefilter: {
+				search: 'H¾ada dediny:'
+			},
+			reportcalc: {
+				neededunits: 'Požadované vojsko:',
+				currentvillage: 'Použitie vojska z aktuálnej dediny.',
+				unitscalc: 'Vojsko vypoèíta:',
+				attack: 'Útoèi s týmito vojakmi',
+				error: 'Chyba!',
+				success: 'Útok úspešne odoslaný!'
+			},
+			selectvillages: {
+				selectvillages: 'Vybra dediny:',
+				unitsattack: 'Vojská útoèia',
+				unitsdefence: 'S obrannými jednotkami',
+				unitsnob: 'So š¾achtami'
+			},
+			rename: {
+				rename: 'Premenova',
+				only: 'Iba',
+				selected: 'Vybraný',
+				report: 'Oznámenie',
+				villages: 'Dediny',
+				commands: 'Povely'
+			},
+			assistentfarm: {
+				auto: 'Automatický',
+				log: 'Logy',
+				onvillage: 'Dedina'
+			},
+			autofarm: {
+				farm: 'Farmenie',
+				autofarm: 'Automatické farmenie',
+				coords: 'Súradnice:',
+				protect: 'Ochrana - Nebudú posielané útoky ak má dedina majite¾a.',
+				replace: 'Výmena - Ak neni sú danné jednotky v dedine, použije náhradu.',
+				start: 'Štart',
+				pause: 'Pozastavi útoky',
+				log: 'Logy:',
+				waitingreturn: 'Nie sú žiadne jednotky v dedine.Èaká sa na vracajúcich sa vojakov!',
+				notroops: 'V dedine nie sú žiadne jednotky.',
+				success: 'Útoky na dedinu odoslané {0}.'
+			},
+			building: {
+				buildtitle: 'Hromadné stavenie - Budovy',
+				buildhelp: 'Budovy budú postavené na úroveò uvedenú nižšie!',
+				cancelbuilds: 'Zruši všetky príkazy na stavbu',
+				destroytitle: 'Hromadné búranie - Budovy',
+				destroyhelp: 'Budovy budú zbúrané na úroveò uvedenú nižšie!',
+				canceldestroy: 'Zruši všetky demolácie',
+				help: 'Kliknite na ikonu budovy, pre zaèatie automatického stavania.',
+				demolitions: 'Búranie',
+				buildings: 'Budovy',
+				confirmcancel: 'Ste si istí, že chcete zruši všetky {0}?'
+			},
+			research: {
+				help: 'Kliknite na ikonu výskum pre zaèatie hromadného skúmania',
+				cancel: 'Zruši všetky skúmania',
+				confirmcancel: 'Ste si istí, že chcete zruši všetky skúmania?'
+			},
+			memo: {
+				memo: 'Pripomienka',
+				save: 'Uloži',
+				lastchange: 'Posledná zmena {0}'
+			},
+			changegroups: {
+				changegroups: 'Zmena skupiny vybraných dedín:',
+				add: 'Prida',
+				remove: 'Odstráni',
+				move: 'Pohyb'
+			},
+			attackplanner: {
+				planner: 'Plánovaè',
+				attackplanner: 'Plánovaè útokov',
+				addcommand: 'Prida príkaz',
+				attacker: 'Útoèiaca dedina',
+				target: 'Cie¾',
+				time: 'Doba dopadu',
+				support: 'Podpora',
+				attack: 'Útok',
+				troops: 'Jednotky',
+				commands: 'Príkazy',
+				type: 'Typ',
+				remove: 'Odstráni',
+				commandssended: 'Odoslané útoky',
+				errorequal: 'Súradnice dediny útoènika nemožu by rovnaké ako súradnice dediny cie¾a!',
+				errorunits: 'Nezadali ste žiadnu jednotku!',
+				errorcoords: 'Cie¾ {0} neexistuje!',
+				success: '{0} Poslané z dedine {1} do dediny {2} s nasledujucími vojakmi {3}'
+			},
+			overview: {
+				warning: '* Pokroèilá vizualizácia je optimalizovaná pre šírku okna nad 1000px. (Nastavenia -> Nastavenia)',
+				combined: 'Kombinovaný',
+				production: 'Produkcia',
+				changemode: 'Zmena režimu zobrazenia',
+				needreload: 'Potrebujete aktualizova stránku'
+			}
+		},
 		pt: {
+			lang: 'Português',
 			config: {
 				tooltip: {
 					mapcoords: 'Permite obter coordenadas do mapa.',
@@ -2552,10 +2992,12 @@
 					assistentfarm: 'Faz ataques automáticos apartir da página do Assistente de Farm.',
 					building: 'Faz construções e demolições em massa na visualização dos edifícios.',
 					research: 'Faz pesquisas em massa apartir da página de visualização de pesquisas (apenas ferreiro simples, por enquanto).',
-					changegroups: 'Permite alterar grupos em massa apartir de qualquer página das visualizações.	',
+					changegroups: 'Permite alterar grupos em massa apartir de qualquer página das visualizações.',
 					memo: 'Mostra area para lembretes na página.',
 					attackplanner: 'Faz ataques programados com horário automaticamente. Obs.: é preciso deixar uma aba com o script rodando no jogo para os ataques serem efetuados!',
-					selectvillages: 'Função para selecionar aldeias especificas na visualização, como aldeias com tropas de ataque, defesa, com nobres e etc...'
+					selectvillages: 'Função para selecionar aldeias especificas na visualização, como aldeias com tropas de ataque, defesa, com nobres e etc...',
+					overview: 'Adiciona opções premium na página de visualização para usuários sem conta premium.',
+					renamevillages: 'Permite renomear aldeias em massa e individuais na visualização de aldeias.'
 				},
 				title: 'Relaxeaza TWAdvanced v{0}',
 				coords: 'Coordenadas',
@@ -2583,7 +3025,11 @@
 				memo: 'Lembrete.',
 				attackplanner: 'Planeador de ataques.',
 				selectvillages: 'Selecionador de aldeias.',
-				save: 'As configurações foram salvas!'
+				overview: 'Visualização avançada.',
+				savealert: 'As configurações foram salvas!',
+				save: 'Salvar',
+				other: 'Outras opções',
+				renamevillages: 'Renomeador de aldeias'
 			},
 			mapcoords: {
 				getcoords: 'Coordenadas obtidas',
@@ -2706,25 +3152,6 @@
 				errorcoords: 'A coordenada {0} não existe.',
 				success: '{0} enviado da aldeia {1} para a aldeia {2} com as seguintes tropas: {3}'
 			},
-			messages: {
-				messages: 'Mensagens',
-				desc: 'Area para troca de mensagens com o desenvolvedor (Relaxeaza)',
-				messagetype: 'Tipo de menssagem:',
-				type: 'Tipo',
-				question: 'Pergunta',
-				suggest: 'Sugestão',
-				bug: 'Problema/bug',
-				critic: 'Crítica',
-				other: 'Outros',
-				subject: 'Assunto',
-				send: 'Enviar',
-				yourmessages: 'Suas Mensagens',
-				lastmessage: 'Última mensagem',
-				back: 'Voltar',
-				partner: 'Parceiro de conversa',
-				reply: 'Responder',
-				errortime: 'Você só pode enviar uma mensagem a cada 10 segundos.'
-			},
 			overview: {
 				warning: '* A visualização avançada é melhor visualizada com a largura da janela acima de 1000px. (Configurações -> Configurações)',
 				combined: 'Combinado',
@@ -2735,48 +3162,11 @@
 		}
 	};
 	
-	var market = game_data.market === 'br' ? 'pt' : game_data.market;
-	var lang = !languages[market] ? languages.pt : languages[market];
+	var lang = !languages[twa.settings.lang] ? languages.pt : languages[twa.settings.lang];
 	
-	Array.prototype.remove = function(from, to) {
-		var rest = this.slice((to || from) + 1 || this.length);
-		this.length = from < 0 ? this.length + from : from;
-		return this.push.apply(this, rest);
+	if(newversion) {
+		UI.addConfirmBox('Relaxeaza Tribal Wars Advanced - Version ' + twa.version + '. <p><b>News:</b><br/>* New languages: English/Slovak</p>', function() {});
 	}
-
-	$.fn.center = function() {
-		this.css('position', 'absolute');
-		this.css('top', Math.max(0, (($(window).height() - this.outerHeight()) / 2) + $(window).scrollTop()) + 'px');
-		this.css('left', Math.max(0, (($(window).width() - this.outerWidth()) / 2) + $(window).scrollLeft()) + 'px');
-		return this;
-	}
-	
-	Number.prototype.format = function() {
-		var hours = Math.floor(this / 3600000);
-		var min = Math.floor(this / 60000) % 60;
-		var sec = (this / 1000) % 60;
-		var str = hours + ':';
-		
-		if(min < 10) {
-			str += '0';
-		}
-		
-		str += min + ':';
-		
-		if(sec < 10) {
-			str += '0';
-		}
-		
-		return str += sec;
-	}
-	
-	String.prototype.springf = function() {
-		var args = arguments;
-		
-		return this.replace(/{(\d+)}/g, function(match, number) {
-			return typeof args[number] != 'undefined' ? args[number] : match;
-		});
-	};
 	
 	twa.ready(function () {
 		switch(game_data.screen) {
@@ -2823,7 +3213,7 @@
 			twa.settings.assistentfarm && game_data.player.farm_manager && !$('.error').length && !$('#twa-assistentfarm').length && twa.assistentfarm.init();
 			break;
 		case 'place':
-
+			
 			break;
 		case 'settings':
 			!$('#di').length && twa.config();
