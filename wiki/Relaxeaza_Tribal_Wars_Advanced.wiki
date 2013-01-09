@@ -133,4 +133,17 @@ Simplismente vá a página referente a função e execute o script.
   * http://tribalwars-scripts.googlecode.com/svn/img/change.png Mensagens removida por falta de um servidor próprio.
   * http://tribalwars-scripts.googlecode.com/svn/img/bug.png O script não estava funcionando em outros servidores além de br/pt. Agora está funcionando.
 
+ * *v1.6* _09/01/13_
+  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Bloco de notas removido.
+  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Opção de "enviar o que tiver" do AutoFarm foi removido.
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Opção para ativar e desativar o AutoFarm.
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Anti-Ban -> Foi adicionado o Tempo Aleatório no AutoFarm, opção que faz com que o tempo entre um ataque e o outro fique entre 0-10 segundos, simulando um jogando normal.
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Anti-Ban -> Adicionado junto ao AutoFarm sistema que carrega páginas aleatórias do jogo, simulando um jogando normal.
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png varias melhoras de performace adicionada ao script, trabalhando com varias aldeias mais facilmente.
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Na visualização de aldeias foi adicionado um checkbox para selecionar todos os outros checkbox.
+  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Na visualização combinada para não premiuns apenas mostrava as tropas recrutadas no quartel e não as do estabulo/oficina.
+  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Alguns bugs das visualizações para jogadores sem premium foram reparados.
+  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Gerador de mapas na classificação não estava funcionando. Arrumado.
+  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Calculador de recursos apartir dos relatorios foi reformulado.
+
 === Qualquer duvida poste nos comentários que será respondida. ===
