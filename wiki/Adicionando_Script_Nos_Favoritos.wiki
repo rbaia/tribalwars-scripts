@@ -6,6 +6,8 @@ Muita gente me pergunta como adicionar os scripts na barra de favoritos no naveg
 
 *2.* Na barra de favoritos clique com o botão direito do mouse e clique em "Adicionar página...".
 
+Na Chrome a barra de favoritos vem ocultada por padrão, aperte **Ctrl+Shift+B** para ela aparecer.
+
 http://tribalwars-scripts.googlecode.com/svn/img/addbar0.png
 
 *3.* Em "Nome" coloque o nome que desejar, em "URL" coloque o script que você baixou (abra o script com o notepad) e clique em Salvar.
