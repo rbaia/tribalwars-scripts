@@ -227,5 +227,15 @@ http://tribalwars-scripts.googlecode.com/svn/img/autofarm.png
   * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Alguns bugs das visualizações para jogadores sem premium foram reparados.
   * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Gerador de mapas na classificação não estava funcionando. Arrumado.
   * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Calculador de recursos apartir dos relatorios foi reformulado.
-
+ * *v1.6.1* _12/02/13_
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png: Agora é possivel alterar o horario de envio no Planeador de Ataque apenas com as setas para cima e para baixa, alterando os valores da hora/minuto/segundo e tambem dia/mes/ano.
+ * *v1.6.2* _20/02/13_
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png: Ferramenta para mostrar as últimas conquistas do mundo.
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png: Agora é possivel trocar o tempo do planeador de ataques apenas apertando para cima/baixo.
+  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png: Problema ao renomear vários ataques de uma vez.
+  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png: Problema que fazia ataques do autofarm parar sozinho (ainda pode acontecer).
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png: Algumas traduções para o inglês/eslovaco estavam faltando.
+  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png: Ferramenta para calcular recursos e farmar aldeias pelo relatório foi reparado.
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png: Opção para enviar arietes diretamente do relatório de espionagem.
+  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png: Opção para selecinar apenas aldeias de ataque/defasa na visualização foi reparado.
 === Qualquer duvida poste nos comentários que será respondida. ===
