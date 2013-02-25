@@ -228,7 +228,7 @@ http://tribalwars-scripts.googlecode.com/svn/img/autofarm.png
   * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Gerador de mapas na classificação não estava funcionando. Arrumado.
   * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Calculador de recursos apartir dos relatorios foi reformulado.
  * *v1.6.1* _12/02/13_
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png: Agora é possivel alterar o horario de envio no Planeador de Ataque apenas com as setas para cima e para baixa, alterando os valores da hora/minuto/segundo e tambem dia/mes/ano.
+  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Agora é possivel alterar o horario de envio no Planeador de Ataque apenas com as setas para cima e para baixa, alterando os valores da hora/minuto/segundo e tambem dia/mes/ano.
  * *v1.6.2* _20/02/13_
   * http://tribalwars-scripts.googlecode.com/svn/img/add.png Ferramenta para mostrar as últimas conquistas do mundo.
   * http://tribalwars-scripts.googlecode.com/svn/img/add.png Agora é possivel trocar o tempo do planeador de ataques apenas apertando para cima/baixo.
