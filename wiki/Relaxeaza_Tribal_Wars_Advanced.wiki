@@ -30,7 +30,12 @@ _Para que os ataques sejam enviados, o script deve permanecer em execução._
  * Ataques coordenados.
  * Fakes.
 
-http://tribalwars-scripts.googlecode.com/svn/img/attackplanner.png
+*Screenshots:*
+
+<a href="http://i.imgur.com/MfCT4aP.png" target="_blank"><img width="150px" src="http://i.imgur.com/MfCT4aP.png"/></a>
+
+<a href="http://i.imgur.com/639Vqft.png" target="_blank"><img width="150px" src="http://i.imgur.com/639Vqft.png"/></a>
+
 
 ----
 === Renomeador de Aldeias ===
