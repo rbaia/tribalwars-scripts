@@ -37,7 +37,7 @@ Com o Farmador Automático é possível farmar diversas aldeias automaticamente.
 ----
 === Contrutor/Demolidor Automático ===
 
-Permite contruir/demolir edificios até uma um nivel especificado para cada edificio.
+Permite contruir/demolir edificios de todas aldeias visiveis na lista de aldeias da visualização até uma um nivel especificado para cada edificio.
 
 *Funcionamento:*
 
