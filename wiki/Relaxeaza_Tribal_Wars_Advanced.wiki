@@ -11,7 +11,7 @@
 Caso não saiba salvar o script na barra de favoritos do navegador, [http://code.google.com/p/tribalwars-scripts/wiki/Adicionando_Script_Nos_Favoritos aqui] tem um tutorial.
 
 === Languages ===
-<font color="red">*Help translate script here/Ajude a traduzir o script aqui: [http://goo.gl/cWd74a aqui].*</font>
+<font color="red">*Help translate script here/Ajude a traduzir o script aqui: [http://goo.gl/nTK4WY aqui].*</font>
  * *pt - Português*
  * *en - English *
 
