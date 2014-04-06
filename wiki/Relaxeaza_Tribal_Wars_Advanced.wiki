@@ -45,4 +45,5 @@ Execute o script na visualização *Visualizações » contruções*
 Configure os niveis que deseja clicando no icone do script -> Contrução Automática.
 Para gerar as contruções/demolições clique no icone do edifico no topo da lista de aldeias.
 
+----
 === Qualquer duvida poste nos comentários que será respondida. ===
