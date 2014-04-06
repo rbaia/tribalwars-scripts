@@ -6,7 +6,7 @@
 
 <font color="red">Não salve o script na barra de favoritos do jogo, salve nos favoritos do navegador.</font>
 
-*Codigo fonte do script: https://code.google.com/p/tribalwars-scripts/source/browse/trunk/tribalwars_advanced.js*
+*Codigo fonte do script: https://code.google.com/p/tribalwars-scripts/source/browse/trunk/tribalwars_advanced.js *
 
 Caso não saiba salvar o script na barra de favoritos do navegador, [http://code.google.com/p/tribalwars-scripts/wiki/Adicionando_Script_Nos_Favoritos aqui] tem um tutorial.
 
