@@ -1,20 +1,19 @@
-== Relaxeaza Tribal Wars Advanced 1.6.1 _(16/02/2013)_ ==
+== Relaxeaza Tribal Wars Advanced 1.0  ==
 
-[http://goo.gl/2HBtA » Download]
+*O script está passando por uma reestruturação, outras ferramentas serão incluidas ao longo das atualizações.*
+
+[http://goo.gl/R6lFDL » Download]
 
 <font color="red">Não salve o script na barra de favoritos do jogo, salve nos favoritos do navegador.</font>
 
 Caso não saiba salvar o script na barra de favoritos do navegador, [http://code.google.com/p/tribalwars-scripts/wiki/Adicionando_Script_Nos_Favoritos aqui] tem um tutorial.
 
-Todas as funções podem ser ativadas e desativadas abrindo a tela de configuração executando o script na página de configuração do Tribal Wars.
-
 === Languages ===
 <font color="red">*Help translate script here/Ajude a traduzir o script aqui: [http://goo.gl/gcdBW aqui].*</font>
- * *pt - Português (Relaxeaza)*
- * *en - English (Rafaclott)*
- * *sk - Slovak (wtfko)*
+ * *pt - Português*
+ * *en - English *
 
-= Ferramentas/Tools =
+= Ferramentas =
 
 === Planeador de Ataques ===
 
@@ -30,217 +29,9 @@ _Para que os ataques sejam enviados, o script deve permanecer em execução._
  * Ataques coordenados.
  * Fakes.
 
-*Screenshots:*
-
-<a href="http://i.imgur.com/MfCT4aP.png" target="_blank"><img width="150px" src="http://i.imgur.com/MfCT4aP.png"/></a>
-
-<a href="http://i.imgur.com/639Vqft.png" target="_blank"><img width="150px" src="http://i.imgur.com/639Vqft.png"/></a>
-
-
-----
-=== Renomeador de Aldeias ===
-
-Com o Renomeador de Aldeias lhe permite renomear aldeias em massa na visualização de aldeias (qualquer modo).
-
-*Usuários sem premium:*
-
-Usuários sem premium tem a possibilidade de renomear aldeias em massa e támbem renomear aldeias individuais diretamente na visualização de aldeias.
-
-http://tribalwars-scripts.googlecode.com/svn/img/renindividual.png
-
-*Máscaras:*
-
-Com as máscaras é possivel renomear aldeias "dinamicamente", usando valores da aldeia atual, veja as máscaras que você pode usar:
-
-|| *Máscara* || *Descrição* || *Visualização que funciona* ||
-|| `{points}` || _É substituido pela pontuação da aldeia._ || Produção, Combinado, Sem visualização avançada ||
-|| `{wood}` || _É substituido pela quantidade de madeira da aldeia._ || Produção, Sem visualização avançada ||
-|| `{stone}` || _É substituido pela quantidade de argila da aldeia._ || Produção, Sem visualização avançada ||
-|| `{iron}` || _É substituido pela quantidade de ferro da aldeia._ || Produção, Sem visualização avançada ||
-|| `{storage}` || _É substituido pelo tamanho do armazém da aldeia._ || Produção, Sem visualização avançada ||
-|| `{farmUsed}` || _É substituido pela quantidade de fazenda usada na aldeia._ || Produção, Combinado, Sem visualização avançada ||
-|| `{farmTotal}` || _É substituido pela quantidade total da fazenda na aldeia._ || Produção, Combinado, Sem visualização avançada ||
-|| `{current}` || _É substituido pelo nome atual da aldeia (muito bom para acrescentar algo ao nome)._ || Todas ||
-|| `{x}` || _É substituido pela coordenada x da aldeia._ || Todas ||
-|| `{y}` || _É substituido pela coordenada y da aldeia._ || Todas ||
-|| `{random(`*`mín, máx`*`)}` || _É substituido por um numero aleatório - Mais sobre a máscara abaixo._ || Todas ||
-|| `{unit(`*`unidade`*`)}` || _É substituido pela quantidade da unidade especificada - Mais sobre a máscara abaixo._ || Combinado ||
-
-----
-
-*Máscaras com argumentos:*
-
-<font color="green" size="3">`{random(`*`mín, máx`*`)}`</font>
-
-*mín:* número mínimo do número aleatório (não é obrigatório).
-
-*máx:* número máximo do número aleatório (não é obrigatório).
-
-Pode-se usar támbem: *`{random}`*, *`{random()}`*.
-
-Não é obrigatório especificar o número máximo e mínimo. Ex: *{random}*, *(random()}*.
-
-
-<font color="green" size="3">`{unit(`*`unidade`*`)}`</font>
-
-*unidade:* nome da unidade desejada. Os nomes são é ingles e obrigatório!
-
- * *spear* - Lanceiro.
- * *sword* - Espadachim.
- * *axe* - Bárbaro.
- * *archer* - Arqueiro.
- * *spy* - Explorador.
- * *light* - Cavalaria leve.
- * *marcher* - Arqueiro a cavalo.
- * *heavy* - Cavalaria pesada.
- * *ram* - Ariete.
- * *catapult* - Catapulta.
- * *knight* - Paladino.
- * *snob* - Nobre.
- * *militia* - Milicia.
-
 ----
 === Farmador Automático ===
 
 Com o Farmador Automático é possível farmar diversas aldeias automaticamente.
 
-*Opções:*
-
- * *Coordenadas* - A lista de coordenadas que o script irá atacar.
- * *Proteção* - Possibilita que sctipt ignore todas coordenadas que não sejam aldeias abandonadas.
-
-*O Farmador Automático conta com dois sistemas para enviar banimentos:*
-
-- Tempo aleatório entre 0-10 segundos no intervalo de cada ataque, simulando um jogador normal.
-
-- Sistema para carregar páginas aleatórias do jogo para simular um jogador normal.
-
-http://tribalwars-scripts.googlecode.com/svn/img/autofarm.png
-
-----
-|| *Funções* || *Descrição* || *Execução* || *Imagem* ||
-|| Assistente de Farm || _Envia ataques em todas as relatórios presentes na página do assistent de farm._ || Assistente de Farm || ||
-|| Contrução e Demolição em Massa || _Faz construções e demolições em massa_ || Visualizações » edifícios || ||
-|| Pesquisa em Massa || _Faz pesquisas em massa apartir da página de visualização de pesquisas (apenas ferreiro simples, por enquanto)._ || Visualizações » pesquisas || ||
-|| Visualização Avançada || _Adiciona ferramentas premium na página de visualização para jogadores sem conta premium._ || Visualizações || ||
-|| Alterador de Grupos || _Faz a mesma função que a visualização de grupos em trocar aldeias de grupos em massa, porém, em qualquer visualização._ || Visualizações || ||
-|| Mini-popup de Pontuação || _Mostra um mini-popup mostrando um gráfico de pontuação ao passar o mouse sobre os nomes das tribos/jogadores._ || Classificações, Membros de tribo || [http://farm8.staticflickr.com/7017/6783881775_ec7562dd29_z.jpg Imagem] ||
-|| Cálculo de Recursos || _Cálcula a quantidade exata de recursos de uma aldeia apartir de um relatório de espionagem._ || Relatório de espionagem || ||
-|| Últimos ataques || _Mostra quanto tempo se passou desde o último ataque em todas as aldeias visíveis no mapa._ || Mapa || [http://farm8.staticflickr.com/7022/6783906179_49acac1191_z.jpg Imagem] ||
-|| Filtro de Relatórios || _Filtra a lista de relatórios por titulo._ || Lista de relatórios || [http://farm8.staticflickr.com/7024/6784121569_0331f08a43_z.jpg Imagem] ||
-|| Filtro de Aldeias || _Filtra aldeias apartir do nome._ || Visualizações || ||
-|| Pesquisa de Aldeias || _Seleciona as coordenadas das aldeias de jogadores/abandonadas do mapa de acordo com as configurações._ || Mapa || [http://farm8.staticflickr.com/7002/6783896419_244610701b_z.jpg Imagem] ||
-|| Pesquisa de Aldeias Manual || _Permite selecionar a coordenada de qualquer aldeia visível no mapa clicando nelas._ || Mapa || [http://farm8.staticflickr.com/7014/6783901739_99bb3abc51_z.jpg Imagem] ||
-|| Pesquisa de Aldeias por Perfil || _Seleciona as coordenadas de todas as aldeias de um jogador de acordo com as configurações._ || Perfil de jogador || [http://farm8.staticflickr.com/7152/6784074433_7cd72cb057_z.jpg Imagem] ||
-|| Gerador de Mapas || _Gera mapas no Tribal Wars Stats apartir do jogadores/tribos selecionados na página de classificação._ || Classificações » qualquer modo || [http://farm8.staticflickr.com/7018/6784043477_34451274da_z.jpg Imagem] ||
-|| Estatísticas no Perfil || _Mostra gráficos e estatísticas no perfil de jogadores ou tribos._ || Perfil de jogador/tribo || [http://farm8.staticflickr.com/7160/6783889497_76805f1d90_z.jpg Imagem] ||
-|| Selecionador de Aldeias || _Seleciona aldeias apartir do rácio de unidades de ataque e defesa._ || Visualizações » tropas || ||
-|| Contador de Unidades || _Faz a contagem de tropas em todas as aldeias visíveis na página visualização de tropas._ || Visualizações » tropas || ||
-|| Renomeador de Comandos || _Renomeia qualquer tipo de comando apartir das páginas de visualizações comando/chegando_ || Visualizações » comandos/chegando || [http://farm8.staticflickr.com/7162/6806533073_896ceb9e76_z.jpg Imagem] ||
-|| Renomeador de Relatórios || _Renomeia todos os relatórios visíveis na página de relatórios._ || Lista de relatórios || [http://farm8.staticflickr.com/7034/6806511071_5edd056206_z.jpg Imagem] ||
-
----
-=== Ferramentas premium para jogadores sem premium ===
-
- * *Visualização avançada combinado/produção*
- * *Renomear aldeia individuais na página de visualização.*
-
-=== Histórico de atualizações ===
-
- * *v1.1* _03/02/12_
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Função para renomear relatórios.
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Função para renomear comandos na visualização.
-  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Largura do display de configuração aumentada para melhor visualização.
-  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Erros de digitação na ajuda no display de configuração.
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Adicionada checkboxes para poder renomear apenas aldeias selecionadas.
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Filtro de aldeias na visualização.
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Contador de tropas em visualizações > tropas.
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Função para calcular recursos exatos em uma aldeia apartir de um relatório de espionagem.
- * *v1.2* _07/02/12_
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Assistente de Farm automático.
-  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Algumas melhoras na performance do script.
- * *v1.3* _22/02/12_
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Construção e demolição em massa.
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Função para cancelar todas as construções/demolições.
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Farmador automatico.
-  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Bug ao mostrar a pontuação mínima/máxima da função de obter coordenadas.
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Atalho para ataque direto na função de calcular recursos.
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Imagem indicando que o script está trabalhando ao renomear aldeias/relatórios/comandos.
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Função para selecionar aldeias por rácio de tropas de ataque e defesa.
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Pesquisa em Massa.
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Opção para cancelar todas as pesquisas.
- * *v1.3.1* _24/02/12_
-  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Os ataques começam mais rapido quando o Assistente de Farm é iniciado.
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Log de ataques no Assistente de Farm.
-  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Erro em algumas funções quando usado apartir do Modo de Férias.
- * *v1.3.2* _24/05/12_
-  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Layout do tooltip de ajuda no display configurações.
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Função de lembrete.
-  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Cores dos identificadores de coletor de coordenadas foram alteradas para melhor visualização.
-  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Agora as configurações de pontuação mínima e máxima das funções de obter coordenadas no mapa e no perfil de jogadores são configuradas na própria página.
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Agora é possivel alterar os grupos das aldeias em qualquer modo de visualização
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Planeador de ataques - envio de ataques em horários programados.
-  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Agora o assistent de farm também usa a opção C quando disponível.
- * *v1.3.3* _04/08/12_
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Função para selecionar aldeias especificas na visualização, como aldeias com tropas de ataque, defesa, etc.
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Area para troca de mensagens com o desenvolvedor. (perguntas, sugestões...)
- * *v1.3.4* _15/08/12_
-  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Forma para troca de mensagens com o desenvolvedor foi melhorada. O modo de conversa é identico a troca de mensagens do jogo.
- * *v1.4* _19/08/12_
-  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Planeador de Ataques -> No campo Horário o valor é sempre o último horário inserido.
-  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Planeador de Ataques -> Ao adicionar as coordenadas da aldeia atacante automaticamente será adicionada todas as tropas da aldeia nos campos das unidades.
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Planeador de Ataques -> Agora é possivel adicionar apoio aos ataques programados.
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Planeador de Ataques -> Foi adicionado um log de comandos para melhor visualização dos ataques/apoios e ataques com problemas.
-  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Mensagens -> A troca de mensagens deixou de ser "Contato" para "Mensagens".
-  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Mensagens -> Proteção contra envio de multiplas mensagens (spam).
-  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Coletor de Coordenadas Manual -> Ao clicar em uma aldeia que já foi selecionada, ela será removidada da lista de coordenadas.
-  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Engine -> Os icones das ferramentas que são usadas em qualquer página do jogo foram movidas para uma barra independente.
-  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Farmador Automático -> Deixará de ser executado apenas na Praça e o modo de uso será parecido com o Planeador de Ataques.
-  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Farmador Automático -> Agora o Farmador Automático pode ser executado de qualquer página do jogo.
-  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Farmador Automático -> O design foi reformulado.
- * *v1.4.1* _20/08/12_
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Farmador Automático -> Foi adicionado um log de ataques.
- * *v1.4.2* _21/08/12_
-  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Farmador Automático -> O problema do "Não há tropas na aldeia" foi solucionado.
-  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Farmador Automático -> O problema da opção "Caso não tenha tropas usar o que tiver" foi solucionado.
- * *v1.4.3* _22/08/12_
-  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Farmador Automático -> Problema na detecção do tempo em que as tropas em andamento retornariam arrumado.
- * *v1.4.4* _26/08/12_
-  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Construtor Automático -> Problema que cancelava todas ordens de contruções foi concertado.
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Area exclusiva para sugestões para o script.
- * *v1.4.5* _27/08/12_
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Visualização Avançada -> Adiciona ferramentas premium na página de visualização para jogadores sem conta premium.
- * *v1.5* _05/09/12_
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Renomeador de Aldeias -> Agora é possivel renomear aldeias em massa e aldeias individuais em contas sem premium.
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Renomeador de Aldeias -> Máscaras foram adicionadas para ter mais opções de manipulação dos nomes das aldeias (apenas para usuarios sem premiumm, por enquanto).
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Visualização Avançada -> Modo "Combinado" foi adicionado aos modos de visulização (sem premium).
-  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Farmador Automático -> Problema que não dava continuidade aos ataques após retornarem foi concertado.
- * *v1.5.1* _03/10/12_
-  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Sugestões removida por falta de um servidor próprio.
-  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Mensagens removida por falta de um servidor próprio.
-  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png O script não estava funcionando em outros servidores além de br/pt. Agora está funcionando.
-
- * *v1.6* _09/01/13_
-  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Bloco de notas removido.
-  * http://tribalwars-scripts.googlecode.com/svn/img/change.png Opção de "enviar o que tiver" do AutoFarm foi removido.
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Opção para ativar e desativar o AutoFarm.
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Anti-Ban -> Foi adicionado o Tempo Aleatório no AutoFarm, opção que faz com que o tempo entre um ataque e o outro fique entre 0-10 segundos, simulando um jogando normal.
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Anti-Ban -> Adicionado junto ao AutoFarm sistema que carrega páginas aleatórias do jogo, simulando um jogando normal.
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png varias melhoras de performace adicionada ao script, trabalhando com varias aldeias mais facilmente.
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Na visualização de aldeias foi adicionado um checkbox para selecionar todos os outros checkbox.
-  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Na visualização combinada para não premiuns apenas mostrava as tropas recrutadas no quartel e não as do estabulo/oficina.
-  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Alguns bugs das visualizações para jogadores sem premium foram reparados.
-  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Gerador de mapas na classificação não estava funcionando. Arrumado.
-  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Calculador de recursos apartir dos relatorios foi reformulado.
- * *v1.6.1* _12/02/13_
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Agora é possivel alterar o horario de envio no Planeador de Ataque apenas com as setas para cima e para baixa, alterando os valores da hora/minuto/segundo e tambem dia/mes/ano.
- * *v1.6.2* _20/02/13_
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Ferramenta para mostrar as últimas conquistas do mundo.
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Agora é possivel trocar o tempo do planeador de ataques apenas apertando para cima/baixo.
-  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Problema ao renomear vários ataques de uma vez.
-  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Problema que fazia ataques do autofarm parar sozinho (ainda pode acontecer).
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Algumas traduções para o inglês/eslovaco estavam faltando.
-  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Ferramenta para calcular recursos e farmar aldeias pelo relatório foi reparado.
-  * http://tribalwars-scripts.googlecode.com/svn/img/add.png Opção para enviar arietes diretamente do relatório de espionagem.
-  * http://tribalwars-scripts.googlecode.com/svn/img/bug.png Opção para selecinar apenas aldeias de ataque/defasa na visualização foi reparado.
 === Qualquer duvida poste nos comentários que será respondida. ===
