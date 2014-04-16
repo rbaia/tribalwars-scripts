@@ -48,4 +48,15 @@ Configure os niveis que deseja clicando no icone do script -> Contrução Autom�
 Para gerar as contruções/demolições clique no icone do edifico no topo da lista de aldeias.
 
 ----
+=== Pesquisador Automático ===
+
+Permite pesquisar unidades em todas aldeias de uma vez.
+No momento só está disponivel para sistemas de pesquisa simples.
+
+*Funcionamento:*
+
+Execute o script na visualização *Visualizações » pesquisas*
+Para gerar as pesquisas clique no icone da unidade no topo da lista de aldeias.
+
+----
 === Qualquer duvida poste nos comentários que será respondida. ===
