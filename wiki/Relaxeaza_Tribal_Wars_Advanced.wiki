@@ -59,4 +59,6 @@ Execute o script na visualização *Visualizações » pesquisas*
 Para gerar as pesquisas clique no icone da unidade no topo da lista de aldeias.
 
 ----
+<font color="red">As ferramentas estão disponíveis para qualquer um usar por conta própria, não me responsabilizarei por bans.</font>
+----
 === Qualquer duvida poste nos comentários que será respondida. ===
