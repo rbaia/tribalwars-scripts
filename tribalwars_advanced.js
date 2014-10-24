@@ -2,12 +2,13 @@
 
 // verifica se o script ja foi executado na página
 if ( document.getElementById( 'TWA_MENU' ) ) {
-	return false;
+	//return false;
 }
 
 var DATA;
 var TRANSLATES;
 var TEMPLATES;
+var STYLES;
 
 // numero de revisão
 var rev = 1;
@@ -25,12 +26,13 @@ var lang;
 var logHistory = [];
 // dados padrão do cache do script
 var defaults = {
-	'TWA DATA': { units: {}, builds: {}, settings: {}, villages: {}, configs: { lang: 'en' }, rev: rev },
+	'TWA DATA': { units: {}, builds: {}, settings: {}, villages: {}, players: {}, configs: { lang: 'en' }, rev: rev },
 	'TWA AUTO_FARM MODELS': { 'Farm #1': { units: {}, coords: [], index: 0 } },
 	'TWA COMMAND_PLANNER COMMANDS': [],
 	'TWA COMMAND_PLANNER COMMANDS_SEND': [],
 	'TWA AUTO_FARM ATTACK_LOG': [],
-	'TWA AUTO_BUILD LEVELS': { main: 20, barracks: 25, stable: 20, garage: 10, snob: 1, smith: 20, place: 1, statue: 1, market: 10, wood: 30, stone: 30, iron: 30, farm: 30, storage: 30, hide: 0, wall: 20 },
+	'TWA AUTO_BUILD MAX_LEVELS': { main: 20, barracks: 25, stable: 20, garage: 10, snob: 1, smith: 20, place: 1, statue: 1, market: 10, wood: 30, stone: 30, iron: 30, farm: 30, storage: 30, hide: 0, wall: 20 },
+	'TWA AUTO_BUILD MIN_LEVELS': { main: 20, barracks: 25, stable: 20, garage: 10, snob: 1, smith: 20, place: 1, statue: 1, market: 10, wood: 30, stone: 30, iron: 30, farm: 30, storage: 30, hide: 0, wall: 20 },
 	'TWA AUTO_BUILD ORDERS': 5,
 	'TWA TRANSLATES': {},
 	'TWA TEMPLATES': {}
@@ -86,7 +88,7 @@ var COMMAND_PLANNER = function() {
 	});
 	
 	// adiciona a entrada do planeador no menu principal e gera a janela do app
-	var app = INTERFACE.createApp(lang.command_planner.command_planner, TEMPLATES.command_planner.css, TEMPLATES.command_planner.html, {
+	var app = INTERFACE.createApp(lang.command_planner.command_planner, TEMPLATES.command_planner.html, {
 		inputs: inputs,
 		header: header
 	});
@@ -155,7 +157,7 @@ var COMMAND_PLANNER = function() {
 	});
 	
 	// carrega o plugin jquery.DateTimePicker
-	jQuery.getScript('http://relaxeaza.aws.af.cm/twa/jquery.datetimepicker.js', function() {
+	jQuery.getScript('http://relaxeaza.aws.af.cm/TWA/jquery.datetimepicker.js', function() {
 		app.find( '[name=CMDPLANNER_TIME]' ).datetimepicker({
 			value: TIMESTAMP_FORMAT( CURRENT_TIME() ),
 			format: 'H:i:s d/m/Y',
@@ -310,18 +312,26 @@ var COMMAND_PLANNER = function() {
 	function UPDATE_COORDS_INFO( elem ) {
 		LOG( 'COMMAND_PLANNER->UPDATE_COORDS_INFO()' );
 		
+		var village;
+		
 		app.find( '.coord' ).each(function( i, elem ) {
-			// pega os dados de cada aldeia
-			GET_VILLAGE_INFO(elem.innerHTML, function( village ) {
-				// caso a aldeia retorne um erro, é mostrado direto no elemento
-				if ( village.error ) {
-					elem.innerHTML = village.error + ' (' + elem.innerHTML + ')';
-				} else {
-					elem.innerHTML = '<a href="' + URL( 'info_village&id=' + village.id ) + '">' + village.name + '</a>';
-					
-					TOOLTIP( elem, FORMAT( '{lang.command_planner.player}: <strong>{player}</strong>', { player: village.player == 0 ? lang.command_planner.abandoned : village.playerName } ) );
-				}
-			});
+			if ( DATA.villages[ elem.innerHTML ] ) {
+				village = DATA.villages[ elem.innerHTML ];
+				
+				elem.innerHTML = '<a href="' + URL( 'info_village&id=' + village.id ) + '">' + village.name + '</a>';
+				TOOLTIP( elem, FORMAT( '{lang.command_planner.player}: <strong>{player}</strong>', { player: village.player_id == 0 ? lang.command_planner.abandoned : village.player_name } ) );
+			} else {
+				GET_VILLAGE_INFO(elem.innerHTML, function( data ) {
+					if ( data.villages.length > 0 ) {
+						village = data.villages[ 0 ];
+						DATA.villages[ elem.innerHTML ] = village;
+						localStorage[ 'TWA DATA' ] = JSON.stringify( DATA );
+						
+						elem.innerHTML = '<a href="' + URL( 'info_village&id=' + village.id ) + '">' + village.name + '</a>';
+						TOOLTIP( elem, FORMAT( '{lang.command_planner.player}: <strong>{player}</strong>', { player: village.player_id == 0 ? lang.command_planner.abandoned : village.player_name } ) );
+					}
+				});
+			}
 		});
 	}
 	
@@ -456,7 +466,7 @@ var COMMAND_PLANNER = function() {
 	 * data {Object} - Objeto com os dados necessários para realizar o comando.
 	 * vid {Number} - ID da aldeia que realizará o comando. */
 	function SEND( cmd, data, vid ) {
-		LOG( 'COMMAND_PLANNER->SEND( ' + JSON.strigify( cmd ) + ' )' );
+		LOG( 'COMMAND_PLANNER->SEND( ' + JSON.stringify( cmd ) + ' )' );
 		
 		// requisição 1/2 para o envio do comando
 		jQuery.post(URL( 'place&try=confirm', vid ), data, function( html ) {
@@ -492,7 +502,7 @@ var COMMAND_PLANNER = function() {
 					SAVE();
 					UPDATE();
 					
-					LOG( 'COMMAND_PLANNER: ' + lang.command_planner.success );
+					LOG( 'COMMAND_PLANNER: ' + lang.command_planner.success_send );
 				});
 			}, freetime);
 		});
@@ -534,7 +544,7 @@ var AUTO_FARM = function() {
 	});
 	
 	// adiciona a entrada do farmador no menu principal e jera a janela do app
-	var app = INTERFACE.createApp( lang.auto_farm.auto_farm, TEMPLATES.auto_farm.css, TEMPLATES.auto_farm.html );
+	var app = INTERFACE.createApp( lang.auto_farm.auto_farm, TEMPLATES.auto_farm.html );
 	
 	for ( var unit in DATA.units ) {
 		header += '<th><img src="http://cdn.tribalwars.com.br/graphic/unit/unit_' + unit + '.png"/></th>';
@@ -666,12 +676,8 @@ var AUTO_FARM = function() {
 	}).on('click', '.TWA_EMPTY_LOG', function() {
 		localStorage.removeItem( 'TWA AUTO_FARM ATTACK_LOG' );
 		
-		jQuery( '#TWA_ATTACK_LOG' ).hide().empty();
+		jQuery( '#TWA_ATTACK_LOG' ).hide().find( 'tbody tr' ).remove();
 	});
-	
-	if ( attackLog.length > 0 ) {
-		jQuery( '#TWA_ATTACK_LOG' ).show();
-	}
 	
 	// insere o historico de ataques na interface
 	jQuery.each(attackLog, function() {
@@ -690,6 +696,10 @@ var AUTO_FARM = function() {
 			mid: this.mid
 		}));
 	});
+	
+	if ( !attackLog.length ) {
+		jQuery( '#TWA_ATTACK_LOG' ).hide();
+	}
 	
 	/** UPDATE - Atualiza a lista de modelos */
 	function UPDATE() {
@@ -741,6 +751,11 @@ var AUTO_FARM = function() {
 		
 		var time = $sd.text() + ' ' + $st.text();
 		var coords = data.x + '|' + data.y;
+		var log = {};
+		
+		for ( var unit in DATA.units ) {
+			units[ unit ] = data[ unit ];
+		}
 		
 		attackLog.push({
 			mid: mid,
@@ -748,8 +763,6 @@ var AUTO_FARM = function() {
 			units: units,
 			coords: coords
 		});
-		
-		localStorage[ 'TWA AUTO_FARM ATTACK_LOG' ] = JSON.stringify( attackLog );
 		
 		var htmlUnits = '';
 		
@@ -766,6 +779,8 @@ var AUTO_FARM = function() {
 			mid: mid
 		}));
 		
+		localStorage[ 'TWA AUTO_FARM ATTACK_LOG' ] = JSON.stringify( attackLog );
+	
 		jQuery( '#TWA_ATTACK_LOG' ).show();
 	}
 	
@@ -960,6 +975,8 @@ var AUTO_FARM = function() {
 								self.prepare( self.data.coords[ self.data.index ].split( '|' ) );
 							}, time);
 						});
+					} else {
+						self.next();
 					}
 				});
 				
@@ -988,41 +1005,51 @@ var AUTO_FARM = function() {
 	UPDATE( true );
 };
 
+/** AUTO_BUILD - Adiciona ordens de construção em todas aldeias da vizualização de apenas uma vez */
 var AUTO_BUILD = function() {
 	LOG( 'AUTO_BUILD()' );
 	
-	var buildings = [ 'main', 'barracks', 'stable', 'garage', 'snob', 'smith', 'place', 'statue', 'market', 'wood', 'stone', 'iron', 'farm', 'storage', 'hide', 'wall' ];
-	var thead = '<th><img src="http://cdn.tribalwars.com.br/graphic/buildings/' + buildings.join( '.png"/></th><th><img src="http://cdn.tribalwars.com.br/graphic/buildings/' ) + '.png"></th>';
-	var tbody = '<tr><td><input type="text" name="' + buildings.join( '"/></td><td><input type="text" name="' ) + '"></td></tr>';
+	var buildings = [ 'main', 'barracks', 'stable', 'garage', 'snob', 'smith', 'place', 'statue', 'market', 'wood', 'stone', 'iron', 'farm', 'storage', 'hide', 'wall' ],
+		// html
+		thead = '<th><img src="http://cdn.tribalwars.com.br/graphic/buildings/' + buildings.join( '.png"/></th><th><img src="http://cdn.tribalwars.com.br/graphic/buildings/' ) + '.png"></th>',
+		tbody = '<tr><td><input type="text" name="' + buildings.join( '"/></td><td><input type="text" name="' ) + '"></td></tr>',
 	
-	var app = INTERFACE.createApp(lang.auto_build.auto_build, TEMPLATES.auto_build.css, TEMPLATES.auto_build.html, {
-		thead: thead,
-		tbody: tbody
-	});
+		app = INTERFACE.createApp(lang.auto_build.auto_build, TEMPLATES.auto_build.html, { thead: thead, tbody: tbody }),
 	
-	var levels = DEFAULTS( 'TWA AUTO_BUILD LEVELS' );
-	var max_orders = DEFAULTS( 'TWA AUTO_BUILD ORDERS' );
+		MAX_LEVELS = DEFAULTS( 'TWA AUTO_BUILD MAX_LEVELS' ),
+		MIN_LEVELS = DEFAULTS( 'TWA AUTO_BUILD MIN_LEVELS' ),
+		MAX_ORDERS = DEFAULTS( 'TWA AUTO_BUILD ORDERS' );
 	
+	// coloca os levels atuais nos inputs de configuração
 	jQuery.each(buildings, function( i, building ) {
-		app.find( '[name=' + building + ']' ).val( levels[ building ] );
+		app.find( '[name=' + building + ']' ).val( MAX_LEVELS[ building ] );
 	});
 	
-	app.find( '[name=max_orders]' ).val( max_orders );
+	app.find( '#TWA_MAX_ORDERS' ).val( MAX_ORDERS );
 	
-	app.find( 'input' ).change(function() {
-		if ( this.name === 'max_orders' ) {
-			localStorage[ 'TWA AUTO_BUILD ORDERS' ] = max_orders = this.value;
-		} else {
-			levels[ this.name ] = this.value;
-			localStorage[ 'TWA AUTO_BUILD LEVELS' ] = JSON.stringify( levels );
+	// sistema de salve automatico (configuração)
+	app.find( 'input' ).keypress(function() {
+		var id = jQuery( this ).parentsUntil( 'section' ).last().attr( id );
+		
+		if ( this.id === 'TWA_MAX_ORDERS' ) {
+			localStorage[ 'TWA AUTO_BUILD ORDERS' ] = MAX_ORDERS = this.value;
+		} else if( id === 'TWA_MAX_LEVELS' ) {
+			MAX_LEVELS[ this.name ] = this.value;
+			localStorage[ 'TWA AUTO_BUILD MAX_LEVELS' ] = JSON.stringify( MAX_LEVELS );
+		} else if( id === 'TWA_MIN_LEVELS' ) {
+			MIN_LEVELS[ this.name ] = this.value;
+			localStorage[ 'TWA AUTO_BUILD MIN_LEVELS' ] = JSON.stringify( MIN_LEVELS );
 		}
 	});
 	
+	// verifica se esta na página correta
 	if ( document.getElementById( 'overview' ) && document.getElementById( 'overview' ).value === 'buildings' ) {
+		// ativa o modo contrução
 		if ( BuildingOverview._display_type === false ) {
 			BuildingOverview.show_all_upgrade_buildings();
 		}
 		
+		// transforma os icones dos edificios no botão de ignição para as contruções
 		jQuery( '#buildings_table tr:first th:has(img[src*=buildings]) a' ).click(function () {
 			var building = jQuery( 'img', this )[ 0 ].src.match( rpngname )[ 1 ];
 			
@@ -1030,37 +1057,45 @@ var AUTO_BUILD = function() {
 		});
 		
 		function BUILD( building, destroy ) {
-			var up_url = jQuery( '#upgrade_building_link' ).val();
-			var down_url = jQuery( '#downgrade_building_link' ).val();
-			var limit = levels[ destroy ? 1 : 0 ][ building ];
-			var type = destroy ? 'red' : 'green';
-			max_orders = destroy ? 5 : max_orders;
+			var upgradeURL = jQuery( '#upgrade_building_link' ).val(),
+				downgradeURL = jQuery( '#downgrade_building_link' ).val(),
+				limit = ( destroy ? MIN_LEVELS : MAX_LEVELS )[ building ],
+				type = destroy ? 'red' : 'green',
+				ul;
+				
+			MAX_ORDERS = destroy ? 5 : MAX_ORDERS;
 			
+			// loop em todas aldeias da vizualização
 			jQuery( '#buildings_table tr:not(:first)' ).each(function() {
-				var vid = this.className.match( rdigit )[ 0 ];
-				var data = BuildingOverview._upgrade_villages[ vid ];
+				// id da aldeia atual
+				var village = this.className.match( rdigit )[ 0 ],
+					data = BuildingOverview._upgrade_villages[ village ];
 				
 				if ( destroy ? data.can_destroy : data.buildings[ building ] ) {
-					var building_orders = jQuery( 'td:last li:has(.order-status-light[style*=' + type + ']) img[src*="' + building + '.png"]', this ).length;
-					var current_level = parseInt( jQuery( '.b_' + building, this ).text(), 10 ) + building_orders;
-					var orders = jQuery( 'td:last li:has(.order-status-light[style*=' + type + '])', this ).length;
+					// quantidade total de ordens que já estão em andamento na aldeia
+					var building_orders = jQuery( 'td:last li:has(.order-status-light[style*=' + type + ']) img[src*="' + building + '.png"]', this ).length,
+					// level atual do edificio
+						current_level = parseInt( jQuery( '.b_' + building, this ).text(), 10 ) + building_orders,
+					// quantidade de ordens do edificio a ser construido que já estão em andamento na aldeia
+						orders = jQuery( 'td:last li:has(.order-status-light[style*=' + type + '])', this ).length;
 					
-					for ( ; orders < max; orders++ ) {
+					// executa quantas vezes for preciso até exercer o limite de ordens
+					for ( ; orders < MAX_ORDERS; orders++ ) {
 						if ( destroy ? current_level-- > limit : current_level++ < limit ) {
 							jQuery.ajax({
-								url: ( destroy ? down_url : up_url ).replace( rvid, 'village=' + vid ),
-								data: { id: building, source: vid, force: 1 },
+								url: ( destroy ? downgradeURL : upgradeURL ).replace( rvid, 'village=' + village ),
+								data: { id: building, source: village, force: 1 },
 								async: false,
 								dataType: 'json',
 								success: function( complete ) {
 									if ( complete.success ) {
-										if ( !jQuery( '#building_order_' + vid ).length ) {
-											var ul = jQuery( '<ul class="order_queue" id="building_order_' + vid + '"></ul>' );
+										if ( !jQuery( '#building_order_' + village ).length ) {
+											ul = jQuery( '<ul class="order_queue" id="building_order_' + village + '"></ul>' );
 											BuildingOverview.create_sortable( ul );
-											jQuery( '#v_' + vid + ' td:last-child' ).append( ul );
+											jQuery( '#v_' + village + ' td:last-child' ).append( ul );
 										}
 										
-										jQuery( '#building_order_' + vid ).html( complete.building_orders );
+										jQuery( '#building_order_' + village ).html( complete.building_orders );
 									}
 								}
 							});
@@ -1077,35 +1112,28 @@ var AUTO_BUILD = function() {
 var AUTO_RESEARCH = function() {
 	LOG( 'AUTO_RESEARCH()' );
 	
-	// var app = INTERFACE.createApp( lang.auto_research.auto_research, TEMPLATES.auto_research.css, TEMPLATES.auto_research.html );
-	
 	if ( document.getElementById( 'overview' ) && document.getElementById( 'overview' ).value === 'tech' ) {
 		jQuery( '#techs_table tr:first a:has(img)' ).click(function() {
-			return RESEARCH( this.href.match( rorder )[ 1 ] );
+			RESEARCH( this.href.match( rorder )[ 1 ] );
+			
+			return false;
 		});
 		
 		function RESEARCH( unit ) {
-			jQuery( '#techs_table tr' ).each(function() {
-				var vid = this.id.split( '_' )[ 1 ];
+			jQuery( '#techs_table tr[id]' ).each(function() {
+				var village = this.id.split( '_' )[ 1 ];
 				
-				if ( document.getElementById( vid + '_' + unit ) ) {
+				if ( document.getElementById( village + '_' + unit ) ) {
 					jQuery.ajax({
 						type: 'post',
-						url: TechOverview.urls.ajax_research_link.replace( rvid, 'village=' + vid ),
+						url: TechOverview.urls.ajax_research_link.replace( rvid, 'village=' + village ),
 						data: { tech_id: unit },
 						dataType: 'json',
-						vid: vid,
+						village: village,
 						success: function( complete ) {
 							if ( complete.success ) {
-								jQuery( '#village_tech_order_' + this.vid ).html( complete.tech_order );
-								TechOverview.change_dot( jQuery( '#' + this.vid + '_' + unit ), this.vid, unit, 'brown' );
-								
-								if ( game_data.village.id == this.vid ) {
-									jQuery( '#wood' ).html( complete.resources[ 0 ] );
-									jQuery( '#stone' ).html( complete.resources[ 1 ] );
-									jQuery( '#iron' ).html( complete.resources[ 2 ] );
-									startTimer();
-								}
+								jQuery( '#village_tech_order_' + this.village ).html( complete.tech_order );
+								TechOverview.change_dot( jQuery( '#' + this.village + '_' + unit ), this.village, unit, 'brown' );
 							}
 						}
 					});
@@ -1115,6 +1143,57 @@ var AUTO_RESEARCH = function() {
 			return false;
 		}
 	}
+};
+
+var CONQUERS = function() {
+	var app = INTERFACE.createApp(lang.conquers.conquers, TEMPLATES.conquers.html, function() {
+		var since = CURRENT_TIME() / 1000 - ( 60 * 60 * 1 ) + 10,
+			tbody = jQuery( '#TWA_CONQUERS_CONQUERS tbody' ),
+			_players = [],
+			_villages = [];
+		
+		jQuery.get('/interface.php?func=get_conquer&since=' + since, function( data ) {
+			var conquers = data.split( /\n/ ),
+				conquer,
+				villageId,
+				time,
+				newOwner,
+				oldOwner;
+			
+			if ( !data.length ) {
+				jQuery( '#TWA_CONQUERS_CONQUERS' ).hide();
+				return jQuery( '#TWA_CONQUERS h3' ).show();
+			}
+			
+			for ( var i = conquers.length - 1; i >= 0; i-- ) {
+				conquer = conquers[ i ].split( ',' );
+				villageId = Number( conquer[ 0 ] );
+				time = TIMESTAMP_FORMAT( Number( conquer[ 1 ] ) * 1000 );
+				newOwner = Number( conquer[ 2 ] );
+				oldOwner = Number( conquer[ 3 ] );
+				
+				if ( _villages.indexOf( villageId ) === -1 ) _villages.push( villageId );
+				if ( _players.indexOf( newOwner ) === -1 ) _players.push( newOwner );
+				if ( _players.indexOf( oldOwner ) === -1 && oldOwner > 0 ) _players.push( oldOwner );
+				
+				tbody.append( '<tr><td data-vid="' + villageId + '"></td><td>' + time + '</td><td data-pid="' + newOwner + '"></td><td data-pid="' + oldOwner + '"></td></tr>' );
+			}
+			
+			tbody.find( 'td[data-pid=0]').html( lang.command_planner.abandoned );
+			
+			jQuery.each(_villages, function( index ) {
+				GET_VILLAGE_INFO(this, function( villageData, villageId ) {
+					tbody.find( 'td[data-vid="' + villageId + '"]' ).html( '<a href="' + URL( 'info_village&id=' + villageId ) + '">' + villageData.name + ' (' + villageData.x + '|' + villageData.y + ')</a>' );
+				}, this);
+			});
+			
+			jQuery.each(_players, function( index ) {
+				GET_PLAYER_INFO(this, function( playerData, playerId ) {
+					tbody.find( 'td[data-pid="' + playerId + '"]' ).html( '<a href="' + URL( 'info_player&id=' + playerId ) + '">' + playerData.player_name + '</a>' );
+				}, this);
+			});
+		});
+	});
 };
 
 /** CONFIGS - Janela de configurações do script */
@@ -1137,7 +1216,7 @@ var CONFIGS = function() {
 		configs += FORMAT( '<tr><td>{name}</td><td class="TWA_CONFIGS_VALUE">{value}</td><td>{desc}</td></tr>', this );
 	});
 	
-	var app = INTERFACE.createApp(lang.configs.configs, TEMPLATES.configs.css, TEMPLATES.configs.html, {
+	var app = INTERFACE.createApp(lang.configs.configs, TEMPLATES.configs.html, {
 		configs: configs
 	});
 	
@@ -1164,7 +1243,7 @@ var CONFIGS = function() {
 				return false;
 			}
 			
-			jQuery.post('http://relaxeaza.aws.af.cm/twa/feedback.php', {
+			jQuery.post('http://relaxeaza.aws.af.cm/TWA/feedback.php', {
 				message: textarea.val(),
 				player: game_data.player.id,
 				world: game_data.world,
@@ -1196,7 +1275,6 @@ var INTERFACE = function() {
 	HTML( 'body', TEMPLATES.twa.tooltip );
 	HTML( '#menu_row2', TEMPLATES.twa.icon );
 	HTML( 'body', TEMPLATES.twa.background );
-	CSS( TEMPLATES.twa.css );
 	
 	$tooltip = jQuery( '#TWA_TOOLTIP' );
 	var background = jQuery( '#TWA_BG' );
@@ -1216,14 +1294,17 @@ var INTERFACE = function() {
 		menu.stop().slideToggle( 100 );
 	});
 	
-	var APP = function( id, css, html, templ ) {
+	var APP = function( id, html, templ ) {
+		var self = this;
 		this.id = id;
-		this.content = apps[ id ] = HTML( background, '<div/>' ).append( FORMAT( html, templ ) );
-		
-		CSS( css );
+		this.content = apps[ id ] = HTML( background, '<div/>' ).append( FORMAT( html, typeof templ === 'function' ? null : templ ) );
 		
 		// adiciona o item no menu | quando clicar no item
 		HTML( menu, '<li><a href="#">» ' + id + '</a></li>' ).click(function() {
+			if ( typeof templ === 'function' ) {
+				templ();
+			}
+			
 			// mostra a janela de fundo
 			background.show();
 			// oculta o menu
@@ -1252,8 +1333,8 @@ var INTERFACE = function() {
 		return this.content.find( expr );
 	};
 	
-	this.createApp = function( id, css, html, templ ) {
-		return new APP( id, css, html, templ );
+	this.createApp = function( id, html, templ ) {
+		return new APP( id, html, templ );
 	};
 	
 	return this;	
@@ -1264,26 +1345,36 @@ var READY = function( callback ) {
 	DATA = DEFAULTS( 'TWA DATA' );
 	TRANSLATES = DEFAULTS( 'TWA TRANSLATES' );
 	TEMPLATES = DEFAULTS( 'TWA TEMPLATES' );
+	TEMPLATES = DEFAULTS( 'TWA TEMPLATES' );
+	STYLES = localStorage[ 'TWA STYLES' ];
 	
 	$sd = jQuery( '#serverDate' );
 	$st = jQuery( '#serverTime' );
 	
 	// caso não tenha nenhum dado no cache
-	if ( jQuery.isEmptyObject( DATA.units ) ) {
+	if ( jQuery.isEmptyObject( DATA.units ) || DATA.rev < rev ) {
 		DATA.units = {};
 		DATA.settings = {};
 		
 		var getConfig = jQuery.get( 'interface.php?func=get_config' );
 		var getUnits = jQuery.get( 'interface.php?func=get_unit_info' );
 		var getMail = jQuery.getJSON( URL( 'mail&_partial' ) );
-		var getTranslates = jQuery.getJSON( 'http://relaxeaza.aws.af.cm/twa/translates.js?' + $.now() );
-		var getTemplates = jQuery.getJSON( 'http://relaxeaza.aws.af.cm/twa/templates.js?' + $.now() );
+		
+		//var getTranslates = jQuery.getJSON( 'http://relaxeaza.aws.af.cm/TWA/translates.js?' + $.now() );
+		var getTranslates = jQuery.getJSON( 'https://dl.dropboxusercontent.com/u/12273739/TWA/translates.js?' + $.now() );
+		//var getTemplates = jQuery.getJSON( 'http://relaxeaza.aws.af.cm/TWA/templates.js?' + $.now() );
+		var getTemplates = jQuery.getJSON( 'https://dl.dropboxusercontent.com/u/12273739/TWA/templates.js?' + $.now() );
+		//var getStyles = jQuery.getJSON( 'http://relaxeaza.aws.af.cm/TWA/styles.css?' + $.now() );
+		var getStyles = jQuery.get( 'https://dl.dropboxusercontent.com/u/12273739/TWA/styles.css?' + $.now() );
 		
 		// é gerado novos dados apartir do servidor
-		jQuery.when( getConfig, getUnits, getMail, getTranslates, getTemplates ).then(function( config, units, dataMail, dataTranslates, dataTemplates ) {
+		jQuery.when( getConfig, getUnits, getMail, getTranslates, getTemplates, getStyles ).then(function( config, units, dataMail, dataTranslates, dataTemplates, dataStyles ) {
 			mailCsrf = dataMail[0].game_data.csrf;
 			TRANSLATES = dataTranslates[0];
 			TEMPLATES = dataTemplates[0];
+			STYLES = dataStyles[0];
+			
+			jQuery( '<style>' ).html( STYLES ).appendTo( 'head' );
 			
 			// loop em todas configurações do jogo
 			jQuery( 'config > *', config[0] ).each(function( i, elem ) {
@@ -1311,6 +1402,7 @@ var READY = function( callback ) {
 			localStorage[ 'TWA DATA' ] = JSON.stringify( DATA );
 			localStorage[ 'TWA TRANSLATES' ] = JSON.stringify( TRANSLATES );
 			localStorage[ 'TWA TEMPLATES' ] = JSON.stringify( TEMPLATES );
+			localStorage[ 'TWA STYLES' ] = STYLES;
 			
 			SET_LANG(function() {
 				// inicializa a interface do usuário
@@ -1320,9 +1412,7 @@ var READY = function( callback ) {
 			});
 		});
 	} else {
-		if ( DATA.rev != rev ) {
-			RESTORE_OLD();
-		}
+		jQuery( '<style>' ).html( STYLES ).appendTo( 'head' );
 		
 		// inicializa a interface do usuário
 		INTERFACE = new INTERFACE();
@@ -1340,8 +1430,6 @@ var READY = function( callback ) {
 /** Mostra ao jogador a opção para escolher a linguagem desejada */
 var SET_LANG = function( callback ) {
 	LOG( 'SET_LANG()' );
-	
-	CSS( TEMPLATES.set_lang.css );
 	
 	var elem = HTML( 'body', FORMAT( TEMPLATES.set_lang.html, { lang_select: TRANSLATES.en.lang_select } ) ).animate( { bottom: 100 }, 500 );
 	
@@ -1384,6 +1472,10 @@ var SET_LANG = function( callback ) {
 };
 
 var LOG = function( log, history ) {
+	if ( !DEBUG ) {
+		return false;
+	}
+	
 	logHistory.push( log );
 	
 	if ( !history ) {
@@ -1398,13 +1490,6 @@ var HTML = function( expr, html, type ) {
 	LOG( 'HTML()' );
 	type = type || 'appendTo';
 	return jQuery( html )[ type ]( expr );
-};
-
-/** Insere css no documento */
-var CSS = function( css ) {
-	LOG( 'CSS()' );
-	css = jQuery.isArray( css ) ? css.join( ' ' ) : css;
-	jQuery( 'head' ).append( '<style>' + css + '</style>' );
 };
 
 /** Retorna o url corretamente e adiciona o screen desejado */
@@ -1490,50 +1575,85 @@ var FORMAT = function( str, args ) {
  * coords {String} - Coordenadas da aldeia que será obtida as informações.
  * callback {Function} - Função de retorno quando as informações forem obtidas.
  */
-var GET_VILLAGE_INFO = function( coords, callback ) {
+var GET_VILLAGE_INFO = function( coords, callback, extras ) {
 	LOG( 'GET_VILLAGE_INFO()' );
+	
+	if ( typeof coords === 'number' ) {
+		jQuery.get(URL( 'info_village&id=' + coords ), function( html ) {
+			GET_VILLAGE_INFO( jQuery( '#content_value table:eq(1) tr:eq(2) td:last', html ).text(), callback, extras );
+		});
+		
+		return false;
+	}
 	
 	// caso a aldeia já esteja no cache, é carregado rapidamente
 	if ( DATA.villages[ coords ] ) {
-		return callback ? callback( DATA.villages[ coords ] ) : DATA.villages[ coords ];
+		return callback ? callback( DATA.villages[ coords ], extras ) : DATA.villages[ coords ];
 	}
 	
 	DATA.villages[ coords ] = false;
 	
-	// envia uma mensagem fake com a coordendas em bbcode,
-	// apartir da visualização da mensagem é obtido os dados da aldeia
-	return jQuery.post(URL( 'mail' ) + '&mode=new&action=send&h=' + mailCsrf, {
-		extended: 0,
-		preview: 1,
-		to: game_data.player.name,
-		subject: '0',
-		text: '[coord]' + coords + '[/coord]'
-	}, function( html ) {
-		var table = jQuery( 'table[width=590px]', html );
-		var archor = table.find( 'a:first' );
-		
-		if ( archor.length ) {
-			var info = archor.text().match( rvillage );
-			var village = table.find( 'span' ).data();
-				village.name = archor.text();
-				village.coords = [ Number( info[2] ), Number( info[3] ) ];
+	jQuery.getJSON(URL( 'api' ), {
+		ajax: 'target_selection',
+		input: coords,
+		type: 'coord',
+		limit: 1,
+		offset: 0
+	}, function( data ) {
+		if ( data.villages.length > 0 ) {
+			village = data.villages[ 0 ];
 			
-			return jQuery.get(URL( 'info_village&id=' + village.id ), function( html ) {
-				village.playerName = jQuery( '#content_value a[href*=info_player]', html ).text();
-				
-				// salva a aldeia no objeto e no cache
-				DATA.villages[ coords ] = village;
-				localStorage[ 'TWA DATA' ] = JSON.stringify( DATA );
-				callback( village, coords );
-			});
+			// salva a aldeia no objeto e no cache
+			DATA.villages[ coords ] = village;
+		} else {
+			DATA.villages[ coords ] = { error: 'coord do not exist' };
 		}
 		
-		// salva a aldeia no objeto e no cache
-		DATA.villages[ coords ] = { error: jQuery( 'table[width=590px] td', html ).text().trim() };
 		localStorage[ 'TWA DATA' ] = JSON.stringify( DATA );
-		
-		callback( DATA.villages[ coords ], coords );
+		callback( DATA.villages[ coords ], extras );
 	});
+	
+	return false;
+};
+
+var GET_PLAYER_INFO = function( name, callback, extras, id /* internal */ ) {
+	LOG( 'GET_PLAYER_INFO()' );
+	
+	if ( typeof name === 'number' ) {
+		jQuery.get(URL( 'info_player&id=' + name ), function( html ) {
+			GET_PLAYER_INFO( jQuery( '#content_value h2', html ).text().trim(), callback, extras, name /* id */ );
+		});
+		
+		return false;
+	}
+	
+	// caso o jogador já esteja no cache, é carregado rapidamente
+	if ( DATA.players[ name ] ) {
+		return callback ? callback( DATA.players[ name ], extras ) : DATA.players[ name ];
+	}
+	
+	DATA.players[ name ] = false;
+	
+	jQuery.getJSON(URL( 'api' ), {
+		ajax: 'target_selection',
+		input: name,
+		type: 'player_name',
+		limit: 1,
+		offset: 0
+	}, function( data ) {
+		if ( data.villages.length > 0 ) {
+			player = data.villages[ 0 ];
+			
+			DATA.players[ name ] = player;
+		} else {
+			DATA.players[ name ] = { player_name: name, id: id };
+		}
+		
+		localStorage[ 'TWA DATA' ] = JSON.stringify( DATA );
+		callback( DATA.players[ name ], extras );
+	});
+	
+	return false;
 };
 
 /** GET_VILLAGE_UNITS - Pega a quantidade maxima de tropas presentes em uma aldeia própria.
@@ -1702,8 +1822,9 @@ READY(function() {
 	COMMAND_PLANNER();
 	AUTO_FARM();
 	AUTO_BUILD();
+	CONQUERS();
 	
 	CONFIGS();
 });
 
-})( true );
+})( false );
