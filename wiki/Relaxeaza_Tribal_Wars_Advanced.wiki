@@ -1,5 +1,7 @@
 == Relaxeaza Tribal Wars Advanced 1.1  ==
 
+`update: 24/10/2014`
+
 *O script está passando por uma reestruturação, outras ferramentas serão incluidas ao longo das atualizações.*
 
 [http://goo.gl/R6lFDL » Download]
