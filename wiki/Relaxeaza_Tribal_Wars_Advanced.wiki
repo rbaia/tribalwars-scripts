@@ -1,4 +1,4 @@
-== Relaxeaza Tribal Wars Advanced 1.0  ==
+== Relaxeaza Tribal Wars Advanced 1.1  ==
 
 *O script está passando por uma reestruturação, outras ferramentas serão incluidas ao longo das atualizações.*
 
@@ -11,9 +11,13 @@
 Caso não saiba salvar o script na barra de favoritos do navegador, [http://code.google.com/p/tribalwars-scripts/wiki/Adicionando_Script_Nos_Favoritos aqui] tem um tutorial.
 
 === Languages ===
-<font color="red">*Help translate script here/Ajude a traduzir o script aqui: [http://goo.gl/nTK4WY aqui].*</font>
  * *pt - Português*
  * *en - English *
+ * *es - Español*
+ * *de - Deutsch*
+ * *ro - Română*
+ * *po - Polskie*
+ * *cz - České *
 
 = Ferramentas =
 
@@ -58,6 +62,10 @@ No momento só está disponivel para sistemas de pesquisa simples.
 Execute o script na visualização *Visualizações » pesquisas*
 Para gerar as pesquisas clique no icone da unidade no topo da lista de aldeias.
 
+----
+=== Últimas Conquistas ===
+
+Mostra todas as últimas conquistas nas últimas 24 horas no mundo em questão.
 ----
 <font color="red">As ferramentas estão disponíveis para qualquer um usar por conta própria, não me responsabilizarei por bans.</font>
 ----
